@@ -1,0 +1,32 @@
+{
+  "name": "vue-build",
+  "version": "1.0.0",
+  "description": "Vue build package",
+  "author": "Brian Voelker <brian@webiswhatido.com>",
+  "homepage": "https://github.com/brianvoe/vue-build#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianvoe/vue-build.git"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/brianvoe/vue-build/issues"
+  },
+  "engines": {"node": ">=6"},
+  "bin": {
+    "vue-build": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
