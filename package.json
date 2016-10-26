@@ -20,10 +20,7 @@
   "bin": {
     "vue-build": "index.js"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
+  "dependencies": {
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.3.0",
