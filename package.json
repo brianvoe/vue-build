@@ -16,14 +16,29 @@
   "bugs": {
     "url": "https://github.com/brianvoe/vue-build/issues"
   },
-  "engines": {"node": ">=6"},
+  "engines": {
+    "node": ">=6"
+  },
   "bin": {
-    "vue-build": "index.js"
+    "vue-build": "bin/index.js"
+  },
+  "scripts": {
+    "help": "vue-build help",
+    "nothing": "vue-build",
+    "blah": "vue-build blah",
+    "version": "vue-build version",
+    "dev": "vue-build dev",
+    "build": "vue-build build",
+    "test": "vue-build test",
+    "lint": "vue-build lint"
   },
   "dependencies": {
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.3.0",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "minimist": "^1.2.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
   }
 }
