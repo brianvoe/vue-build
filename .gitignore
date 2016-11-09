@@ -1,5 +1,10 @@
-node_modules
+# Build folder
+build
+dist
 
+# Node folder/files
+node_modules
 npm-debug.log
 
+# Yarn files
 yarn.lock

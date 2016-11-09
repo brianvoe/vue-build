@@ -21,6 +21,9 @@ function direct (name) {
       require('./version.js')
       process.exit()
       break
+    case 'build':
+      require('./build.js')
+      break
     case 'dev':
       require('./dev.js')
       break
