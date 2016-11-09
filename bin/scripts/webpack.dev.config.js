@@ -5,10 +5,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:1234/'
-  ],
+  // entry: [
+  //   'webpack/hot/dev-server',
+  //   'webpack-dev-server/client?http://localhost:1234/'
+  // ],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

@@ -3,7 +3,11 @@ var projectRoot = process.cwd()
 module.exports = {
   context: process.cwd() + '/src',
   // Main file entry point
-  entry: ['./app.js'],
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:1234/',
+    './app.js'
+  ],
   output: {
     path: process.cwd() + '/dist',
     filename: '[name].js'
@@ -34,15 +38,18 @@ module.exports = {
     //   }
     // ],
     loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      },
+      // {
+      //   test: /\.vue$/,
+      //   loader: 'vue'
+      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        query: {
+          presets: [['es2015', {'modules': false}], 'stage-2']
+        }
       }
       // {
       //   test: /\.json$/,

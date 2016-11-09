@@ -17,9 +17,7 @@ var spinner = ora({
 }).start()
 
 var app = express()
-console.log(config)
 var compiler = webpack(config, function (err, stats) {
-  spinner.succeed()
   if (err) { throw err }
   process.stdout.write(stats.toString({
     colors: true,
@@ -58,6 +56,7 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 module.exports = app.listen(1234, function (err) {
+  spinner.succeed()
   if (err) {
     console.log(err)
     return
