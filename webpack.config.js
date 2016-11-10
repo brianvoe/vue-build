@@ -2,13 +2,13 @@
 var projectRoot = process.cwd()
 
 module.exports = {
-  context: process.cwd() + '/src',
+  context: projectRoot + '/src',
   // Main file entry point
   entry: {
     app: ['./app.js']
   },
   output: {
-    path: process.cwd() + '/dist',
+    path: projectRoot + '/dist',
     filename: '[name].js',
     publicPath: '/'
   },
