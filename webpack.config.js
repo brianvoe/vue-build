@@ -12,6 +12,10 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
+  devServer: {
+    contentBase: './',
+    port: 1234
+  },
   // resolveLoader: {
   //   fallback: [process.cwd() + '/node_modules']
   // },
@@ -53,8 +57,7 @@ module.exports = {
         include: projectRoot,
         exclude: /node_modules/,
         query: {
-          presets: [['es2015', {'modules': false}], 'stage-2'],
-          plugins: ['transform-runtime']
+          presets: [['es2015', {'modules': false}], 'stage-2']
         }
       },
       {
