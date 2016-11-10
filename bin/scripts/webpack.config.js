@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: process.cwd() + '/dist',
     filename: '[name].js',
-    publicPath: './src'
+    publicPath: '/'
   },
   // resolveLoader: {
   //   fallback: [process.cwd() + '/node_modules']
@@ -23,21 +23,19 @@ module.exports = {
   //   ]
   // },
   module: {
-    // preLoaders: [
-    //   {
-    //     test: /\.vue$/,
-    //     loader: 'eslint',
-    //     include: projectRoot,
-    //     exclude: /node_modules/
-    //   },
-    //   {
-    //     test: /\.js$/,
-    //     loader: 'eslint',
-    //     include: projectRoot,
-    //     exclude: /node_modules/
-    //   }
-    // ],
-    loaders: [
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'eslint',
+        exclude: /node_modules/
+      },
+      {
+        enforce: 'pre',
+        test: /\.vue$/,
+        loader: 'eslint',
+        exclude: /node_modules/
+      },
       {
         test: /\.vue$/,
         loader: 'vue',
@@ -55,7 +53,8 @@ module.exports = {
         include: projectRoot,
         exclude: /node_modules/,
         query: {
-          presets: [['es2015', {'modules': false}], 'stage-2']
+          presets: [['es2015', {'modules': false}], 'stage-2'],
+          plugins: ['transform-runtime']
         }
       },
       {

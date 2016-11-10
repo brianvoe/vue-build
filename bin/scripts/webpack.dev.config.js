@@ -1,4 +1,5 @@
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.config')
 
@@ -21,8 +22,14 @@ module.exports = merge(baseWebpackConfig, {
 
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    // new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      inject: true,
+      showErrors: true,
+      template: 'index.html'
+    })
   ]
   // plugins: [
   //   new webpack.DefinePlugin({
