@@ -1,28 +1,34 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.config')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
-  // entry: [
-  //   'webpack/hot/dev-server',
-  //   'webpack-dev-server/client?http://localhost:1234/'
-  // ],
+  entry: {
+    app: [
+      'webpack-dev-server/client?http://localhost:1234/',
+      'webpack/hot/dev-server'
+    ]
+  },
+  // Set webpack dev server items here
+  devServer: {
+    // Content base sets the base path of where you wan to serve your files
+    contentBase: './src',
+    hot: true,
+    historyApiFallback: true,
+
+    noInfo: true
+
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"'
-      }
-    }),
-    // Hot module replacement
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    })
+    new webpack.NoErrorsPlugin()
   ]
+  // plugins: [
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: '"development"'
+  //     }
+  //   })
+  // ]
 })

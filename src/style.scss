@@ -1,0 +1,23 @@
+$content-height: 200px;
+$content-width: 60%;
+
+body {
+  font-family: Helvetica;
+  background-image: -webkit-linear-gradient(top, #FFAE00 0%, #FF5A00 100%);
+}
+
+h1 {
+  margin: 0 0 20px 0;
+}
+
+#app {
+  .content {
+    text-align: center;
+    background-color: white;
+    height: $content-height;
+    width: $content-width;
+    padding: 20px;
+    margin: 20px auto 0 auto;
+    box-shadow: 5px 5px 10px #000000;
+  }
+}
