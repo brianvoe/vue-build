@@ -6,6 +6,7 @@ var Webpack = require('webpack')
 
 var WebpackDevServer = require(process.cwd() + '/node_modules/webpack-dev-server/lib/Server.js')
 var webpackConfig = require('./scripts/webpack.dev.config.js')
+var webpackHotMiddleware = require('webpack-hot-middleware')
 
 var compiler = Webpack(webpackConfig)
 var server = new WebpackDevServer(compiler, Object.assign({}, {
@@ -18,6 +19,13 @@ var server = new WebpackDevServer(compiler, Object.assign({}, {
       console.log('Using middleware for ' + req.url)
       next()
     })
+
+    // Add webpack hot middleware to use for error overlay
+    // Quiet is set to true because well let WebpackDevServer handle console logging
+    app.use(webpackHotMiddleware(compiler, {
+      overlay: true,
+      quiet: true
+    }))
 
     // Here you can access the Express app object and add your own custom middleware to it.
     // For example, to define custom handlers for some paths:

@@ -1,14 +1,15 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.config')
+var baseWebpackConfig = require(process.cwd() + '/webpack.config')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   entry: {
     app: [
       'webpack-dev-server/client?http://localhost:1234/',
-      'webpack/hot/dev-server'
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client'
     ]
   },
   // Set webpack dev server items here
@@ -17,17 +18,16 @@ module.exports = merge(baseWebpackConfig, {
     contentBase: './src',
     hot: true,
     historyApiFallback: true,
+    clientLogLevel: 'warning',
 
     noInfo: true
-
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
-      showErrors: true,
+      showErrors: false,
       template: 'index.html'
     })
   ]

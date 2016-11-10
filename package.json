@@ -45,7 +45,6 @@
     "es6-promise": "^4.0.5",
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.1",
-    "eslint-config-vue": "^2.0.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-html": "^1.6.0",
     "eslint-plugin-promise": "^3.3.0",
@@ -61,6 +60,7 @@
     "vuex": "^2.0.0",
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.10",
+    "webpack-hot-middleware": "^2.13.2",
     "webpack-merge": "^0.15.0"
   }
 }
