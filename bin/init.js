@@ -15,8 +15,8 @@ module.exports = function (yargs) {
   .then(function (answers) {
     console.log() // Console Spacing
 
-    // .env file
-    if (answers.envFile) {
+    // webpack file
+    if (answers.webpackFile) {
       console.log('Creating webpack file')
       fs.copy(vueBuildRoot + 'webpack.config.js', projectRoot + '/webpack.config.js', function (err) {
         if (err) { console.error(err); process.exit(1) }
