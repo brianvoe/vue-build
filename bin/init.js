@@ -1,6 +1,7 @@
 module.exports = function (yargs) {
+  var path = require('path')
   var copy = require('copy')
-  // var vueBuildRoot = '../'
+  let vueBuildRoot = path.join(__dirname, '../')
   var projectRoot = process.cwd()
 
   var inquirer = require('inquirer')
@@ -13,7 +14,7 @@ module.exports = function (yargs) {
   .then(function (answers) {
     console.log(answers)
     if (answers.envFile) {
-      copy('../.env', projectRoot, function (err, files) {
+      copy(vueBuildRoot + '.env', projectRoot, function (err, files) {
         if (err) { throw err }
       })
     }
