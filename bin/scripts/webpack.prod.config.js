@@ -1,6 +1,27 @@
+var webpack = require('webpack')
 var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.config')
+var baseWebpackConfig = require(process.cwd() + '/webpack.config')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = merge(baseWebpackConfig, {
-  devtool: 'source-map'
+var webpackConfig = merge(baseWebpackConfig, {
+  devtool: process.env.SOURCE_MAP ? '#source-map' : false,
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    })
+  ]
 })
+
+module.exports = webpackConfig
