@@ -2,9 +2,21 @@
 
 /* eslint-env node */
 
+// process .env file
+var pathToEnv = process.cwd() + '/.env'
+require('fs').exists(pathToEnv, (exists) => {
+  if (exists) {
+    require('dotenv').config({
+      path: pathToEnv
+    })
+  }
+})
+
+// Initiate yargs scripts
 var version = require('../package').version
 var yargs = require('yargs')
   // List commands
+  .command('init', 'Initiate structure', require('./init.js'))
   .command('dev', 'Start development server', require('./dev.js'))
   .command('build', 'Production build to dist', require('./build.js'))
   .command('lint', 'Lint files', require('./lint.js'))
@@ -41,6 +53,11 @@ var yargs = require('yargs')
   .help('help')
 
   // Simple usage
-  .usage('Usage: $0 <command> [options]')
+  .usage('Usage: vue-build <command> [options]')
   .epilog('copyright ' + new Date().getFullYear())
   .showHelpOnFail(false, 'Specify --help for available options')
+
+// If you dont send any commands show help
+if (yargs.argv._.length === 0) {
+  yargs.showHelp()
+}
