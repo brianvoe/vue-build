@@ -2,7 +2,7 @@ module.exports = function (yargs) {
   var path = require('path')
   var copy = require('copy')
   let vueBuildRoot = path.join(__dirname, '../')
-  var projectRoot = process.cwd()
+  var projectRoot = process.cwd() + '/'
 
   console.log('vueRoot', vueBuildRoot + '.env')
   console.log('projectRoot', projectRoot)
@@ -18,7 +18,7 @@ module.exports = function (yargs) {
     console.log() // Console Spacing
     if (answers.envFile) {
       console.log('Creating env file')
-      copy.one(vueBuildRoot + '.env', projectRoot + '/happy', function (err, file) {
+      copy.one(vueBuildRoot + '.env', projectRoot, function (err, file) {
         if (err) {
           console.error(err)
           process.exit(1)
