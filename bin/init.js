@@ -4,9 +4,6 @@ module.exports = function (yargs) {
   let vueBuildRoot = path.join(__dirname, '../')
   var projectRoot = process.cwd()
 
-  console.log('vueRoot', vueBuildRoot + '.env')
-  console.log('projectRoot', projectRoot)
-
   var inquirer = require('inquirer')
   inquirer.prompt([
     {type: 'confirm', name: 'envFile', message: 'Create/Override env file?', default: true},
