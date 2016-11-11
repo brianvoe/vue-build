@@ -4,6 +4,9 @@ module.exports = function (yargs) {
   let vueBuildRoot = path.join(__dirname, '../')
   var projectRoot = process.cwd()
 
+  console.log('vueRoot', vueBuildRoot + '.env')
+  console.log('projectRoot', projectRoot)
+
   var inquirer = require('inquirer')
   inquirer.prompt([
     {type: 'confirm', name: 'envFile', message: 'Create env file?', default: true},
@@ -12,8 +15,10 @@ module.exports = function (yargs) {
     {type: 'confirm', name: 'testFolder', message: 'Create /test folder?', default: true}
   ])
   .then(function (answers) {
+    console.log() // Console Spacing
     console.log(answers)
     if (answers.envFile) {
+      console.log('Creating env file')
       copy(vueBuildRoot + '.env', projectRoot, function (err, files) {
         if (err) { throw err }
       })
