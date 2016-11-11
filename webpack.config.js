@@ -39,6 +39,7 @@ module.exports = {
   // },
   module: {
     rules: [
+      // Preloaders
       {
         enforce: 'pre',
         test: /\.js$/,
@@ -51,6 +52,7 @@ module.exports = {
         loader: 'eslint',
         exclude: /node_modules/
       },
+      // Loaders
       {
         test: /\.vue$/,
         loader: 'vue',
