@@ -13,7 +13,7 @@ module.exports = function (yargs) {
   .then(function (answers) {
     console.log(answers)
     if (answers.envFile) {
-      copy('.env', projectRoot, function (err, files) {
+      copy('../.env', projectRoot, function (err, files) {
         if (err) { throw err }
       })
     }
