@@ -7,21 +7,20 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:1234/',
+      'webpack-dev-server/client',
       'webpack/hot/dev-server',
       'webpack-hot-middleware/client'
     ]
   },
-  // Set webpack dev server items here
+  // Set webpack dev server options - essentially default values
+  // Could be overwritten by may main webpack config
   devServer: {
-    // Content base sets the base path of where you wan to serve your files
-    contentBase: './src',
     hot: true,
     historyApiFallback: true,
     clientLogLevel: 'warning',
-
     noInfo: true
   },
+  // Plugins needed for development
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -31,11 +30,4 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html'
     })
   ]
-  // plugins: [
-  //   new webpack.DefinePlugin({
-  //     'process.env': {
-  //       NODE_ENV: '"development"'
-  //     }
-  //   })
-  // ]
 })

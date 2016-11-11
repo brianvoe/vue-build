@@ -23,10 +23,8 @@
     "vue-build": "bin/index.js"
   },
   "scripts": {
-    "help": "vue-build help",
-    "nothing": "vue-build",
-    "blah": "vue-build blah",
-    "version": "vue-build version",
+    "help": "vue-build --help",
+    "version": "vue-build --version",
     "dev": "vue-build dev",
     "build": "vue-build build",
     "test": "vue-build test",
@@ -61,6 +59,7 @@
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.10",
     "webpack-hot-middleware": "^2.13.2",
-    "webpack-merge": "^0.15.0"
+    "webpack-merge": "^0.15.0",
+    "yargs": "^6.3.0"
   }
 }

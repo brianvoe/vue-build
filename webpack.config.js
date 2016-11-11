@@ -2,19 +2,25 @@
 var projectRoot = process.cwd()
 
 module.exports = {
+  // Path to main source folder where your files reside
   context: projectRoot + '/src',
-  // Main file entry point
+  // Main file entry point - must be in app object as we append dev injections to that path
   entry: {
     app: ['./app.js']
   },
   output: {
     path: projectRoot + '/dist',
-    filename: '[name].js',
-    publicPath: '/'
+    filename: '[name].js', // filename based upon entry variable - ex: app.js
+    publicPath: '/' // Important for dev server main path
   },
+  // Config information that will be sent to
   devServer: {
-    contentBase: './',
-    port: 1234
+    // contentBase: './src', // Base path for the content
+    port: 1234, // Dev server port
+    hot: true, // Hot reloading
+    historyApiFallback: true, // Enables suport for history api fallback
+    clientLogLevel: 'warning', // The amount of logging for browser console logs
+    noInfo: true // Suppress boring info in command line
   },
   // resolveLoader: {
   //   fallback: [process.cwd() + '/node_modules']
@@ -25,6 +31,11 @@ module.exports = {
   //     process.cwd() + '/src',
   //     process.cwd() + '/node_modules'
   //   ]
+  // },
+
+  // Aliases - Used for pointing to reusable parts of your app
+  // alias: {
+  //   src: projectRoot + '/src'
   // },
   module: {
     rules: [
