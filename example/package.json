@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "example",
+  "main": "index.js",
+  "devDependencies": {
+    "vue-build": "github:brianvoe/vue-build"
+  }
+}
