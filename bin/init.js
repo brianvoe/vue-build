@@ -19,8 +19,13 @@ module.exports = function (yargs) {
     console.log(answers)
     if (answers.envFile) {
       console.log('Creating env file')
-      copy(vueBuildRoot + '.env', projectRoot, function (err, files) {
-        if (err) { throw err }
+      copy.one(vueBuildRoot + '.env', projectRoot, function (err, file) {
+        if (err) {
+          console.error(err)
+          process.exit(1)
+        }
+
+        console.log(file)
       })
     }
   })
