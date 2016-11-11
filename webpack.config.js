@@ -22,21 +22,16 @@ module.exports = {
     clientLogLevel: 'warning', // The amount of logging for browser console logs
     noInfo: true // Suppress boring info in command line
   },
-  // resolveLoader: {
-  //   fallback: [process.cwd() + '/node_modules']
-  // },
-  // resolve: {
-  //   extensions: ['', '.js', '.jsx'],
-  //   modules: [
-  //     process.cwd() + '/src',
-  //     process.cwd() + '/node_modules'
-  //   ]
-  // },
-
-  // Aliases - Used for pointing to reusable parts of your app
-  // alias: {
-  //   src: projectRoot + '/src'
-  // },
+  resolve: {
+    // If you dont put the extension on an import it will
+    // try to resolve it by looking for these extensions first
+    extensions: ['.scss', '.js', '.vue'],
+    enforceExtension: false, // Whether or not to force user to add .ext to end of files
+    // Aliases - Used for pointing to reusable parts of your app
+    alias: {
+      src: projectRoot + '/src'
+    }
+  },
   module: {
     rules: [
       // Preloaders
