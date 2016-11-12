@@ -3,9 +3,14 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require(process.cwd() + '/webpack.config')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
+process.env.NODE_ENV = process.env.environment
+
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

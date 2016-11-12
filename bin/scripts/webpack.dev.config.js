@@ -2,6 +2,21 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require(process.cwd() + '/webpack.config')
+var projectRoot = process.cwd()
+var pathToEnv = projectRoot + '/.env'
+
+// Load .env file
+require('fs').exists(pathToEnv, (exists) => {
+  if (exists) {
+    console.log('hit')
+    require('dotenv').config({
+      path: pathToEnv
+    })
+  }
+})
+
+console.log(process.env.ENVIRONMENT)
+process.env.NODE_ENV = JSON.stringify(process.env.environment)
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
@@ -22,6 +37,9 @@ module.exports = merge(baseWebpackConfig, {
   },
   // Plugins needed for development
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({

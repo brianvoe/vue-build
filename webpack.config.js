@@ -1,4 +1,3 @@
-// var webpack = require('webpack')
 var projectRoot = process.cwd()
 
 module.exports = {
@@ -92,7 +91,6 @@ module.exports = {
       //     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
       //   }
       // },
-
     ]
   }
 }
