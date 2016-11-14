@@ -6,8 +6,5 @@ dist
 node_modules
 npm-debug.log
 
-# Yarn files
-yarn.lock
-
 # Misc
 .imdone
