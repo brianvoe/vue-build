@@ -19,6 +19,7 @@ module.exports = merge(baseWebpackConfig, {
     hot: true,
     historyApiFallback: true,
     clientLogLevel: 'warning',
+    quiet: true,
     noInfo: true
   },
   // Plugins needed for development

@@ -1,6 +1,10 @@
 $content-height: 200px;
 $content-width: 60%;
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: Helvetica;
   background: linear-gradient(to bottom, #FFAE00 0%, #FF5A00 100%);

@@ -12,7 +12,6 @@ module.exports = function (yargs) {
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, Object.assign({}, {
-    // Content base sets the base path of where you wan to serve your files
     stats: {
       colors: true
     },
