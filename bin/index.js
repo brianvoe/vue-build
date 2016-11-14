@@ -24,10 +24,6 @@ var yargs = require('yargs')
   .command('lint', 'Lint files', require('./lint.js'))
   .command('unit', 'Unit testing', require('./test_unit.js'))
   .command('e2e', 'End to end testing', require('./test_e2e.js'))
-  .command('test', 'Run unit and e2e tests', function (yargs) {
-    require('./test_unit.js')(yargs)
-    require('./test_e2e.js')(yargs)
-  })
   .command('help', 'Show help', function (yargs) { yargs.showHelp() })
   .recommendCommands() // If your close enough recommend the closest command
 
