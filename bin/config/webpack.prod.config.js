@@ -1,7 +1,6 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require(process.cwd() + '/webpack.config')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 process.env.NODE_ENV = process.env.environment
 
