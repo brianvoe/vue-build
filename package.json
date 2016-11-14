@@ -27,7 +27,8 @@
     "version": "vue-build --version",
     "dev": "vue-build dev",
     "build": "vue-build build",
-    "test": "vue-build test",
+    "unit": "vue-build unit",
+    "e2e": "vue-build e2e",
     "lint": "vue-build lint"
   },
   "dependencies": {
@@ -72,7 +73,7 @@
     "vue-style-loader": "^1.0.0",
     "vuex": "^2.0.0",
     "webpack": "2.1.0-beta.26",
-    "webpack-dev-server": "^2.1.0-beta.10",
+    "webpack-dev-server": "^2.1.0-beta.11",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-merge": "^0.15.0",
     "whatwg-fetch": "^1.0.0",
