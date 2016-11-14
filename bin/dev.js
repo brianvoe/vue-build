@@ -18,7 +18,9 @@ module.exports = function (yargs) {
     },
     setup: function (app) {
       app.use(function (req, res, next) {
-        console.log('Using middleware for ' + req.url)
+        if (process.env.ENVIRONMENT !== 'testing') {
+          console.log('Using middleware for ' + req.url)
+        }
         next()
       })
 
@@ -37,8 +39,10 @@ module.exports = function (yargs) {
     }
   }, webpackConfig.devServer))
 
-  server.listen(port, 'localhost', function () {
-    console.log() // Add spacing
-    console.log('Starting server on http://localhost:' + port)
+  return server.listen(port, 'localhost', function () {
+    if (process.env.ENVIRONMENT !== 'testing') {
+      console.log() // Add spacing
+      console.log('Starting dev server on http://localhost:' + port)
+    }
   })
 }

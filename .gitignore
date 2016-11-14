@@ -6,5 +6,8 @@ dist
 node_modules
 npm-debug.log
 
+# Testing
+selenium-debug.log
+
 # Misc
 .imdone
