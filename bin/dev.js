@@ -5,7 +5,7 @@
 module.exports = function (yargs) {
   var Webpack = require('webpack')
   var WebpackDevServer = require(process.cwd() + '/node_modules/webpack-dev-server/lib/Server.js')
-  var webpackConfig = require('./scripts/webpack.dev.config.js')
+  var webpackConfig = require('./config/webpack.dev.config.js')
   var webpackHotMiddleware = require('webpack-hot-middleware')
 
   var port = yargs.argv.port || process.env.PORT || webpackConfig.devServer.port

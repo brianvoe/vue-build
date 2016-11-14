@@ -4,7 +4,7 @@
 
 module.exports = function (yargs) {
   var webpack = require('webpack')
-  var config = require('./scripts/webpack.prod.config.js')
+  var config = require('./config/webpack.prod.config.js')
   var ora = require('ora') // Loading spinner
 
   // Start spinner
