@@ -37,19 +37,19 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       {
         enforce: 'pre',
         test: /\.vue$/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // Loaders
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           postcss: [
             require('autoprefixer')({
@@ -60,7 +60,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: projectRoot,
         exclude: /node_modules/,
         query: {
@@ -69,11 +69,11 @@ module.exports = {
       },
       {
         test: /\.(scss|css)$/,
-        loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+        loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       }
       // {
       //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
