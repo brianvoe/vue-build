@@ -16,16 +16,6 @@ var webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       }
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      }
     })
   ]
 })
