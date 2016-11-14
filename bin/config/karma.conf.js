@@ -13,7 +13,7 @@ module.exports = function (config) {
     colors: true,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: (process.env.SINGLE_RUN === true || false),
 
     // list of files / patterns to load in the browser
     files: [
