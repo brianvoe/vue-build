@@ -38,6 +38,7 @@ module.exports = function (yargs) {
   }, webpackConfig.devServer))
 
   server.listen(port, 'localhost', function () {
+    console.log() // Add spacing
     console.log('Starting server on http://localhost:' + port)
   })
 }

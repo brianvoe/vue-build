@@ -4,13 +4,15 @@
 
 // process .env file
 var pathToEnv = process.cwd() + '/.env'
-require('fs').exists(pathToEnv, (exists) => {
-  if (exists) {
-    require('dotenv').config({
-      path: pathToEnv
-    })
-  }
-})
+var fs = require('fs')
+try {
+  fs.statSync(pathToEnv)
+  require('dotenv').config({
+    path: pathToEnv
+  })
+} catch (err) {
+  console.error('No .env file. Using defaults')
+}
 
 // Initiate yargs scripts
 var version = require('../package').version
