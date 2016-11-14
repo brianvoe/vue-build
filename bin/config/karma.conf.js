@@ -19,7 +19,7 @@ module.exports = function (config) {
       // Test files
       'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
       'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
-      {pattern: 'test/unit/**/*.js', watched: false}
+      {pattern: process.cwd() + '/test/unit/**/*.js', watched: false}
     ],
 
     preprocessors: {
