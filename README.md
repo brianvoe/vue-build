@@ -70,6 +70,7 @@ The main goal was to create as simplistic of a folder structure as possible, but
     - :file_folder: e2e
       - :file_folder: spec - tests go here
       - :file_folder: report
+      - :file_folder: error screenshots
 
 ## Roadmap
   - Chunk Extracting

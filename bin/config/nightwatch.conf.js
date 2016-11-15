@@ -23,6 +23,12 @@ module.exports = {
       'selenium_port': 4444,
       'selenium_host': 'localhost',
       'silent': true,
+      'screenshots': {
+        'enabled': true,
+        'on_failure': true,
+        'on_error': true,
+        'path': projectRoot + '/test/e2e/screenshots'
+      },
       'globals': {
         'devServerURL': 'http://localhost:' + process.env.PORT
       }
