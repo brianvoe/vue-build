@@ -3,8 +3,11 @@
 /* eslint-env node */
 
 module.exports = function (yargs) {
+  // Set env variables
+  process.env.NODE_ENV = 'testing'
+  process.env.ENVIRONMENT = 'testing'
+
   var path = require('path')
-  console.log()
   // Start karma server
   var Server = require('karma').Server
   new Server({
