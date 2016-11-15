@@ -1,8 +1,8 @@
 {
   "name": "vue-build",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Vue build package",
-  "author": "Brian Voelker <brian@webiswhatido.com>",
+  "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
   "license": "MIT",
   "main": "bin/index.js",
