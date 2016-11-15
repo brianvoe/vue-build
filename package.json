@@ -5,7 +5,7 @@
   "author": "Brian Voelker <brian@webiswhatido.com>",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
   "license": "MIT",
-  "main": "index.js",
+  "main": "bin/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brianvoe/vue-build.git"
@@ -23,7 +23,7 @@
     "vue-build": "bin/index.js"
   },
   "scripts": {
-    "help": "vue-build --help",
+    "help": "vue-build help",
     "version": "vue-build --version",
     "dev": "vue-build dev",
     "build": "vue-build build",
