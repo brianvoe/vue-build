@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+/* eslint-env node */
+
 module.exports = function (yargs) {
   // Set env variables
   process.env.NODE_ENV = 'testing'
