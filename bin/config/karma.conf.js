@@ -1,6 +1,7 @@
 // Karma configuration
 module.exports = function (config) {
   var testPath = process.cwd() + '/test/unit/**/*.js'
+  var webpackConfig = require(process.cwd() + '/webpack.config.js')
   config.set({
     singleRun: process.env.SINGLE_RUN || true,
 
@@ -18,8 +19,6 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // Test files
-      'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
-      'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
       {pattern: testPath, watched: false}
     ],
 
@@ -28,13 +27,7 @@ module.exports = function (config) {
       [testPath]: ['webpack']
     },
 
-    webpack: {
-      // karma watches the test entry points
-      // (you don't need to specify the entry option)
-      // webpack watches dependencies
-
-      // webpack configuration
-    },
+    webpack: webpackConfig,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -46,7 +39,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'], // ['PhantomJS', 'Chrome', 'Firefox'],
+    browsers: ['Chrome'], // ['PhantomJS', 'Chrome', 'Firefox'],
 
     // Webpack middleware config
     webpackMiddleware: {
