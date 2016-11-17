@@ -18,6 +18,7 @@ Vue-build takes those frustrations and hopefully eliminates them with a set of p
   - Karma
   - Mocha
   - Chai
+  - Code Coverage
 - E2e Testing
   - Nightwatch
   - Selenium
