@@ -6,6 +6,7 @@ module.exports = function (yargs) {
   // Set env variables
   process.env.NODE_ENV = 'testing'
   process.env.ENVIRONMENT = 'testing'
+  process.env.SINGLE_RUN = yargs.argv['single-run']
 
   var path = require('path')
   // Start karma server

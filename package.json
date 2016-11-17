@@ -28,6 +28,7 @@
     "dev": "vue-build dev",
     "build": "vue-build build",
     "unit": "vue-build unit",
+    "unit:single": "vue-build unit --single-run",
     "e2e": "vue-build e2e",
     "test": "vue-build unit && vue-build e2e",
     "lint": "vue-build lint"
