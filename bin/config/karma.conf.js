@@ -1,14 +1,22 @@
 // Karma configuration
 module.exports = function (config) {
-  var testPath = process.cwd() + '/test/unit/**/*.js'
+  var merge = require('webpack-merge')
+  var testPath = process.cwd() + '/test/unit'
   var webpackConfig = require(process.cwd() + '/webpack.config.js')
+  var webpackTestConfig = merge(webpackConfig, {
+    // use inline sourcemap for karma-sourcemap-loader
+    devtool: '#inline-source-map'
+  })
+  // no need for app entry during tests
+  delete webpackConfig.entry
+
   config.set({
     singleRun: process.env.SINGLE_RUN || true,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'progress', 'coverage'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -19,15 +27,18 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // Test files
-      {pattern: testPath, watched: false}
+      {pattern: testPath + '/spec/**/*.js', watched: false}
     ],
 
     preprocessors: {
-      // add webpack as preprocessor
-      [testPath]: ['webpack']
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      [process.cwd() + '/src/**/*.js']: ['coverage'],
+      [testPath + '/spec/**/*.js']: ['webpack']
     },
 
-    webpack: webpackConfig,
+    webpack: webpackTestConfig,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -39,10 +50,20 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'], // ['PhantomJS', 'Chrome', 'Firefox'],
+    browsers: ['PhantomJS'], // ['PhantomJS', 'Chrome', 'Firefox'],
+
+    // Code Coverage Report
+    coverageReporter: {
+      dir: testPath + '/coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    },
 
     // Webpack middleware config
     webpackMiddleware: {
+      noInfo: true,
       stats: 'errors-only'
     }
   })
