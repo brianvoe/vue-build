@@ -14,19 +14,19 @@ module.exports = function (config) {
   delete webpackTestConfig.entry
 
   // Add isparta stuff - code coverage
-  // webpackTestConfig.module.rules.some(function (loader, i) {
-  //   if (loader.loader === 'babel-loader') {
-  //     loader.include = testPath
-  //   }
-  //   if (loader.loader === 'vue-loader') {
-  //     loader.options.js = 'isparta!' + loader.options.js
-  //   }
-  //   if (loader.enforce === 'pre' && loader.test.test('.vue')) {
-  //     console.log('hit')
-  //     loader.loader = 'isparta-loader!' + loader.loader
-  //     loader.include = projectRoot + '/src'
-  //   }
-  // })
+  webpackTestConfig.module.rules.some(function (loader, i) {
+    if (loader.loader === 'babel-loader') {
+      loader.include = [loader.include, testPath]
+    }
+    // if (loader.loader === 'vue-loader') {
+    //   loader.options.js = 'isparta!' + loader.options.js
+    // }
+    // if (loader.enforce === 'pre' && loader.test.test('.vue')) {
+    //   console.log('hit')
+    //   loader.loader = 'isparta-loader!' + loader.loader
+    //   loader.include = projectRoot + '/src'
+    // }
+  })
 
   // Set karma configuration
   config.set({
@@ -35,7 +35,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'spec', 'coverage'],
+    reporters: ['mocha', 'coverage'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -63,7 +63,7 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai-as-promised', 'chai'],
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG

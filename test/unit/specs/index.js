@@ -1,9 +1,4 @@
-var chai = require('chai')
-var chaiAsPromised = require('chai-as-promised')
-chai.use(chaiAsPromised)
-var assert = chai.assert
-
-/* global describe, it */
+/* global describe,it,assert */
 
 import Vue from 'vue'
 import app from 'src/app.vue'
