@@ -1,14 +1,41 @@
 // Karma configuration
 module.exports = function (config) {
-  var testPath = process.cwd() + '/test/unit/**/*.js'
-  var webpackConfig = require(process.cwd() + '/webpack.config.js')
+  var merge = require('webpack-merge')
+  var projectRoot = process.cwd()
+  var testPath = projectRoot + '/test/unit'
+  var webpackConfig = require(projectRoot + '/webpack.config.js')
+
+  // Merge main config with test config
+  var webpackTestConfig = merge(webpackConfig, {
+    // use inline sourcemap for karma-sourcemap-loader
+    devtool: '#inline-source-map'
+  })
+  // no need for app entry during tests
+  delete webpackTestConfig.entry
+
+  // Add isparta stuff - code coverage
+  // webpackTestConfig.module.rules.some(function (loader, i) {
+  //   if (loader.loader === 'babel-loader') {
+  //     loader.include = testPath
+  //   }
+  //   if (loader.loader === 'vue-loader') {
+  //     loader.options.js = 'isparta!' + loader.options.js
+  //   }
+  //   if (loader.enforce === 'pre' && loader.test.test('.vue')) {
+  //     console.log('hit')
+  //     loader.loader = 'isparta-loader!' + loader.loader
+  //     loader.include = projectRoot + '/src'
+  //   }
+  // })
+
+  // Set karma configuration
   config.set({
     singleRun: process.env.SINGLE_RUN || true,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'spec', 'coverage'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -19,15 +46,20 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // Test files
-      {pattern: testPath, watched: false}
+      'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
+      'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
+      {pattern: testPath + '/spec/**/*.js', watched: false}
     ],
 
     preprocessors: {
-      // add webpack as preprocessor
-      [testPath]: ['webpack']
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      [projectRoot + '/src/**/*.js']: ['coverage'],
+      [testPath + '/spec/**/*.js']: ['webpack']
     },
 
-    webpack: webpackConfig,
+    webpack: webpackTestConfig,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -39,10 +71,20 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'], // ['PhantomJS', 'Chrome', 'Firefox'],
+    browsers: ['PhantomJS'], // ['PhantomJS', 'Chrome', 'Firefox'],
+
+    // Code Coverage Report
+    coverageReporter: {
+      dir: testPath + '/coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    },
 
     // Webpack middleware config
     webpackMiddleware: {
+      noInfo: true,
       stats: 'errors-only'
     }
   })
