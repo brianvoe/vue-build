@@ -1,5 +1,6 @@
 // Karma configuration
 module.exports = function (config) {
+  var webpack = require('webpack')
   var merge = require('webpack-merge')
   var projectRoot = process.cwd()
   var testPath = projectRoot + '/test/unit'
@@ -8,7 +9,13 @@ module.exports = function (config) {
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
     // use inline sourcemap for karma-sourcemap-loader
-    devtool: '#inline-source-map'
+    devtool: '#inline-source-map',
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
+        'process.env.NODE_ENV': JSON.stringify(process.env.ENVIRONMENT)
+      })
+    ]
   })
   // no need for app entry during tests
   delete webpackTestConfig.entry
