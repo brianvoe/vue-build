@@ -48,7 +48,7 @@ module.exports = function (config) {
       // Test files
       'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
       'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
-      {pattern: testPath + '/spec/**/*.js', watched: false}
+      {pattern: testPath + '/specs/**/*.js', watched: false}
     ],
 
     preprocessors: {
@@ -56,7 +56,7 @@ module.exports = function (config) {
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
       [projectRoot + '/src/**/*.js']: ['coverage'],
-      [testPath + '/spec/**/*.js']: ['webpack']
+      [testPath + '/specs/**/*.js']: ['webpack']
     },
 
     webpack: webpackTestConfig,

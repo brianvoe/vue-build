@@ -3,7 +3,7 @@ var projectRoot = process.cwd()
 
 // http://nightwatchjs.org/guide#settings-file
 module.exports = {
-  'src_folders': [projectRoot + '/test/e2e/spec'],
+  'src_folders': [projectRoot + '/test/e2e/specs'],
   'output_folder': projectRoot + '/test/e2e/reports',
   'selenium': {
     'start_process': true,

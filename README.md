@@ -68,10 +68,10 @@ The main goal was to create as simplistic of a folder structure as possible, but
     - :page_facing_up: app.js - main file
   - :file_folder: test
     - :file_folder: unit
-      - :file_folder: spec - test go here
+      - :file_folder: specs - test go here
       - :file_folder: coverage
     - :file_folder: e2e
-      - :file_folder: spec - tests go here
+      - :file_folder: specs - tests go here
       - :file_folder: report
       - :file_folder: screenshots - error screenshots
 
