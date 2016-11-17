@@ -1,5 +1,3 @@
-/* global describe,it,assert */
-
 import Vue from 'vue'
 import app from 'src/app.vue'
 
