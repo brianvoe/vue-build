@@ -48,6 +48,7 @@ vue-build build
 
 // Unit testing
 vue-build unit
+vue-build unit --single-run // Will run one time
 
 // E2e testing
 vue-build e2e

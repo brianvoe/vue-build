@@ -42,6 +42,13 @@ var yargs = require('yargs')
     describe: 'environment setting'
   })
 
+  .option('sr', {
+    alias: 'single-run',
+    default: true,
+    type: 'boolean',
+    describe: 'testing single run through'
+  })
+
   // Version
   .alias('v', 'version')
   .version(function () { return version })

@@ -1,5 +1,6 @@
 // Karma configuration
 module.exports = function (config) {
+  var webpack = require('webpack')
   var merge = require('webpack-merge')
   var projectRoot = process.cwd()
   var testPath = projectRoot + '/test/unit'
@@ -8,7 +9,13 @@ module.exports = function (config) {
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
     // use inline sourcemap for karma-sourcemap-loader
-    devtool: '#inline-source-map'
+    devtool: '#inline-source-map',
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
+        'process.env.NODE_ENV': JSON.stringify(process.env.ENVIRONMENT)
+      })
+    ]
   })
   // no need for app entry during tests
   delete webpackTestConfig.entry
@@ -29,11 +36,12 @@ module.exports = function (config) {
   })
 
   // Set karma configuration
+  var singleRun = Boolean(process.env.SINGLE_RUN === String(undefined) ? false : process.env.SINGLE_RUN)
+  var autoWatch = Boolean(singleRun !== true)
   config.set({
-    singleRun: process.env.SINGLE_RUN || true,
+    singleRun: singleRun,
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['mocha', 'coverage'],
 
@@ -41,14 +49,14 @@ module.exports = function (config) {
     colors: true,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: (process.env.SINGLE_RUN === true || false),
+    autoWatch: autoWatch,
 
     // list of files / patterns to load in the browser
     files: [
       // Test files
       'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
       'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
-      {pattern: testPath + '/specs/**/*.js', watched: false}
+      {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
     ],
 
     preprocessors: {
