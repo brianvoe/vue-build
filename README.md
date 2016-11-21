@@ -42,6 +42,7 @@ See structure for more details
 // Run dev server
 vue-build dev
 vue-build dev --port=1324 // Optional - port
+vue-build dev --devtool="eval-source-map" // Optional - default "eval-source-map"
 
 // Build
 vue-build build
@@ -53,6 +54,8 @@ vue-build unit --single-run // Will run one time
 // E2e testing
 vue-build e2e
 vue-build e2e --port=9090 // Optional - port
+vue-build e2e --options="--tag example" // Run all tests with tag
+vue-build e2e --devtool="eval" // Optional - default "eval"
 
 // Linting
 vue-build lint

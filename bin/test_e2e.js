@@ -8,6 +8,7 @@ module.exports = function (yargs) {
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs.argv['single-run']
   process.env.E2E_PORT = yargs.argv.port || 9090
+  process.env.DEVTOOL = 'eval' // Set devtool to be really fast
 
   // Start the dev server
   var server = require('./dev.js')(yargs)
@@ -16,11 +17,9 @@ module.exports = function (yargs) {
   // Put together nightwatch options
   var opts = []
   opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
-  if (yargs.argv.tag) {
-    opts = opts.concat(['--tag', yargs.argv.tag])
-  }
-  if (yargs.argv.group) {
-    opts = opts.concat(['--group', yargs.argv.group])
+  // additional nightwatch options
+  if (yargs.argv.options) {
+    opts = opts.concat([yargs.argv.options])
   }
 
   // Run nightwatch
