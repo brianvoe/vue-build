@@ -52,6 +52,7 @@ vue-build unit --single-run // Will run one time
 
 // E2e testing
 vue-build e2e
+vue-build e2e --port=9090 // Optional - port
 
 // Linting
 vue-build lint

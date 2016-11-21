@@ -1,5 +1,7 @@
 require('babel-register')
 var projectRoot = process.cwd()
+// Grab from .env file otherwise default is 9090
+var port = process.env.E2E_PORT || 9090
 
 // http://nightwatchjs.org/guide#settings-file
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
 
   'test_settings': {
     'default': {
-      'launch_url': 'http://localhost:' + process.env.PORT,
+      'launch_url': 'http://localhost:' + port,
       'selenium_port': 4444,
       'selenium_host': 'localhost',
       'silent': true,
@@ -30,7 +32,7 @@ module.exports = {
         'path': projectRoot + '/test/e2e/screenshots'
       },
       'globals': {
-        'devServerURL': 'http://localhost:' + process.env.PORT
+        'devServerURL': 'http://localhost:' + port
       }
     },
 

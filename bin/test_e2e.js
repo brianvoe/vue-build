@@ -7,6 +7,8 @@ module.exports = function (yargs) {
   process.env.NODE_ENV = 'testing'
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs.argv['single-run']
+  process.env.E2E_PORT = yargs.argv.port || process.env.E2E_PORT || 9090
+  yargs.argv.port = process.env.E2E_PORT
 
   // Start the dev server
   var server = require('./dev.js')(yargs)
