@@ -1,7 +1,7 @@
 require('babel-register')
 var projectRoot = process.cwd()
 // Grab from .env file otherwise default is 9090
-var port = process.env.E2E_PORT || 9090
+var port = process.env.E2E_PORT
 
 // http://nightwatchjs.org/guide#settings-file
 module.exports = {
@@ -40,7 +40,10 @@ module.exports = {
       'desiredCapabilities': {
         'browserName': 'chrome',
         'javascriptEnabled': true,
-        'acceptSslCerts': true
+        'acceptSslCerts': true,
+        'chromeOptions': {
+          'args': ['--no-sandbox']
+        }
       }
     },
 
