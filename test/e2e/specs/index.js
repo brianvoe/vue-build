@@ -1,4 +1,5 @@
 module.exports = {
+  '@tags': ['example'],
   'Example vue': function (browser) {
     browser
       .url(browser.launchUrl)
