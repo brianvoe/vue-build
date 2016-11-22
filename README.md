@@ -46,8 +46,8 @@ vue-build dev
 vue-build dev --port=1324 // Optional - port
 vue-build dev --devtool="eval-source-map" // Optional - default "eval-source-map"
 
-// Build
-vue-build build
+// Production build to dist folder
+vue-build prod
 
 // Unit testing
 vue-build unit
@@ -65,6 +65,17 @@ vue-build lint
 
 // Help
 vue-build help
+```
+
+## Env file
+```bash
+ENVIRONMENT=development
+
+# Dev
+PORT=5555
+
+# Production
+SOURCE_MAP=true
 ```
 
 ## Structure
