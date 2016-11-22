@@ -1,4 +1,5 @@
 require('babel-register')
+var fs = require('fs')
 var projectRoot = process.cwd()
 // Grab from .env file otherwise default is 9090
 var port = process.env.E2E_PORT
@@ -34,7 +35,7 @@ var firefoxSettings = Object.assign({}, defaultSettings, {
   }
 })
 
-module.exports = {
+var nightwatchConfig = {
   'src_folders': [projectRoot + '/test/e2e/specs'],
   'output_folder': projectRoot + '/test/e2e/reports',
   'selenium': {
@@ -56,3 +57,19 @@ module.exports = {
     'firefox': firefoxSettings
   }
 }
+
+// If folder exists for custom_commands_path
+try {
+  var commandPath = projectRoot + '/test/e2e/commands'
+  fs.statSync(commandPath)
+  nightwatchConfig.custom_commands_path = commandPath
+} catch (err) {}
+
+// If folder exists for custom_assertions_path
+try {
+  var assertionPath = projectRoot + '/test/e2e/assertions'
+  fs.statSync(assertionPath)
+  nightwatchConfig.custom_assertions_path = assertionPath
+} catch (err) {}
+
+module.exports = nightwatchConfig
