@@ -7,8 +7,14 @@ module.exports = function (yargs) {
   var WebpackDevServer = require(process.cwd() + '/node_modules/webpack-dev-server/lib/Server.js')
   var webpackConfig = require('./config/webpack.dev.config.js')
   var webpackHotMiddleware = require('webpack-hot-middleware')
+  var chalk = require('chalk')
 
-  var port = yargs.argv.port || process.env.PORT || webpackConfig.devServer.port
+  // Set port in order of importance
+  var port = process.env.E2E_PORT || yargs.argv.port || process.env.PORT || webpackConfig.devServer.port
+
+  // Overwrite devtool
+  var devtool = process.env.DEVTOOL || yargs.argv.devtool || false
+  if (devtool) { webpackConfig.devtool = devtool }
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, Object.assign({}, {
@@ -39,9 +45,10 @@ module.exports = function (yargs) {
   }, webpackConfig.devServer))
 
   return server.listen(port, 'localhost', function () {
-    if (process.env.ENVIRONMENT === 'development') {
+    if (process.env.ENVIRONMENT !== 'production') {
       console.log() // Add spacing
-      console.log('Starting dev server on http://localhost:' + port)
+      console.log(chalk.blue('Dev server started'))
+      console.log(chalk.blue('http://localhost:' + port + '.....PID:' + process.pid))
     }
   })
 }

@@ -1,8 +1,41 @@
 require('babel-register')
+var fs = require('fs')
 var projectRoot = process.cwd()
+// Grab from .env file otherwise default is 9090
+var port = process.env.E2E_PORT
 
-// http://nightwatchjs.org/guide#settings-file
-module.exports = {
+// Setting
+var defaultSettings = {
+  'launch_url': 'http://localhost:' + port,
+  'selenium_port': 4444,
+  'selenium_host': '127.0.0.1',
+  'silent': true,
+  'screenshots': {
+    'enabled': true,
+    'on_failure': true,
+    'on_error': true,
+    'path': projectRoot + '/test/e2e/screenshots'
+  }
+}
+var chromeSettings = Object.assign({}, defaultSettings, {
+  'desiredCapabilities': {
+    'browserName': 'chrome',
+    'javascriptEnabled': true,
+    'acceptSslCerts': true,
+    'chromeOptions': {
+      'args': ['--no-sandbox']
+    }
+  }
+})
+var firefoxSettings = Object.assign({}, defaultSettings, {
+  'desiredCapabilities': {
+    'browserName': 'firefox',
+    'javascriptEnabled': true,
+    'acceptSslCerts': true
+  }
+})
+
+var nightwatchConfig = {
   'src_folders': [projectRoot + '/test/e2e/specs'],
   'output_folder': projectRoot + '/test/e2e/reports',
   'selenium': {
@@ -18,36 +51,25 @@ module.exports = {
   },
 
   'test_settings': {
-    'default': {
-      'launch_url': 'http://localhost:' + process.env.PORT,
-      'selenium_port': 4444,
-      'selenium_host': 'localhost',
-      'silent': true,
-      'screenshots': {
-        'enabled': true,
-        'on_failure': true,
-        'on_error': true,
-        'path': projectRoot + '/test/e2e/screenshots'
-      },
-      'globals': {
-        'devServerURL': 'http://localhost:' + process.env.PORT
-      }
-    },
-
-    'chrome': {
-      'desiredCapabilities': {
-        'browserName': 'chrome',
-        'javascriptEnabled': true,
-        'acceptSslCerts': true
-      }
-    },
-
-    'firefox': {
-      'desiredCapabilities': {
-        'browserName': 'firefox',
-        'javascriptEnabled': true,
-        'acceptSslCerts': true
-      }
-    }
+    // default is chrome
+    'default': chromeSettings,
+    'chrome': chromeSettings,
+    'firefox': firefoxSettings
   }
 }
+
+// If folder exists for custom_commands_path
+try {
+  var commandPath = projectRoot + '/test/e2e/commands'
+  fs.statSync(commandPath)
+  nightwatchConfig.custom_commands_path = commandPath
+} catch (err) {}
+
+// If folder exists for custom_assertions_path
+try {
+  var assertionPath = projectRoot + '/test/e2e/assertions'
+  fs.statSync(assertionPath)
+  nightwatchConfig.custom_assertions_path = assertionPath
+} catch (err) {}
+
+module.exports = nightwatchConfig

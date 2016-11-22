@@ -28,25 +28,39 @@ var yargs = require('yargs')
   .recommendCommands() // If your close enough recommend the closest command
 
   // Set port
-  .option('p', {
-    alias: 'port',
+  .option('port', {
+    alias: 'p',
     type: 'number',
     describe: 'dev server port to listen on'
   })
 
   // Set environment
-  .option('e', {
-    alias: 'environment',
+  .option('environment', {
+    alias: 'e',
     type: 'string',
     choices: ['development', 'testing', 'production'],
     describe: 'environment setting'
   })
 
-  .option('sr', {
-    alias: 'single-run',
+  .option('devtool', {
+    alias: 'dt',
+    type: 'string',
+    describe: 'Webpack performance builds'
+  })
+
+  // Single run
+  .option('single-run', {
+    alias: 'sr',
     default: true,
     type: 'boolean',
     describe: 'testing single run through'
+  })
+
+  // e2e nightwatch options
+  .option('options', {
+    alias: 'o',
+    type: 'string',
+    describe: 'e2e nightwatch options'
   })
 
   // Version
