@@ -19,7 +19,7 @@ module.exports = function (yargs) {
   opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
   // additional nightwatch options
   if (yargs.argv.options) {
-    opts = opts.concat([yargs.argv.options])
+    opts = opts.concat(yargs.argv.options.split(' '))
   }
 
   // Run nightwatch
