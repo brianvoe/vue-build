@@ -81,7 +81,7 @@
     "node-sass": "^3.11.2",
     "ora": "^0.3.0",
     "sass-loader": "^4.0.2",
-    "selenium-server": "^3.0.1",
+    "selenium-server": "3.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "vue": "^2.0.5",
