@@ -55,6 +55,7 @@ vue-build unit --single-run // Will run one time
 vue-build e2e
 vue-build e2e --port=9090 // Optional - port
 vue-build e2e --options="--tag example" // Run all tests with tag
+vue-build e2e --options="-e chrome,firefox" // This will run both browsers
 vue-build e2e --devtool="eval" // Optional - default "eval"
 
 // Linting
@@ -77,6 +78,8 @@ The main goal was to create as simplistic of a folder structure as possible, but
       - :file_folder: coverage
     - :file_folder: e2e
       - :file_folder: specs - tests go here
+      - :file_folder: commands - see nightwatch commands
+      - :file_folder: assertions - see nightwatch assertions
       - :file_folder: report
       - :file_folder: screenshots - error screenshots
 
