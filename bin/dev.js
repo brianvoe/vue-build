@@ -44,9 +44,9 @@ module.exports = function (yargs) {
   }, webpackConfig.devServer))
 
   return server.listen(port, 'localhost', function () {
-    if (process.env.ENVIRONMENT === 'development') {
+    if (process.env.ENVIRONMENT !== 'production') {
       console.log() // Add spacing
-      console.log('Starting dev server on http://localhost:' + port)
+      console.log('http://localhost:' + port + '.....PID:' + process.pid)
     }
   })
 }
