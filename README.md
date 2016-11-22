@@ -1,5 +1,7 @@
 <h1 align="center"><a href="https://vuejs.org"><img width="100"src="https://vuejs.org/images/logo.png" /></a>ue-build</h1>
 
+[![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
+
 The build process is one of the ***most frustrating*** things about front end development and cluttering up your app with a bunch of config and packages you rarely ever need to think about doesn't help either.
 
 Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue, Webpack 2, .env, Sass, Eslint(Standard), Karma, Mocha, Chai, Nightwatch
