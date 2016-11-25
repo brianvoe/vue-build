@@ -63,8 +63,9 @@ module.exports = {
         loader: 'babel-loader',
         include: projectRoot,
         exclude: /node_modules/,
-        query: {
-          presets: [['es2015', {'modules': false}], 'stage-2']
+        options: {
+          presets: [['es2015', {'modules': false}], 'stage-2'],
+          plugins: ['coverage']
         }
       },
       {
