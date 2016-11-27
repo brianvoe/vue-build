@@ -51,11 +51,13 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['last 3 versions']
-            })
-          ]
+          loaders: {
+            postcss: [
+              require('autoprefixer')({
+                browsers: ['last 3 versions']
+              })
+            ]
+          }
         }
       },
       {
