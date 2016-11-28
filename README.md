@@ -96,6 +96,11 @@ The main goal was to create as simplistic of a folder structure as possible, but
       - :file_folder: report
       - :file_folder: screenshots - error screenshots
 
+## Note
+By design I am trying to keep the terminal as clean as possible. So in doing so when running unit tests I disabled the browser from console logging to the terminal. In order to see console.logs run ```vue-build unit --single-run``` and view console logs there.
+
+If anyone has a better solution please let me know
+
 ## Roadmap
   - Chunk Extracting
   - Express server endpoint adding

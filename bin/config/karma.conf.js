@@ -39,13 +39,18 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // Src files
+      {pattern: projectRoot + '/src/**/*.js', watched: autoWatch},
+      {pattern: projectRoot + '/src/**/*.vue', watched: autoWatch},
       // Test files
       {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
     ],
 
-    // Preprocess files
+    // Preprocess src/test files
     preprocessors: {
-      [testPath + '/specs/**/*.js']: ['webpack']
+      [projectRoot + '/src/**/*.js']: ['webpack', 'sourcemap'],
+      [projectRoot + '/src/**/*.vue']: ['webpack', 'sourcemap'],
+      [testPath + '/specs/**/*.js']: ['webpack', 'sourcemap']
     },
 
     webpack: webpackTestConfig,
@@ -57,6 +62,11 @@ module.exports = function (config) {
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_ERROR,
+
+    // Dont have the browser console log or error to the terminal
+    client: {
+      captureConsole: false
+    },
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
