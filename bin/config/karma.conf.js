@@ -63,6 +63,11 @@ module.exports = function (config) {
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_ERROR,
 
+    // Dont have the browser console log or error to the terminal
+    client: {
+      captureConsole: false
+    },
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'], // ['PhantomJS', 'Chrome', 'Firefox'],
