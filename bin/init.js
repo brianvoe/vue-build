@@ -33,7 +33,7 @@ module.exports = function (yargs) {
     }
 
     // .babelrc file
-    if (answers.envFile) {
+    if (answers.babelrcFile) {
       console.log('Creating .babelrc file')
       fs.copy(vueBuildRoot + '.babelrc', projectRoot + '/.babelrc', function (err) {
         if (err) { console.error(err); process.exit(1) }
