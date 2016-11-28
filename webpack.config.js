@@ -51,21 +51,20 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['last 3 versions']
-            })
-          ]
+          loaders: {
+            postcss: [
+              require('autoprefixer')({
+                browsers: ['last 3 versions']
+              })
+            ]
+          }
         }
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: projectRoot,
-        exclude: /node_modules/,
-        query: {
-          presets: [['es2015', {'modules': false}], 'stage-2']
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.(scss|css)$/,
@@ -78,7 +77,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: '[name].[hash:7].[ext]'
         }
@@ -86,7 +85,7 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: '[name].[hash:7].[ext]'
         }

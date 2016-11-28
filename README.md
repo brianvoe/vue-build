@@ -99,5 +99,4 @@ The main goal was to create as simplistic of a folder structure as possible, but
 ## Roadmap
   - Chunk Extracting
   - Express server endpoint adding
-  - Code coverage
   - More expressive console output

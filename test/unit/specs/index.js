@@ -2,14 +2,13 @@ import Vue from 'vue'
 import app from 'src/app.vue'
 
 describe('Simple assertion test', function () {
-  it('Make sure test runs', function (done) {
+  it('Make sure test runs', function () {
     const vm = new Vue(app).$mount()
 
-    vm.message = 'foo'
-    // wait a "tick" after state change before asserting DOM updates
-    Vue.nextTick(() => {
-      assert.equal(vm.message, 'foo', 'message doesnt equal foo')
-      done()
-    })
+    // Method call to update Message
+    vm.updateMessage('foo')
+
+    // Via return promise make sure message equals what it should
+    return assert.equal(vm.message, 'foo Now go build something!', 'message doesnt equal foo')
   })
 })

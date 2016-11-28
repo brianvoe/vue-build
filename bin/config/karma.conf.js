@@ -9,7 +9,7 @@ module.exports = function (config) {
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
     // use inline sourcemap for karma-sourcemap-loader
-    devtool: '#inline-source-map',
+    devtool: 'inline-source-map',
     plugins: [
       new webpack.DefinePlugin({
         'process.env': JSON.stringify(process.env),
@@ -17,23 +17,9 @@ module.exports = function (config) {
       })
     ]
   })
+
   // no need for app entry during tests
   delete webpackTestConfig.entry
-
-  // Add isparta stuff - code coverage
-  webpackTestConfig.module.rules.some(function (loader, i) {
-    if (loader.loader === 'babel-loader') {
-      loader.include = [loader.include, testPath]
-    }
-    // if (loader.loader === 'vue-loader') {
-    //   loader.options.js = 'isparta!' + loader.options.js
-    // }
-    // if (loader.enforce === 'pre' && loader.test.test('.vue')) {
-    //   console.log('hit')
-    //   loader.loader = 'isparta-loader!' + loader.loader
-    //   loader.include = projectRoot + '/src'
-    // }
-  })
 
   // Set karma configuration
   var singleRun = Boolean(process.env.SINGLE_RUN === String(undefined) ? false : process.env.SINGLE_RUN)
@@ -54,16 +40,11 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // Test files
-      'node_modules/whatwg-fetch/fetch.js', // fetch polyfill
-      'node_modules/babel-polyfill/dist/polyfill.js', // other polyfill. Ex: Promise, etc...
       {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
     ],
 
+    // Preprocess files
     preprocessors: {
-      // source files, that you wanna generate coverage for
-      // do not include tests or libraries
-      // (these files will be instrumented by Istanbul)
-      [projectRoot + '/src/**/*.js']: ['coverage'],
       [testPath + '/specs/**/*.js']: ['webpack']
     },
 
