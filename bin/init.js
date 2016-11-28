@@ -7,8 +7,9 @@ module.exports = function (yargs) {
   var inquirer = require('inquirer')
   inquirer.prompt([
     {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
-    {type: 'confirm', name: 'envFile', message: 'Create/Override env file?', default: true},
-    {type: 'confirm', name: 'eslintFile', message: 'Create/Override eslint file?', default: true},
+    {type: 'confirm', name: 'envFile', message: 'Create/Override .env file?', default: true},
+    {type: 'confirm', name: 'babelrcFile', message: 'Create/Override .babelrc file?', default: true},
+    {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
     {type: 'confirm', name: 'sourceFolder', message: 'Create/Override /src folder?', default: true},
     {type: 'confirm', name: 'testFolder', message: 'Create/Override /test folder?', default: true}
   ])
@@ -25,15 +26,23 @@ module.exports = function (yargs) {
 
     // .env file
     if (answers.envFile) {
-      console.log('Creating env file')
+      console.log('Creating .env file')
       fs.copy(vueBuildRoot + '.env', projectRoot + '/.env', function (err) {
         if (err) { console.error(err); process.exit(1) }
       })
     }
 
-    // eslint file
+    // .babelrc file
+    if (answers.envFile) {
+      console.log('Creating .babelrc file')
+      fs.copy(vueBuildRoot + '.babelrc', projectRoot + '/.babelrc', function (err) {
+        if (err) { console.error(err); process.exit(1) }
+      })
+    }
+
+    // .eslintrc file
     if (answers.eslintFile) {
-      console.log('Creating eslint file')
+      console.log('Creating .eslintrc file')
       fs.copy(vueBuildRoot + '.eslintrc', projectRoot + '/.eslintrc', function (err) {
         if (err) { console.error(err); process.exit(1) }
       })
@@ -46,7 +55,7 @@ module.exports = function (yargs) {
         if (err) { console.error(err); process.exit(1) }
       })
     }
-    // source file
+    // test folder
     if (answers.testFolder) {
       console.log('Creating test folder')
       fs.copy(vueBuildRoot + 'test', projectRoot + '/test', function (err) {
