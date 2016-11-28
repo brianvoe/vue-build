@@ -3,4 +3,5 @@ test
 webpack.config.js
 .env
 .eslintrc
+.babelrc
 yarn.lock
