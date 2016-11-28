@@ -64,11 +64,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: projectRoot,
-        exclude: /node_modules/,
-        options: {
-          presets: [['es2015', {'modules': false}], 'stage-2'],
-          plugins: ['coverage']
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.(scss|css)$/,
@@ -81,7 +77,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: '[name].[hash:7].[ext]'
         }
@@ -89,7 +85,7 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        query: {
+        options: {
           limit: 10000,
           name: '[name].[hash:7].[ext]'
         }
