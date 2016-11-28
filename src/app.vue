@@ -1,11 +1,6 @@
 <script>
   export default {
     data: function () {
-      let number = 6
-      if (number === 777) {
-        console.log('no hit')
-      }
-
       return {
         image: require('src/logo.png'),
         title: 'ue-Build',
@@ -18,9 +13,6 @@
       updateMessage: function (message) {
         let newMessage = message + ' Now go build something!'
         this.message = newMessage
-      },
-      notTested: function () {
-        console.log('do it')
       }
     }
   }
