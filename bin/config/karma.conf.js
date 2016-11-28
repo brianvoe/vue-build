@@ -39,13 +39,18 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // Src files
+      {pattern: projectRoot + '/src/**/*.js', watched: autoWatch},
+      {pattern: projectRoot + '/src/**/*.vue', watched: autoWatch},
       // Test files
       {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
     ],
 
-    // Preprocess files
+    // Preprocess src/test files
     preprocessors: {
-      [testPath + '/specs/**/*.js']: ['webpack']
+      [projectRoot + '/src/**/*.js']: ['webpack', 'sourcemap'],
+      [projectRoot + '/src/**/*.vue']: ['webpack', 'sourcemap'],
+      [testPath + '/specs/**/*.js']: ['webpack', 'sourcemap']
     },
 
     webpack: webpackTestConfig,
