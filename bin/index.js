@@ -27,42 +27,6 @@ var yargs = require('yargs')
   .command('help', 'Show help', function (yargs) { yargs.showHelp() })
   .recommendCommands() // If your close enough recommend the closest command
 
-  // Set port
-  .option('p', {
-    alias: 'port',
-    type: 'number',
-    describe: 'dev server port to listen on'
-  })
-
-  // Set environment
-  .option('e', {
-    alias: 'environment',
-    type: 'string',
-    choices: ['development', 'testing', 'production'],
-    describe: 'environment setting'
-  })
-
-  .option('dt', {
-    alias: 'devtool',
-    type: 'string',
-    describe: 'Webpack performance builds'
-  })
-
-  // Single run
-  .option('sr', {
-    alias: 'single-run',
-    default: true,
-    type: 'boolean',
-    describe: 'testing single run through'
-  })
-
-  // e2e nightwatch options
-  .option('o', {
-    alias: 'options',
-    type: 'string',
-    describe: 'e2e nightwatch options'
-  })
-
   // Version
   .alias('v', 'version')
   .version(function () { return version })
@@ -73,7 +37,7 @@ var yargs = require('yargs')
   .help('help')
 
   // Simple usage
-  .usage('Usage: vue-build <command> [options]')
+  .usage('Usage: vue-build <command> [options]\nUsage: vue-build <command> --help')
   .epilog('Have questions? Email: brian@webiswhatido.com')
   .showHelpOnFail(false, 'Specify --help for available options')
 
