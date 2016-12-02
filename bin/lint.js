@@ -5,30 +5,32 @@
 module.exports = function (yargs) {
   var spawn = require('cross-spawn')
   var projectRoot = process.cwd()
-
-  var opts = [
-    '--config', projectRoot + '/.eslintrc', // Config
-    '--ext', '.js,.vue', // Extensions
-    projectRoot + '/src',
-    projectRoot + '/test/unit/spec',
-    projectRoot + '/test/e2e/spec'
-  ]
+  var chalk = require('chalk')
 
   // Lint src folder
-  var opts = [
+  console.log(chalk.blue('Linting src folder'))
+  var srcOpts = [
     '--config', projectRoot + '/.eslintrc', // Config
     '--ext', '.js,.vue', // Extensions
     projectRoot + '/src'
   ]
-  spawn('./node_modules/.bin/eslint', opts, { stdio: 'inherit' })
+  spawn.sync('./node_modules/.bin/eslint', srcOpts, { stdio: 'inherit' })
 
   // Lint unit test folder
-  opts = [
+  console.log(chalk.blue('Linting unit test folder'))
+  var unitOpts = [
     '--config', projectRoot + '/.eslintrc', // Config
     '--ext', '.js,.vue', // Extensions
-    projectRoot + '/src'
+    projectRoot + '/test/unit/spec'
   ]
-  spawn('./node_modules/.bin/eslint', opts, { stdio: 'inherit' })
+  spawn.sync('./node_modules/.bin/eslint', unitOpts, { stdio: 'inherit' })
 
   // Lint e2e test folder
+  console.log(chalk.blue('Linting e2e test folder'))
+  var e2eOpts = [
+    '--config', projectRoot + '/.eslintrc', // Config
+    '--ext', '.js,.vue', // Extensions
+    projectRoot + '/test/e2e/spec'
+  ]
+  spawn.sync('./node_modules/.bin/eslint', e2eOpts, { stdio: 'inherit' })
 }
