@@ -2,7 +2,34 @@
 
 /* eslint-env node */
 
-module.exports = function (yargs) {
+// Sub options for dev command
+exports.builder = {
+  e: {
+    alias: 'environment',
+    type: 'string',
+    choices: ['development', 'testing', 'production'],
+    describe: 'environment setting'
+  },
+  p: {
+    alias: 'port',
+    type: 'number',
+    describe: 'server port to listen on'
+  },
+  dt: {
+    alias: 'devtool',
+    type: 'string',
+    describe: 'webpack performance build'
+  },
+  sr: {
+    alias: 'single-run',
+    default: true,
+    type: 'boolean',
+    describe: 'testing single run'
+  }
+}
+
+// dev command function
+exports.handler = function (yargs) {
   var Webpack = require('webpack')
   var WebpackDevServer = require(process.cwd() + '/node_modules/webpack-dev-server/lib/Server.js')
   var webpackConfig = require('./config/webpack.dev.config.js')
@@ -10,10 +37,10 @@ module.exports = function (yargs) {
   var chalk = require('chalk')
 
   // Set port in order of importance
-  var port = process.env.E2E_PORT || yargs.argv.port || process.env.PORT || webpackConfig.devServer.port
+  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port
 
   // Overwrite devtool
-  var devtool = process.env.DEVTOOL || yargs.argv.devtool || false
+  var devtool = process.env.DEVTOOL || yargs.devtool || false
   if (devtool) { webpackConfig.devtool = devtool }
 
   var compiler = Webpack(webpackConfig)
