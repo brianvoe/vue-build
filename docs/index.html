@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vue-build by brianvoe</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Vue-build</h1>
+        <p>vue cli</p>
+
+        <p class="view"><a href="https://github.com/brianvoe/vue-build">View the Project on GitHub <small>brianvoe/vue-build</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/brianvoe/vue-build/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/brianvoe/vue-build/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/brianvoe/vue-build">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1 align="center">
+<a id="ue-build" class="anchor" href="#ue-build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://vuejs.org"><img width="100" src="https://vuejs.org/images/logo.png"></a>ue-build</h1>
+
+<p><a href="https://travis-ci.org/brianvoe/vue-build"><img src="https://travis-ci.org/brianvoe/vue-build.svg?branch=master" alt="Build Status"></a></p>
+
+<p>The build process is one of the <strong><em>most frustrating</em></strong> things about front end development and cluttering up your app with a bunch of config and packages you rarely ever need to think about doesn't help either.</p>
+
+<p>Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue, Webpack 2, .env, Sass, Eslint(Standard), Karma, Mocha, Chai, Nightwatch</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Command Line Scripts</li>
+<li>Webpack 2
+
+<ul>
+<li>Hot Reloading</li>
+<li>Hot Middleware</li>
+<li>Error Overlay</li>
+<li>.env Processing</li>
+</ul>
+</li>
+<li>Sass</li>
+<li>Babel</li>
+<li>Eslint - Standard</li>
+<li>Unit Testing
+
+<ul>
+<li>Karma</li>
+<li>Mocha</li>
+<li>Chai</li>
+<li>Code Coverage</li>
+</ul>
+</li>
+<li>E2e Testing
+
+<ul>
+<li>Nightwatch</li>
+<li>Selenium</li>
+<li>Chrome Driver</li>
+<li>Gecko(firefox) Driver</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-source-js"><pre>npm install <span class="pl-k">-</span>g vue<span class="pl-k">-</span>build</pre></div>
+
+<h2>
+<a id="initiation" class="anchor" href="#initiation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initiation</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// Initiate files/folders</span>
+vue<span class="pl-k">-</span>build init</pre></div>
+
+<p>See structure for more details</p>
+
+<h2>
+<a id="scripts" class="anchor" href="#scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scripts</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// Run dev server</span>
+vue<span class="pl-k">-</span>build dev
+vue<span class="pl-k">-</span>build dev <span class="pl-k">--</span>port<span class="pl-k">=</span><span class="pl-c1">1324</span> <span class="pl-c">// Optional - port</span>
+vue<span class="pl-k">-</span>build dev <span class="pl-k">--</span>devtool<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>eval-source-map<span class="pl-pds">"</span></span> <span class="pl-c">// Optional - default "eval-source-map"</span>
+
+<span class="pl-c">// Production build to dist folder</span>
+vue<span class="pl-k">-</span>build prod
+
+<span class="pl-c">// Unit testing</span>
+vue<span class="pl-k">-</span>build unit
+vue<span class="pl-k">-</span>build unit <span class="pl-k">--</span>single<span class="pl-k">-</span>run <span class="pl-c">// Will run one time</span>
+
+<span class="pl-c">// E2e testing</span>
+vue<span class="pl-k">-</span>build e2e
+vue<span class="pl-k">-</span>build e2e <span class="pl-k">--</span>port<span class="pl-k">=</span><span class="pl-c1">9090</span> <span class="pl-c">// Optional - port</span>
+vue<span class="pl-k">-</span>build e2e <span class="pl-k">--</span>options<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>--tag example<span class="pl-pds">"</span></span> <span class="pl-c">// Run all tests with tag</span>
+vue<span class="pl-k">-</span>build e2e <span class="pl-k">--</span>options<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>-e chrome,firefox<span class="pl-pds">"</span></span> <span class="pl-c">// This will run both browsers</span>
+vue<span class="pl-k">-</span>build e2e <span class="pl-k">--</span>devtool<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>eval<span class="pl-pds">"</span></span> <span class="pl-c">// Optional - default "eval"</span>
+
+<span class="pl-c">// Linting</span>
+vue<span class="pl-k">-</span>build lint
+
+<span class="pl-c">// Help</span>
+vue<span class="pl-k">-</span>build help</pre></div>
+
+<h2>
+<a id="env-file" class="anchor" href="#env-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Env file</h2>
+
+<div class="highlight highlight-source-shell"><pre>ENVIRONMENT=development
+
+<span class="pl-c"># Dev</span>
+PORT=5555
+
+<span class="pl-c"># Production</span>
+SOURCE_MAP=<span class="pl-c1">true</span></pre></div>
+
+<h2>
+<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Structure</h2>
+
+<p>The main goal was to create as simplistic of a folder structure as possible, but still allow additional flexibility for webpack configuration.</p>
+
+<ul>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> app
+
+<ul>
+<li>
+<g-emoji alias="page_facing_up" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c4.png" ios-version="6.0">📄</g-emoji> .env - main environment config</li>
+<li>
+<g-emoji alias="page_facing_up" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c4.png" ios-version="6.0">📄</g-emoji> webpack.config.js</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> src
+
+<ul>
+<li>
+<g-emoji alias="page_facing_up" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c4.png" ios-version="6.0">📄</g-emoji> app.js - main file</li>
+</ul>
+</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> test
+
+<ul>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> unit
+
+<ul>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> specs - test go here</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> coverage</li>
+</ul>
+</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> e2e
+
+<ul>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> specs - tests go here</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> commands - see nightwatch commands</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> assertions - see nightwatch assertions</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> report</li>
+<li>
+<g-emoji alias="file_folder" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c1.png" ios-version="6.0">📁</g-emoji> screenshots - error screenshots</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="note" class="anchor" href="#note" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note</h2>
+
+<p>By design I am trying to keep the terminal as clean as possible. So in doing so when running unit tests I disabled the browser from console logging to the terminal. In order to see console.logs run <code>vue-build unit --single-run</code> and view console logs there.</p>
+
+<p>If anyone has a better solution please let me know</p>
+
+<h2>
+<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roadmap</h2>
+
+<ul>
+<li>Chunk Extracting</li>
+<li>Express server endpoint adding</li>
+<li>More expressive console output</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/brianvoe">brianvoe</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
