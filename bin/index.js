@@ -2,6 +2,17 @@
 
 /* eslint-env node */
 
+var chalk = require('chalk')
+var clear = require('clear')
+var figlet = require('figlet')
+
+// Tell everyone what they are using
+clear()
+console.log(
+  chalk.blue.bold(
+    figlet.textSync('Vue-Build')
+  )
+)
 // process .env file
 var pathToEnv = process.cwd() + '/.env'
 var fs = require('fs')
@@ -10,9 +21,7 @@ try {
   require('dotenv').config({
     path: pathToEnv
   })
-} catch (err) {
-  console.error('No .env file. Using defaults')
-}
+} catch (err) {}
 
 // Initiate yargs scripts
 var version = require('../package').version
