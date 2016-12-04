@@ -1,7 +1,0 @@
-{
-  "name": "example",
-  "private": true,
-  "devDependencies": {
-    "vue-build": "github:brianvoe/vue-build"
-  }
-}
