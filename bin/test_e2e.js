@@ -8,6 +8,26 @@ exports.builder = {
     alias: 'port',
     type: 'number',
     describe: 'server port to listen on'
+  },
+  dt: {
+    alias: 'devtool',
+    type: 'string',
+    describe: 'webpack performance build'
+  },
+  b: {
+    alias: 'browser',
+    type: 'string',
+    describe: 'set which browser to run'
+  },
+  t: {
+    alias: 'tags',
+    type: 'string',
+    describe: 'run tests with set tags'
+  },
+  o: {
+    alias: 'options',
+    type: 'string',
+    describe: 'nightwatch options'
   }
 }
 
@@ -18,7 +38,7 @@ exports.handler = function (yargs) {
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs['single-run']
   process.env.E2E_PORT = yargs.port || 9090
-  process.env.DEVTOOL = 'eval' // Set devtool to be really fast
+  process.env.DEVTOOL = yargs.devtool || 'eval' // Set devtool to be really fast
 
   // Start the dev server
   var server = require('./dev.js').handler(yargs)
@@ -27,6 +47,19 @@ exports.handler = function (yargs) {
   // Put together nightwatch options
   var opts = []
   opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
+
+  // set browser type
+  if (yargs.browser) {
+    opts = opts.concat(['-e', yargs.browser])
+  }
+
+  // set tags
+  if (yargs.tags) {
+    yargs.tags.split(',').forEach(function (item) {
+      opts = opts.concat(['--tag', item.trim()])
+    })
+  }
+
   // additional nightwatch options
   if (yargs.options) {
     opts = opts.concat(yargs.options.split(' '))
