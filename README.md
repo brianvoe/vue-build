@@ -58,5 +58,7 @@ vue-build help
 
 ## Roadmap
   - Chunk Extracting
+  - Remove need for webpack.config.js
+  - Remove need for .babelrc file
   - Express server endpoint additions
   - More expressive console output
