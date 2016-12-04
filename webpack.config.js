@@ -12,7 +12,7 @@ module.exports = {
     filename: '[name].js', // filename based upon entry variable - ex: app.js
     publicPath: '/' // Important for dev server main path
   },
-  // Config information that will be sent to
+  // Config information that will be sent to the dev server
   devServer: {
     // contentBase: './src', // Base path for the content
     port: 1234, // Dev server port

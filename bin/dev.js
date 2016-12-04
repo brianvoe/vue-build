@@ -36,8 +36,8 @@ exports.handler = function (yargs) {
   var webpackHotMiddleware = require('webpack-hot-middleware')
   var chalk = require('chalk')
 
-  // Set port in order of importance
-  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port
+  // Set port in order of importance - fallback is 8080
+  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
 
   // Overwrite devtool
   var devtool = process.env.DEVTOOL || yargs.devtool || false
