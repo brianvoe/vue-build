@@ -7,6 +7,10 @@ module.exports = function (yargs) {
   var config = require('./config/webpack.prod.config.js')
   var ora = require('ora') // Loading spinner
 
+  // Set default environment
+  process.env.NODE_ENV = 'production'
+  process.env.ENVIRONMENT = 'production'
+
   // Start spinner
   var spinner = ora({
     text: 'Building for production...',
