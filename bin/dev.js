@@ -40,7 +40,7 @@ exports.handler = function (yargs) {
   var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
 
   // Overwrite devtool
-  var devtool = process.env.DEVTOOL || yargs.devtool || false
+  var devtool = yargs.devtool || false
   if (devtool) { webpackConfig.devtool = devtool }
 
   var compiler = Webpack(webpackConfig)
