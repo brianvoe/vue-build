@@ -15,15 +15,15 @@ exports.builder = {
     type: 'number',
     describe: 'server port to listen on'
   },
-  o: {
-    alias: 'options',
-    type: 'string',
-    describe: 'nightwatch options'
+  s: {
+    alias: 'single-run',
+    type: 'boolean',
+    default: false,
+    describe: 'run unit test once'
   },
   c: {
     alias: 'coverage',
     type: 'boolean',
-    default: true,
     describe: 'show last code coverage report'
   }
 }
