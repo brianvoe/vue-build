@@ -19,18 +19,32 @@ exports.builder = {
     alias: 'options',
     type: 'string',
     describe: 'nightwatch options'
+  },
+  c: {
+    alias: 'coverage',
+    type: 'boolean',
+    default: true,
+    describe: 'show last code coverage report'
   }
 }
 
 // unit command function
 exports.handler = function (yargs) {
+  var path = require('path')
+  var chalk = require('chalk')
+  var projectRoot = process.cwd()
+
+  // if show-coverage argument is passed in open browser to coverage report
+  if (yargs['coverage']) {
+    var open = require('open')
+    open(projectRoot + '/test/unit/coverage/lcov-report/index.html')
+    return
+  }
+
   // Set env variables
   process.env.NODE_ENV = 'testing'
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs['single-run']
-
-  var path = require('path')
-  var chalk = require('chalk')
 
   // Ouput whats going on
   console.log(chalk.blue('Building src files for tests'))
