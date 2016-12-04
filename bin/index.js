@@ -10,9 +10,7 @@ try {
   require('dotenv').config({
     path: pathToEnv
   })
-} catch (err) {
-  console.error('No .env file. Using defaults')
-}
+} catch (err) {}
 
 // Initiate yargs scripts
 var version = require('../package').version
