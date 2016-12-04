@@ -2,6 +2,17 @@
 
 /* eslint-env node */
 
+var chalk = require('chalk')
+var clear = require('clear')
+var figlet = require('figlet')
+
+// Tell everyone what they are using
+clear()
+console.log(
+  chalk.blue.bold(
+    figlet.textSync('Vue-Build')
+  )
+)
 // process .env file
 var pathToEnv = process.cwd() + '/.env'
 var fs = require('fs')
