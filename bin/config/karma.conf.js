@@ -22,8 +22,8 @@ module.exports = function (config) {
   delete webpackTestConfig.entry
 
   // Set karma configuration
-  var singleRun = Boolean(process.env.SINGLE_RUN === String(undefined) ? false : process.env.SINGLE_RUN)
-  var autoWatch = Boolean(singleRun !== true)
+  var singleRun = (process.env.SINGLE_RUN === 'true')
+  var autoWatch = singleRun !== true
   config.set({
     singleRun: singleRun,
 
