@@ -72,4 +72,18 @@ try {
   nightwatchConfig.custom_assertions_path = assertionPath
 } catch (err) {}
 
+// If folder exists for page_objects_path
+try {
+  var pageObjectsPath = projectRoot + '/test/e2e/page_objects'
+  fs.statSync(pageObjectsPath)
+  nightwatchConfig.page_objects_path = pageObjectsPath
+} catch (err) {}
+
+// If file exists for globals_path
+try {
+  var globalsPath = projectRoot + '/test/e2e/globals/globals.js'
+  fs.statSync(globalsPath)
+  nightwatchConfig.globals_path = globalsPath
+} catch (err) {}
+
 module.exports = nightwatchConfig
