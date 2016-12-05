@@ -61,6 +61,7 @@ See the [wiki](/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
   - Chunk Extracting
+  - Possibly add a percentage progress for production build
   - Remove need for webpack.config.js
   - Remove need for .babelrc file
   - Express server endpoint additions
