@@ -12,10 +12,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
   plugins: [
     new ProgressBarPlugin({
-      format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-      callback: function () {
-        console.log(chalk.blue('Dev server started'))
-      }
+      format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
