@@ -45,6 +45,8 @@ exports.handler = function (yargs) {
   process.env.NODE_ENV = 'testing'
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs['single-run']
+  process.env.PORT = yargs.port || process.env.PORT || 8080
+  process.env.KARMA_PORT = 8765
 
   // Ouput whats going on
   console.log(chalk.blue('Building src files for tests'))
@@ -52,6 +54,7 @@ exports.handler = function (yargs) {
   // Start karma server
   var Server = require('karma').Server
   new Server({
+    port: process.env.KARMA_PORT,
     configFile: path.join(__dirname, './config/karma.conf.js')
   }).start()
 }
