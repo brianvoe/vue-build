@@ -30,12 +30,20 @@ exports.builder = {
 
 // dev command function
 exports.handler = function (yargs) {
+  var projectRoot = process.cwd()
   var Webpack = require('webpack')
-  var WebpackDevServer = require(process.cwd() + '/node_modules/webpack-dev-server/lib/Server.js')
-  var webpackConfig = require('./config/webpack.dev.config.js')
+  var WebpackDevServer = require(projectRoot + '/node_modules/webpack-dev-server/lib/Server.js')
   var webpackHotMiddleware = require('webpack-hot-middleware')
   var chalk = require('chalk')
   var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+  var fs = require('fs')
+
+  // Check environment if yargs is passed set environment
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+  process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development'
+  if (yargs.environment) {
+    process.env.ENVIRONMENT = yargs.environment
+  }
 
   // Set port in order of importance - fallback is 8080
   var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
@@ -44,7 +52,16 @@ exports.handler = function (yargs) {
   var devtool = yargs.devtool || false
   if (devtool) { webpackConfig.devtool = devtool }
 
-  // Add progress bar
+  // Check if there is a server.js file in the test folder
+  var pathToServer = projectRoot + '/test/server.js'
+  try {
+    fs.statSync(pathToServer)
+  } catch (err) { pathToServer = false }
+
+  // Load webpack config file
+  var webpackConfig = require('./config/webpack.dev.config.js')
+
+  // Add progress bar to webpack config
   webpackConfig.plugins.push(new ProgressBarPlugin({
     format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
     callback: function () {
@@ -75,11 +92,10 @@ exports.handler = function (yargs) {
         quiet: true
       }))
 
-      // Here you can access the Express app object and add your own custom middleware to it.
-      // For example, to define custom handlers for some paths:
-      // app.get('/some/path', function(req, res) {
-      //   res.json({ custom: 'response' });
-      // });
+      // If there is a server.js file load it and pass app to it
+      if (pathToServer) {
+        require(pathToServer)(app)
+      }
     }
   }, webpackConfig.devServer))
 
