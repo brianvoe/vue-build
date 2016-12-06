@@ -2,9 +2,19 @@
 module.exports = function (config) {
   var webpack = require('webpack')
   var merge = require('webpack-merge')
+  var fs = require('fs')
+  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var projectRoot = process.cwd()
   var testPath = projectRoot + '/test/unit'
   var webpackConfig = require(projectRoot + '/webpack.config.js')
+  var chalk = require('chalk')
+  var port = process.env.PORT
+
+  // Check if there is a server.js file in the test folder
+  var pathToServer = projectRoot + '/test/server.js'
+  try {
+    fs.statSync(pathToServer)
+  } catch (err) { pathToServer = false }
 
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
@@ -21,10 +31,15 @@ module.exports = function (config) {
   // no need for app entry during tests
   delete webpackTestConfig.entry
 
+  // Add progress bar to webpack config
+  webpackTestConfig.plugins.push(new ProgressBarPlugin({
+    format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
+  }))
+
   // Set karma configuration
   var singleRun = (process.env.SINGLE_RUN === 'true')
   var autoWatch = singleRun !== true
-  config.set({
+  var configInfo = {
     singleRun: singleRun,
 
     // test results reporter to use
@@ -90,6 +105,44 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true,
       stats: 'errors-only'
+    },
+
+    // plugins
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher',
+      'karma-webpack',
+      'karma-sourcemap-loader',
+      'karma-mocha',
+      'karma-mocha-reporter',
+      'karma-chai',
+      'karma-chai-as-promised',
+      'karma-coverage',
+      'karma-spec-reporter'
+    ]
+  }
+
+  // If there is a server path add express server
+  if (pathToServer) {
+    var expressServer = function (args, config, logger, helper) {
+      console.log(chalk.blue('Running server on http://localhost:' + port + '.....PID:' + process.pid))
+
+      var express = require('express')
+      var app = express()
+
+      // require server path and pass express app to it
+      require(pathToServer)(app)
+
+      app.listen(port)
     }
-  })
+
+    // Push inline express server plugin
+    configInfo.frameworks.push('express-http-server')
+    configInfo.plugins.push({
+      'framework:express-http-server': ['factory', expressServer]
+    })
+  }
+
+  config.set(configInfo)
 }
