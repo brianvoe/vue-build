@@ -41,41 +41,46 @@ exports.handler = function (yargs) {
   process.env.DEVTOOL = yargs.devtool || 'eval' // Set devtool to be really fast
 
   // Start the dev server
-  var server = require('./dev.js').handler(yargs)
+  var dev = require('./dev.js').handler(yargs)
+  var compiler = dev.compiler
+  var server = dev.server
   var path = require('path')
 
-  // Put together nightwatch options
-  var opts = []
-  opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
+  // Once compiler is done run nightwatch
+  compiler.plugin('done', function () {
+    // Put together nightwatch options
+    var opts = []
+    opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
 
-  // set browser type
-  if (yargs.browser) {
-    opts = opts.concat(['-e', yargs.browser])
-  }
+    // set browser type
+    if (yargs.browser) {
+      opts = opts.concat(['-e', yargs.browser])
+    }
 
-  // set tags
-  if (yargs.tags) {
-    yargs.tags.split(',').forEach(function (item) {
-      opts = opts.concat(['--tag', item.trim()])
+    // set tags
+    if (yargs.tags) {
+      yargs.tags.split(',').forEach(function (item) {
+        opts = opts.concat(['--tag', item.trim()])
+      })
+    }
+
+    // additional nightwatch options
+    if (yargs.options) {
+      opts = opts.concat(yargs.options.split(' '))
+    }
+
+    // Run nightwatch
+    var spawn = require('cross-spawn')
+    var runner = spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
+
+    // If runner exits or has an error close dev server
+    runner.on('exit', function (code) {
+      server.close()
+      process.exit(code)
     })
-  }
-
-  // additional nightwatch options
-  if (yargs.options) {
-    opts = opts.concat(yargs.options.split(' '))
-  }
-
-  // Run nightwatch
-  var spawn = require('cross-spawn')
-  var runner = spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
-
-  // If runner exits or has an error close dev server
-  runner.on('exit', function (code) {
-    server.close()
-    process.exit(code)
-  })
-  runner.on('error', function (err) {
-    server.close()
-    throw err
+    runner.on('error', function (err) {
+      server.close()
+      throw err
+    })
   })
 }

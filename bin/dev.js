@@ -35,6 +35,7 @@ exports.handler = function (yargs) {
   var webpackConfig = require('./config/webpack.dev.config.js')
   var webpackHotMiddleware = require('webpack-hot-middleware')
   var chalk = require('chalk')
+  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
   // Set port in order of importance - fallback is 8080
   var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
@@ -42,6 +43,17 @@ exports.handler = function (yargs) {
   // Overwrite devtool
   var devtool = yargs.devtool || false
   if (devtool) { webpackConfig.devtool = devtool }
+
+  // Add progress bar
+  webpackConfig.plugins.push(new ProgressBarPlugin({
+    format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+    callback: function () {
+      if (process.env.ENVIRONMENT !== 'production') {
+        console.log(chalk.blue('Dev server started'))
+        console.log(chalk.blue('http://localhost:' + port + '.....PID:' + process.pid))
+      }
+    }
+  }))
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, Object.assign({}, {
@@ -71,11 +83,10 @@ exports.handler = function (yargs) {
     }
   }, webpackConfig.devServer))
 
-  return server.listen(port, 'localhost', function () {
-    if (process.env.ENVIRONMENT !== 'production') {
-      console.log() // Add spacing
-      console.log(chalk.blue('Dev server started'))
-      console.log(chalk.blue('http://localhost:' + port + '.....PID:' + process.pid))
-    }
-  })
+  var serverListen = server.listen(port, 'localhost', function () {})
+
+  return {
+    compiler: compiler,
+    server: serverListen
+  }
 }
