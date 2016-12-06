@@ -46,6 +46,11 @@ module.exports = function (config) {
       {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
     ],
 
+    // files to exclude
+    exclude: [
+      projectRoot + '/src/app.js' // exclude main app file
+    ],
+
     // Preprocess src/test files
     preprocessors: {
       [projectRoot + '/src/**/*.js']: ['webpack', 'sourcemap'],
@@ -64,9 +69,9 @@ module.exports = function (config) {
     logLevel: config.LOG_ERROR,
 
     // Dont have the browser console log or error to the terminal
-    client: {
-      captureConsole: false
-    },
+    // client: {
+    //   captureConsole: false
+    // },
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
