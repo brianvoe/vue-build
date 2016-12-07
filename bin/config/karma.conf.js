@@ -44,10 +44,27 @@ module.exports = function (config) {
   // Establish which files to run
   var files = []
   var preprocessors = {}
-  if (testFiles) {
+  // Default set of files
+  if (!testFiles) {
+    // Test files
+    files.push({pattern: testPath + '/specs/**/*.js', watched: autoWatch})
+    preprocessors[testPath + '/specs/**/*.js'] = ['webpack', 'sourcemap']
+
+    // Src files only if your running coverage
+    if (coverage) {
+      files.push({pattern: projectRoot + '/src/**/*.js', watched: autoWatch})
+      preprocessors[projectRoot + '/src/**/*.js'] = ['webpack', 'sourcemap']
+      files.push({pattern: projectRoot + '/src/**/*.vue', watched: autoWatch})
+      preprocessors[projectRoot + '/src/**/*.vue'] = ['webpack', 'sourcemap']
+    }
+  } else {
+    testFiles = testFiles.replace(/^\/|\/$/g, '') // strip begining slashes slashes
     // Add to files
-    var pattern = projectRoot + '/test/specs/' + testFiles
+    var pattern = projectRoot + '/test/unit/specs/' + testFiles
     files.push({pattern: pattern, watched: autoWatch})
+
+    // Add to preprocessors
+    preprocessors[pattern] = ['webpack', 'sourcemap']
   }
 
   // Set karma configuration
@@ -65,13 +82,7 @@ module.exports = function (config) {
     autoWatch: autoWatch,
 
     // list of files / patterns to load in the browser
-    files: [
-      // Src files
-      {pattern: projectRoot + '/src/**/*.js', watched: autoWatch},
-      {pattern: projectRoot + '/src/**/*.vue', watched: autoWatch},
-      // Test files
-      {pattern: testPath + '/specs/**/*.js', watched: autoWatch}
-    ],
+    files: files,
 
     // files to exclude
     exclude: [
@@ -79,11 +90,7 @@ module.exports = function (config) {
     ],
 
     // Preprocess src/test files
-    preprocessors: {
-      [projectRoot + '/src/**/*.js']: ['webpack', 'sourcemap'],
-      [projectRoot + '/src/**/*.vue']: ['webpack', 'sourcemap'],
-      [testPath + '/specs/**/*.js']: ['webpack', 'sourcemap']
-    },
+    preprocessors: preprocessors,
 
     webpack: webpackTestConfig,
 
