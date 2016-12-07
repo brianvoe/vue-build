@@ -25,6 +25,11 @@ exports.builder = {
     alias: 'coverage',
     type: 'boolean',
     describe: 'show last code coverage report'
+  },
+  f: {
+    alias: 'files',
+    type: 'string',
+    describe: 'set the file(s) you want to test'
   }
 }
 
@@ -32,14 +37,6 @@ exports.builder = {
 exports.handler = function (yargs) {
   var path = require('path')
   var chalk = require('chalk')
-  var projectRoot = process.cwd()
-
-  // if show-coverage argument is passed in open browser to coverage report
-  if (yargs['coverage']) {
-    var open = require('open')
-    open(projectRoot + '/test/unit/coverage/lcov-report/index.html')
-    return
-  }
 
   // Set env variables
   process.env.NODE_ENV = 'testing'
@@ -47,6 +44,8 @@ exports.handler = function (yargs) {
   process.env.SINGLE_RUN = yargs['single-run']
   process.env.PORT = yargs.port || process.env.PORT || 8080
   process.env.KARMA_PORT = 8765
+  process.env.COVERAGE = yargs.coverage || false
+  process.env.FILES = yargs.files || ''
 
   // Ouput whats going on
   console.log(chalk.blue('Building src files for tests'))
