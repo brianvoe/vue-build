@@ -6,7 +6,7 @@ module.exports = function (config) {
   var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var projectRoot = process.cwd()
   var testPath = projectRoot + '/test/unit'
-  var webpackConfig = require(projectRoot + '/webpack.config.js')
+  var webpackConfig = require('./webpack.base.config.js')
   var chalk = require('chalk')
   var port = process.env.PORT
   var coverage = (process.env.COVERAGE === 'true')
@@ -58,6 +58,7 @@ module.exports = function (config) {
       preprocessors[projectRoot + '/src/**/*.vue'] = ['webpack', 'sourcemap']
     }
   } else {
+    // Test file arguments were passed in lets use that for file and preprocessors
     testFiles = testFiles.replace(/^\/|\/$/g, '') // strip begining slashes slashes
     // Add to files
     var pattern = projectRoot + '/test/unit/specs/' + testFiles

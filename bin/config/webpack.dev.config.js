@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var merge = require('webpack-merge')
-var baseWebpackConfig = require(process.cwd() + '/webpack.config')
+var baseWebpackConfig = require('./webpack.base.config.js')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
