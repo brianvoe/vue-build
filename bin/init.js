@@ -9,7 +9,6 @@ module.exports = function (yargs) {
     {type: 'confirm', name: 'packageFile', message: 'Create/Override package.json file?', default: true},
     {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
     {type: 'confirm', name: 'envFile', message: 'Create/Override .env file?', default: true},
-    {type: 'confirm', name: 'babelrcFile', message: 'Create/Override .babelrc file?', default: true},
     {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
     {type: 'confirm', name: 'sourceFolder', message: 'Create/Override /src folder?', default: true},
     {type: 'confirm', name: 'testFolder', message: 'Create/Override /test folder?', default: true}
@@ -45,14 +44,6 @@ module.exports = function (yargs) {
     if (answers.envFile) {
       console.log('Creating .env file')
       fs.copy(vueBuildRoot + '.env', projectRoot + '/.env', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
-    }
-
-    // .babelrc file
-    if (answers.babelrcFile) {
-      console.log('Creating .babelrc file')
-      fs.copy(vueBuildRoot + '.babelrc', projectRoot + '/.babelrc', function (err) {
         if (err) { console.error(err); process.exit(1) }
       })
     }
