@@ -2,6 +2,14 @@ var fs = require('fs')
 var projectRoot = process.cwd()
 var merge = require('webpack-merge')
 
+var babelSettings = {
+  presets: [['es2015', {'modules': false}], 'stage-2'],
+  plugins: ['transform-runtime']
+}
+if (process.env.COVERAGE === 'true') {
+  babelSettings.plugins.push('istanbul')
+}
+
 var config = {
   // Path to main source folder where your files reside
   context: projectRoot + '/src',
@@ -60,6 +68,7 @@ var config = {
         loader: 'vue-loader',
         options: {
           loaders: {
+            js: 'babel-loader?' + JSON.stringify(babelSettings),
             postcss: [
               require('autoprefixer')({
                 browsers: ['last 3 versions']
@@ -72,7 +81,8 @@ var config = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: babelSettings
       },
       {
         test: /\.(scss|css)$/,
