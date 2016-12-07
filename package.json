@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Vue build package",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
