@@ -2,7 +2,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var BabiliMinifyPlugin = require('babili-webpack-plugin')
-var baseWebpackConfig = require(process.cwd() + '/webpack.config')
+var baseWebpackConfig = require('./webpack.base.config.js')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var chalk = require('chalk')
 

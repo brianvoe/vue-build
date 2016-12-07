@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Vue build package",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
@@ -25,13 +25,15 @@
   "scripts": {
     "help": "vue-build help",
     "version": "vue-build --version",
+    "init": "vue-build init",
     "dev": "vue-build dev",
     "prod": "vue-build prod",
     "unit": "vue-build unit",
     "unit:single": "vue-build unit --single-run",
     "e2e": "vue-build e2e",
     "test": "vue-build unit --single-run && vue-build e2e",
-    "lint": "vue-build lint"
+    "lint": "vue-build lint",
+    "all": "vue-build lint && vue-build unit --single-run && vue-build e2e && vue-build prod"
   },
   "dependencies": {
     "autoprefixer": "^6.5.2",
