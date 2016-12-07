@@ -9,12 +9,17 @@ module.exports = function (config) {
   var webpackConfig = require(projectRoot + '/webpack.config.js')
   var chalk = require('chalk')
   var port = process.env.PORT
+  var coverage = (process.env.COVERAGE === 'true')
+  var singleRun = coverage || (process.env.SINGLE_RUN === 'true')
+  var autoWatch = singleRun !== true
+  var testFiles = process.env.FILES
 
-  // Check if there is a server.js file in the test folder
-  var pathToServer = projectRoot + '/test/server.js'
-  try {
-    fs.statSync(pathToServer)
-  } catch (err) { pathToServer = false }
+  // if show-coverage argument is passed in open browser to coverage report
+  // if (coverage) {
+  //   var open = require('open')
+  //   open(projectRoot + '/test/unit/coverage/lcov-report/index.html')
+  //   return
+  // }
 
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
@@ -36,15 +41,22 @@ module.exports = function (config) {
     format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
   }))
 
+  // Establish which files to run
+  var files = []
+  var preprocessors = {}
+  if (testFiles) {
+    // Add to files
+    var pattern = projectRoot + '/test/specs/' + testFiles
+    files.push({pattern: pattern, watched: autoWatch})
+  }
+
   // Set karma configuration
-  var singleRun = (process.env.SINGLE_RUN === 'true')
-  var autoWatch = singleRun !== true
   var configInfo = {
     singleRun: singleRun,
 
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -92,15 +104,6 @@ module.exports = function (config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'], // ['PhantomJS', 'Chrome', 'Firefox'],
 
-    // Code Coverage Report
-    coverageReporter: {
-      dir: testPath + '/coverage',
-      reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' }
-      ]
-    },
-
     // Webpack middleware config
     webpackMiddleware: {
       noInfo: true,
@@ -123,8 +126,25 @@ module.exports = function (config) {
     ]
   }
 
-  // If there is a server path add express server
-  if (pathToServer) {
+  // If coverage add to config
+  if (coverage) {
+    configInfo.reporters.push('coverage')
+    configInfo.coverageReporter = {
+      dir: testPath + '/coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    }
+  }
+
+  // Add express server
+  // Check if there is a server.js file in the test folder
+  try {
+    var pathToServer = projectRoot + '/test/server.js'
+    fs.statSync(pathToServer)
+
+    // If statsSync is successfull push plugin and run express server
     var expressServer = function (args, config, logger, helper) {
       console.log(chalk.blue('Running server on http://localhost:' + port + '.....PID:' + process.pid))
 
@@ -142,7 +162,8 @@ module.exports = function (config) {
     configInfo.plugins.push({
       'framework:express-http-server': ['factory', expressServer]
     })
-  }
+  } catch (err) {}
 
+  // Set configuration
   config.set(configInfo)
 }
