@@ -33,6 +33,17 @@ exports.builder = {
 
 // e2e command function
 exports.handler = function (yargs) {
+  var chalk = require('chalk')
+  var fs = require('fs')
+  // Check to make sure you have a e2e directory
+  try {
+    fs.statSync(process.cwd() + '/test/e2e')
+    fs.statSync(process.cwd() + '/test/e2e/specs')
+  } catch (err) {
+    console.log(chalk.red('Sorry you do not have a e2e/specs folder'))
+    return
+  }
+
   // Set env variables
   process.env.NODE_ENV = 'testing'
   process.env.ENVIRONMENT = 'testing'
