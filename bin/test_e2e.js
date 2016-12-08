@@ -45,7 +45,7 @@ exports.handler = function (yargs) {
   }
 
   // Set env variables
-  process.env.NODE_ENV = 'testing'
+  process.env.NODE_ENV = 'production'
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs['single-run']
   process.env.E2E_PORT = yargs.port || 9090
