@@ -37,6 +37,7 @@ exports.handler = function (yargs) {
   var chalk = require('chalk')
   var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var fs = require('fs')
+  var firstRun = true
 
   // Check environment if yargs is passed set environment
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -46,7 +47,7 @@ exports.handler = function (yargs) {
   }
 
   // Set port in order of importance - fallback is 8080
-  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
+  var port = process.env.PORT = process.env.E2E_PORT || yargs.port || process.env.PORT || 8080
 
   // Overwrite devtool
   var devtool = yargs.devtool || false
@@ -65,9 +66,10 @@ exports.handler = function (yargs) {
   webpackConfig.plugins.push(new ProgressBarPlugin({
     format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
     callback: function () {
-      if (process.env.ENVIRONMENT !== 'production') {
+      if (process.env.ENVIRONMENT !== 'production' && firstRun) {
         console.log(chalk.blue('Dev server started'))
         console.log(chalk.blue('http://localhost:' + port + '.....PID:' + process.pid))
+        firstRun = false // only show dev server started once
       }
     }
   }))

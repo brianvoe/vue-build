@@ -28,7 +28,7 @@ module.exports = function (config) {
     plugins: [
       new webpack.DefinePlugin({
         'process.env': JSON.stringify(process.env),
-        'process.env.NODE_ENV': JSON.stringify(process.env.ENVIRONMENT)
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       })
     ]
   })
@@ -132,6 +132,12 @@ module.exports = function (config) {
       'karma-coverage',
       'karma-spec-reporter'
     ]
+  }
+
+  // Polyfill stuff of phantomjs
+  if (configInfo.browsers.includes('PhantomJS')) {
+    configInfo.files.unshift(projectRoot + '/node_modules/whatwg-fetch/fetch.js') // fetch polyfill
+    configInfo.files.unshift(projectRoot + '/node_modules/babel-polyfill/dist/polyfill.js') // other polyfill. Ex: Promise, etc...)
   }
 
   // If coverage add to config
