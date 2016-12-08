@@ -46,7 +46,7 @@ exports.handler = function (yargs) {
   }
 
   // Set port in order of importance - fallback is 8080
-  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || webpackConfig.devServer.port || 8080
+  var port = process.env.E2E_PORT || yargs.port || process.env.PORT || 8080
 
   // Overwrite devtool
   var devtool = yargs.devtool || false
