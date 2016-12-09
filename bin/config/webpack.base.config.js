@@ -22,15 +22,6 @@ var config = {
     filename: '[name].js', // filename based upon entry variable - ex: app.js
     publicPath: '/' // Important for dev server main path
   },
-  // Config information that will be sent to the dev server
-  devServer: {
-    // contentBase: './src', // Base path for the content
-    port: 1234, // Dev server port
-    hot: true, // Hot reloading
-    historyApiFallback: true, // Enables suport for history api fallback
-    clientLogLevel: 'warning', // The amount of logging for browser console logs
-    noInfo: true // Suppress boring info in command line
-  },
   resolve: {
     // If you dont put the extension on an import it will
     // try to resolve it by looking for these extensions first

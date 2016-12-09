@@ -7,19 +7,10 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   entry: {
     app: [
-      'webpack-dev-server/client',
+      // 'webpack-dev-server/client',
       'webpack/hot/dev-server',
-      'webpack-hot-middleware/client'
+      'webpack-hot-middleware/client?noInfo=true'
     ]
-  },
-  // Set webpack dev server options - essentially default values
-  // Could be overwritten by may main webpack config
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    clientLogLevel: 'warning',
-    quiet: true,
-    noInfo: true
   },
   // Plugins needed for development
   plugins: [
