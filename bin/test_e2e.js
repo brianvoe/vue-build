@@ -28,6 +28,11 @@ exports.builder = {
     alias: 'options',
     type: 'string',
     describe: 'nightwatch options'
+  },
+  tp: {
+    alias: 'test-port',
+    type: 'number',
+    describe: 'test against running port'
   }
 }
 
@@ -35,6 +40,7 @@ exports.builder = {
 exports.handler = function (yargs) {
   var chalk = require('chalk')
   var fs = require('fs')
+
   // Check to make sure you have a e2e directory
   try {
     fs.statSync(process.cwd() + '/test/e2e')
@@ -48,43 +54,25 @@ exports.handler = function (yargs) {
   process.env.NODE_ENV = 'production'
   process.env.ENVIRONMENT = 'testing'
   process.env.SINGLE_RUN = yargs['single-run']
-  process.env.E2E_PORT = yargs.port || 9090
+  process.env.E2E_PORT = yargs['test-port'] || yargs.port || 9090
   process.env.DEVTOOL = yargs.devtool || 'eval' // Set devtool to be really fast
+
+  // If yargs has test-port just run nightwatch
+  if (yargs['test-port']) {
+    runNightwatch(yargs)
+    return
+  }
 
   // Start the dev server
   var dev = require('./dev.js').handler(yargs)
   var compiler = dev.compiler
   var server = dev.server
-  var path = require('path')
 
   // Once compiler is done run nightwatch
   compiler.plugin('done', function () {
-    // Put together nightwatch options
-    var opts = []
-    opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
+    var runner = runNightwatch(yargs)
 
-    // set browser type
-    if (yargs.browser) {
-      opts = opts.concat(['-e', yargs.browser])
-    }
-
-    // set tags
-    if (yargs.tags) {
-      yargs.tags.split(',').forEach(function (item) {
-        opts = opts.concat(['--tag', item.trim()])
-      })
-    }
-
-    // additional nightwatch options
-    if (yargs.options) {
-      opts = opts.concat(yargs.options.split(' '))
-    }
-
-    // Run nightwatch
-    var spawn = require('cross-spawn')
-    var runner = spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
-
-    // If runner exits or has an error close dev server
+      // If runner exits or has an error close dev server
     runner.on('exit', function (code) {
       server.close()
       process.exit(code)
@@ -94,4 +82,33 @@ exports.handler = function (yargs) {
       throw err
     })
   })
+}
+
+function runNightwatch (yargs) {
+  var path = require('path')
+  var spawn = require('cross-spawn')
+
+  // Put together nightwatch options
+  var opts = []
+  opts = opts.concat(['--config', path.join(__dirname, 'config/nightwatch.conf.js')])
+
+  // set browser type
+  if (yargs.browser) {
+    opts = opts.concat(['-e', yargs.browser])
+  }
+
+  // set tags
+  if (yargs.tags) {
+    yargs.tags.split(',').forEach(function (item) {
+      opts = opts.concat(['--tag', item.trim()])
+    })
+  }
+
+  // additional nightwatch options
+  if (yargs.options) {
+    opts = opts.concat(yargs.options.split(' '))
+  }
+
+  // Run nightwatch
+  return spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
 }
