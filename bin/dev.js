@@ -75,10 +75,16 @@ exports.handler = function (yargs) {
   }))
 
   var compiler = Webpack(webpackConfig)
-  var server = new WebpackDevServer(compiler, Object.assign({}, {
+  var server = new WebpackDevServer(compiler, {
+    hot: true,
+    historyApiFallback: true,
+    clientLogLevel: 'warning',
+    quiet: true,
+    noInfo: true,
     stats: {
       colors: true
     },
+    // express server setup extension
     setup: function (app) {
       app.use(function (req, res, next) {
         if (process.env.ENVIRONMENT === 'development') {
@@ -89,17 +95,14 @@ exports.handler = function (yargs) {
 
       // Add webpack hot middleware to use for error overlay
       // Quiet is set to true because well let WebpackDevServer handle console logging
-      app.use(webpackHotMiddleware(compiler, {
-        overlay: true,
-        quiet: true
-      }))
+      app.use(webpackHotMiddleware(compiler))
 
       // If there is a server.js file load it and pass app to it
       if (pathToServer) {
         require(pathToServer)(app)
       }
     }
-  }, webpackConfig.devServer))
+  })
 
   var serverListen = server.listen(port, 'localhost', function () {})
 
