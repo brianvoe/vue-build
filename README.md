@@ -61,4 +61,3 @@ See the [wiki](/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
   - Chunk Extracting
-  - When running e2e it checks if dev is already running and if so just uses that instead of rebuilding dev every time
