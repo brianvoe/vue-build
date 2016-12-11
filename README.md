@@ -6,7 +6,7 @@ The build process is one of the ***most frustrating*** things about front end de
 
 Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue, Webpack 2, .env, Sass, Eslint(Standard), Karma, Mocha, Chai, Nightwatch
 
-See the [wiki](/brianvoe/vue-build/wiki) for more detailed information
+See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
 ## Features
 - Command Line Scripts
@@ -57,7 +57,7 @@ vue-build lint
 // Help
 vue-build help
 ```
-See the [wiki](/brianvoe/vue-build/wiki) for more detailed information
+See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
   - Chunk Extracting
