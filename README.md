@@ -17,6 +17,7 @@ Note: As we get closer to the release of webpack 2 primary functionality may cha
   - Hot Middleware
   - Error Overlay
   - .env Processing
+  - production css extraction
 - Sass
 - Babel
 - Eslint - Standard
