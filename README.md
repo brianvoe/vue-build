@@ -62,4 +62,4 @@ vue-build help
 See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
-  - Chunk Extracting
+  - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
