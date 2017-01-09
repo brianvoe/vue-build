@@ -63,4 +63,5 @@ vue-build help
 See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
+  - Junit testing xml output for both unit and e2e testing
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
