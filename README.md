@@ -8,6 +8,8 @@ Vue-build takes those frustrations and hopefully eliminates them with a set of p
 
 See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
+Note: As we get closer to the release of webpack 2 primary functionality may change.
+
 ## Features
 - Command Line Scripts
 - Webpack 2
