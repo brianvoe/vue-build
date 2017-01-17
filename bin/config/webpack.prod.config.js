@@ -29,7 +29,9 @@ var webpackConfig = merge(baseWebpackConfig, {
 })
 
 // Add css extraction
-var extractCSS = new ExtractTextPlugin('[name].css')
+var extractCSS = new ExtractTextPlugin('[name].css', {
+  allChunks: true
+})
 for (var rule in webpackConfig.module.rules) {
   if (webpackConfig.module.rules[rule].test.test('.css')) {
     // Replace default loader with extractCSS
