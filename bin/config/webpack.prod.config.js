@@ -31,6 +31,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 // Add css extraction
 var extractCSS = new ExtractTextPlugin({
   filename: '[name].css',
+  disable: false,
   allChunks: true
 })
 for (var rule in webpackConfig.module.rules) {
