@@ -51,6 +51,7 @@ exports.handler = function (yargs) {
   // Set env variables
   process.env.NODE_ENV = 'production'
   process.env.ENVIRONMENT = 'testing'
+  process.env.TESTING_TYPE = 'unit'
   process.env.SINGLE_RUN = yargs['single-run']
   process.env.PORT = yargs.port || process.env.PORT || 8080
   process.env.KARMA_PORT = 8765
