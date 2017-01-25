@@ -53,6 +53,7 @@ exports.handler = function (yargs) {
   // Set env variables
   process.env.NODE_ENV = 'production'
   process.env.ENVIRONMENT = 'testing'
+  process.env.TESTING_TYPE = 'e2e'
   process.env.SINGLE_RUN = yargs['single-run']
   process.env.E2E_PORT = yargs['test-port'] || yargs.port || 9090
   process.env.DEVTOOL = yargs.devtool || 'eval' // Set devtool to be really fast
