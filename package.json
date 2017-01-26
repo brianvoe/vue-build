@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "description": "Vue development/testing/production cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
@@ -98,7 +98,7 @@
     "karma-webpack": "^2.0.0",
     "mocha": "^3.1.2",
     "nightwatch": "^0.9.8",
-    "node-sass": "^3.11.2",
+    "node-sass": "^4.3.0",
     "open": "0.0.5",
     "progress-bar-webpack-plugin": "^1.9.0",
     "sass-loader": "^4.0.2",
