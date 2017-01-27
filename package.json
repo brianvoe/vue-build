@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "0.28.0",
+  "version": "0.28.1",
   "description": "Vue development/testing/production cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
