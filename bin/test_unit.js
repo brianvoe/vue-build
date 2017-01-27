@@ -38,14 +38,25 @@ exports.handler = function (yargs) {
   var path = require('path')
   var chalk = require('chalk')
   var fs = require('fs')
+  var path = require('path')
 
   // Check to make sure you have a e2e directory
   try {
-    fs.statSync(process.cwd() + '/test/unit')
-    fs.statSync(process.cwd() + '/test/unit/specs')
+    fs.statSync(path.join(process.cwd(), '/test/unit'))
+    fs.statSync(path.join(process.cwd(), '/test/unit/specs'))
   } catch (err) {
     console.log(chalk.red('Sorry you do not have a unit/specs folder'))
     return
+  }
+
+  // check to make sure the test runner file (index.js) is present
+  if (!yargs.files) {
+    try {
+      fs.statSync(path.join(process.cwd(), '/test/unit/index.js'))
+    } catch (err) {
+      console.log(chalk.red(`unit/index.js not found. Run vue-build init to generate it (or copy it from the example project in the vue-build repo).`))
+      return
+    }
   }
 
   // Set env variables

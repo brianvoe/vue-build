@@ -13,6 +13,7 @@ module.exports = function (config) {
   var singleRun = coverage || (process.env.SINGLE_RUN === 'true')
   var autoWatch = singleRun !== true
   var testFiles = process.env.FILES
+  var path = require('path')
 
   // if show-coverage argument is passed in open browser to coverage report
   // if (coverage) {
@@ -46,22 +47,14 @@ module.exports = function (config) {
   var preprocessors = {}
   // Default set of files
   if (!testFiles) {
-    // Test files
-    files.push({pattern: testPath + '/specs/**/*.js', watched: autoWatch})
-    preprocessors[testPath + '/specs/**/*.js'] = ['webpack', 'sourcemap']
-
-    // Src files only if your running coverage
-    if (coverage) {
-      files.push({pattern: projectRoot + '/src/**/*.js', watched: autoWatch})
-      preprocessors[projectRoot + '/src/**/*.js'] = ['webpack', 'sourcemap']
-      files.push({pattern: projectRoot + '/src/**/*.vue', watched: autoWatch})
-      preprocessors[projectRoot + '/src/**/*.vue'] = ['webpack', 'sourcemap']
-    }
+    // Test all files in test/unit/specs
+    files.push({pattern: path.join(testPath, 'index.js'), watched: autoWatch})
+    preprocessors[path.join(testPath, 'index.js')] = ['webpack', 'sourcemap']
   } else {
     // Test file arguments were passed in lets use that for file and preprocessors
     testFiles = testFiles.replace(/^\/|\/$/g, '') // strip begining slashes slashes
     // Add to files
-    var pattern = projectRoot + '/test/unit/specs/' + testFiles
+    var pattern = path.join(projectRoot, '/test/unit/specs/', testFiles)
     files.push({pattern: pattern, watched: autoWatch})
 
     // Add to preprocessors
