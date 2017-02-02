@@ -101,6 +101,7 @@
     "node-sass": "^4.3.0",
     "open": "0.0.5",
     "progress-bar-webpack-plugin": "^1.9.0",
+    "resolve-url-loader": "^1.6.1",
     "sass-loader": "^4.0.2",
     "selenium-server": "3.0.1",
     "style-loader": "^0.13.1",
