@@ -77,7 +77,7 @@ var config = {
       },
       {
         test: /\.(scss|css)$/,
-        loader: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+        loader: ['style-loader', 'css-loader?sourceMap', 'resolve-url-loader', 'sass-loader?sourceMap']
       },
       {
         test: /\.json$/,
