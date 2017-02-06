@@ -1,0 +1,6 @@
+{
+  "name": "docs",
+  "dependencies": {
+    "vue-build": "^0.29.0"
+  }
+}

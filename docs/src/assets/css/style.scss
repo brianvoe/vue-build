@@ -1,0 +1,100 @@
+$primary: #42b983;
+$secondary: #35495E;
+$font-color: #666666;
+$border-color: #DCDEE2;
+$background-color: #f1f1f1;
+
+// Standard white/black
+$white: #ffffff;
+$black: #000000;
+
+$sidebar-width: 150px;
+
+// Main body element
+html {height: 100%; min-height: 100%;}
+body {
+  height: 100%;
+  margin: 0;
+	padding: 0;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4;
+  color: $font-color;
+  background-color: $white;
+}
+
+a {
+  color: $primary;
+  font-weight: 600;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  width: 100%;
+  min-width: 600px;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+
+  // Header - located at the top of the aplication
+  .header {
+    flex: 0 0 150px;
+    background-color: $white;
+    text-align: center;
+    padding: 15px 0 15px 0;
+
+    .logo {
+      font-size: 80px;
+      font-weight: bold;
+
+      img {
+        height: 100px;
+      }
+    }
+    .tagline {
+      margin: 0 auto;
+      text-align: center;
+      font-size: 18px;
+    }
+  }
+
+  .container {
+    flex: 1 1 auto;
+    min-height: 0; /* weird browser fix */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    // Sidebar is the primarly left hand bar
+    .sidebar {
+      flex: 0 1 $sidebar-width;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      ul {
+        li {
+          
+        }
+      }
+    }
+
+    // Main is the large main section
+    .main {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: calc(100% - #{$sidebar-width});
+      min-height: 0; /* weird browser fix */
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 10px;
+    }
+  }
+}
