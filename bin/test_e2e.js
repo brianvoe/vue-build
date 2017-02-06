@@ -111,5 +111,5 @@ function runNightwatch (yargs) {
   }
 
   // Run nightwatch
-  return spawn('./node_modules/.bin/nightwatch', opts, { stdio: 'inherit' })
+  return spawn(path.join(__dirname, '../node_modules/.bin/nightwatch'), opts, { stdio: 'inherit' })
 }
