@@ -1,10 +1,14 @@
 <script>
-  import logo from './logo.png'
+  import nav from './components/nav.vue'
+  import logo from './assets/images/logo.png'
   export default {
     data: function () {
       return {
         logo
       }
+    },
+    components: {
+      navBar: nav
     },
     methods: {}
   }
@@ -17,7 +21,7 @@
       <div class="tagline">Taking the frustrating build process and clutter out of your application</div>
     </div>
     <div class="container">
-      <div class="sidebar">Sidebar</div>
+      <div class="sidebar"><navBar /></div>
       <div class="main">Main section</div>
     </div>
   </div>
