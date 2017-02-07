@@ -9,7 +9,9 @@ var chalk = require('chalk')
 var fs = require('fs')
 var projectRoot = process.cwd()
 
-process.env.NODE_ENV = process.env.environment
+// Set default environment
+process.env.NODE_ENV = process.env.ENVIRONMENT || 'production'
+process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
 
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
