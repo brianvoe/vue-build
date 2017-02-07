@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "0.29.3",
+  "version": "0.29.4",
   "description": "Vue development/testing/production cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
@@ -75,7 +75,7 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "express": "^4.14.0",
-    "extract-text-webpack-plugin": "^2.0.0-beta.5",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "figlet": "^1.2.0",
     "file-loader": "^0.9.0",
     "fs-extra": "^1.0.0",
