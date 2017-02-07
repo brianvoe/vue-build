@@ -3,7 +3,7 @@ import app from 'src/app.vue'
 import router from './router.js'
 import hljs from 'highlightjs'
 
-import './assets/css/style.scss'
+import './assets/css/app.scss'
 
 Vue.directive('highlightjs', {
   deep: true,

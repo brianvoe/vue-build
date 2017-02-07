@@ -7,6 +7,11 @@
         logo
       }
     },
+    computed: {
+      isHome () {
+        return this.$route.path === '/'
+      }
+    },
     components: {
       navBar: nav
     },
@@ -14,18 +19,9 @@
   }
 </script>
 
-<style>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .3s ease;
-  }
-  .fade-enter, .fade-leave-to {
-    opacity: 0;
-  }
-</style>
-
 <template>
   <div class="app">
-    <div class="header">
+    <div class="header" :class="{'large': isHome}">
       <div class="logo"><img :src="logo" />ue-build</div>
       <div class="tagline">Taking the frustrating build process and clutter out of your application</div>
     </div>
