@@ -87,7 +87,9 @@ exports.handler = function (yargs) {
 
 function runNightwatch (yargs) {
   var path = require('path')
+  var fs = require('fs')
   var spawn = require('cross-spawn')
+  var chalk = require('chalk')
 
   // Put together nightwatch options
   var opts = []
@@ -111,5 +113,19 @@ function runNightwatch (yargs) {
   }
 
   // Run nightwatch
-  return spawn(path.join(__dirname, '../node_modules/.bin/nightwatch'), opts, { stdio: 'inherit' })
+  // Depending on where your executing from it may be
+  var path1 = path.join(process.cwd(), './node_modules/.bin/nightwatch')
+  var path2 = path.join(process.cwd(), './node_modules/vue-build/node_modules/.bin/nightwatch')
+  try {
+    fs.statSync(path1)
+    return spawn(path1, opts, { stdio: 'inherit' })
+  } catch (err1) {
+    try {
+      fs.statSync(path2)
+      return spawn(path2, opts, { stdio: 'inherit' })
+    } catch (err2) {
+      console.log(chalk.red('Sorry could not run nightwatch. ', err1, err2))
+      return
+    }
+  }
 }
