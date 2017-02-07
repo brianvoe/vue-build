@@ -5,8 +5,8 @@ Vue.use(VueRouter)
 
 // Components
 import home from './components/home.vue'
-import gettingStarted from './components/getting-started.vue'
-import installation from './components/installation.vue'
+import initiation from './components/initiation.vue'
+import development from './components/development.vue'
 
 export default new VueRouter({
   mode: 'history',
@@ -19,14 +19,14 @@ export default new VueRouter({
       component: home
     },
     {
-      path: '/getting-started',
-      name: 'getting-started',
-      component: gettingStarted
+      path: '/initiation',
+      name: 'initiation',
+      component: initiation
     },
     {
-      path: '/installation',
-      name: 'installation',
-      component: installation
+      path: '/development',
+      name: 'development',
+      component: development
     }
   ]
 })
