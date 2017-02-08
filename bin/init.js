@@ -6,7 +6,6 @@ module.exports = function (yargs) {
 
   var inquirer = require('inquirer')
   inquirer.prompt([
-    {type: 'confirm', name: 'packageFile', message: 'Create/Override package.json file?', default: true},
     {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
     {type: 'confirm', name: 'envFile', message: 'Create/Override .env file?', default: true},
     {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
@@ -15,22 +14,6 @@ module.exports = function (yargs) {
   ])
   .then(function (answers) {
     console.log() // Console Spacing
-
-    // package.json file
-    if (answers.packageFile) {
-      console.log('Creating package.json file')
-      var packageJson = {
-        name: 'app',
-        version: '0.1.0',
-        dependencies: {
-          'vue-build': '^' + require('../package').version
-        }
-      }
-      fs.writeFileSync(
-        projectRoot + '/package.json',
-        JSON.stringify(packageJson, null, 2)
-      )
-    }
 
     // webpack file
     if (answers.webpackFile) {
