@@ -1,6 +1,8 @@
 var fs = require('fs')
-var projectRoot = process.cwd()
+var path = require('path')
 var merge = require('webpack-merge')
+var projectRoot = process.cwd()
+var projectModules = path.join(projectRoot, '/node_modules')
 
 var babelSettings = {
   presets: [['es2015', {'modules': false}], 'stage-2'],
@@ -12,17 +14,18 @@ if (process.env.COVERAGE === 'true') {
 
 var config = {
   // Path to main source folder where your files reside
-  context: projectRoot + '/src',
+  context: path.join(projectRoot, 'src'),
   // Main file entry point - must be in app object as we append dev injections to that path
   entry: {
     app: ['./app.js']
   },
   output: {
-    path: projectRoot + '/dist',
+    path: path.resolve(projectRoot, 'dist'),
     filename: '[name].js', // filename based upon entry variable - ex: app.js
     publicPath: '/' // Important for dev server main path
   },
   resolve: {
+    modules: [projectRoot + '/src', projectModules],
     // If you dont put the extension on an import it will
     // try to resolve it by looking for these extensions first
     extensions: ['.scss', '.js', '.vue'],
@@ -71,7 +74,6 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: projectRoot,
         exclude: /node_modules/,
         options: babelSettings
       },

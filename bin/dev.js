@@ -32,11 +32,12 @@ exports.builder = {
 exports.handler = function (yargs) {
   var projectRoot = process.cwd()
   var Webpack = require('webpack')
-  var WebpackDevServer = require(projectRoot + '/node_modules/webpack-dev-server/lib/Server.js')
-  var webpackHotMiddleware = require('webpack-hot-middleware')
   var chalk = require('chalk')
-  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var fs = require('fs')
+  var path = require('path')
+  var WebpackDevServer = require('webpack-dev-server')
+  var webpackHotMiddleware = require('webpack-hot-middleware')
+  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var firstRun = true
 
   // Check environment if yargs is passed set environment
@@ -76,6 +77,8 @@ exports.handler = function (yargs) {
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, {
+    contentBase: projectRoot + '/dist/',
+    publicPath: '/',
     hot: true,
     historyApiFallback: true,
     clientLogLevel: 'warning',
