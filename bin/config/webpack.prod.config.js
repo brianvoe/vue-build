@@ -2,7 +2,6 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var BabiliMinifyPlugin = require('babili-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config.js')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var chalk = require('chalk')
@@ -23,9 +22,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': JSON.stringify(process.env),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new BabiliMinifyPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       comments: false,
-      sourceMape: process.env.SOURCE_MAP
+      sourceMap: process.env.SOURCE_MAP
     })
   ]
 })
