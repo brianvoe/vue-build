@@ -10,6 +10,8 @@ if (process.env.COVERAGE === 'true') {
   babelSettings.plugins.push('istanbul')
 }
 
+console.log(projectRoot + '/src')
+
 var config = {
   // Path to main source folder where your files reside
   context: projectRoot + '/src',
@@ -18,11 +20,12 @@ var config = {
     app: ['./app.js']
   },
   output: {
-    path: projectRoot + '/dist',
+    path: projectRoot + '/dist/',
     filename: '[name].js', // filename based upon entry variable - ex: app.js
     publicPath: '/' // Important for dev server main path
   },
   resolve: {
+    modules: [projectRoot + '/src', projectRoot + '/node_modules'],
     // If you dont put the extension on an import it will
     // try to resolve it by looking for these extensions first
     extensions: ['.scss', '.js', '.vue'],
