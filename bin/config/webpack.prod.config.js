@@ -39,7 +39,11 @@ var extractCSS = new ExtractTextPlugin({
 for (var rule in webpackConfig.module.rules) {
   if (webpackConfig.module.rules[rule].test.test('.css')) {
     // Replace default loader with extractCSS
-    webpackConfig.module.rules[rule].loader = extractCSS.extract(['css-loader?sourceMap', 'sass-loader?sourceMap'])
+    webpackConfig.module.rules[rule].loader = extractCSS.extract([
+      'css-loader?sourceMap',
+      'resolve-url-loader',
+      'sass-loader?sourceMap'
+    ])
 
     // Add extraction plugin
     webpackConfig.plugins.push(extractCSS)
