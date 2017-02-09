@@ -11,13 +11,13 @@ See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed inf
 ## Features
 - Command Line Scripts
 - Webpack 2
+  - Babel
   - Hot Reloading
   - Hot Middleware
   - Error Overlay
   - .env Processing
   - production css extraction
 - Sass
-- Babel
 - Eslint - Standard
 - Unit Testing
   - Karma
