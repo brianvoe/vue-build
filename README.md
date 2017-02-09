@@ -63,3 +63,4 @@ See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed inf
 ## Roadmap
   - Junit testing xml output for both unit and e2e testing
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
+  - Impliment port checking before build. https://www.npmjs.com/package/tcp-port-used
