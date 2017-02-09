@@ -2,8 +2,10 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.config.js')
+var projectRoot = process.cwd()
+var fs = require('fs')
 
-module.exports = merge(baseWebpackConfig, {
+var webpackConfig = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   entry: {
     app: [
@@ -19,11 +21,30 @@ module.exports = merge(baseWebpackConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      inject: true,
-      showErrors: false,
-      template: 'index.html'
-    })
+    new webpack.HotModuleReplacementPlugin()
   ]
 })
+
+// Check if they have an html file to output if so add plugin
+try {
+  var indexHtml = projectRoot + '/src/index.html'
+  fs.statSync(indexHtml)
+
+  var htmlOptions = {
+    inject: true,
+    cache: false,
+    showErrors: false,
+    template: 'index.html'
+  }
+
+  try {
+    var favicon = projectRoot + '/src/favicon.ico'
+    fs.statSync(favicon)
+    htmlOptions.favicon = favicon
+  } catch (err) {}
+
+  // If your here it did find an html file and now we add plugin
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlOptions))
+} catch (err) {}
+
+module.exports = webpackConfig
