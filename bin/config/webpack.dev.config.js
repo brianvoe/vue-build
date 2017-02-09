@@ -46,5 +46,5 @@ try {
   // If your here it did find an html file and now we add plugin
   webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlOptions))
 } catch (err) {}
-console.log(webpackConfig.plugins)
+
 module.exports = webpackConfig
