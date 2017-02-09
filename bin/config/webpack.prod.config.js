@@ -54,17 +54,20 @@ try {
   var indexHtml = projectRoot + '/src/index.html'
   fs.statSync(indexHtml)
 
-  // If your here it did find an html file and now we add plugin
-  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+  var htmlOptions = {
     inject: true,
     showErrors: false,
-    template: 'index.html',
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-    }
-  }))
+    template: 'index.html'
+  }
+
+  try {
+    var favicon = projectRoot + '/src/favicon.ico'
+    fs.statSync(favicon)
+    htmlOptions.favicon = favicon
+  } catch (err) {}
+
+  // If your here it did find an html file and now we add plugin
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(htmlOptions))
 } catch (err) {}
 
 module.exports = webpackConfig

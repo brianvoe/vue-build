@@ -11,7 +11,9 @@
     </code></pre>
 
     <h3>Error overlay</h3>
-    During development if there are any linting or build errors they will show up as a screen overlay
-    ![](/brianvoe/vue-build/blob/master/bin/screenshots/error_screen.jpg?raw=true)
+    <p>
+      During development if there are any linting,
+      build syntax errors they will show up as a screen overlay in the browser.
+    </p>
   </div>
 </template>

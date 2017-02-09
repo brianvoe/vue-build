@@ -2,8 +2,9 @@
   <div>
     <h1>Production</h1>
     <p>
-      Running vue-build prod will transpile your code into
-      dist folder. Code will be minified and your css will be extracted.
+      Running vue-build prod will transpile and uglify(minify) your js,
+      extract your css and output to the dist folder. 
+      Code will be minified and your css will be extracted.
     </p>
 
     <pre v-highlightjs><code class="bash">
