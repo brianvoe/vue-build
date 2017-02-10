@@ -1,43 +1,87 @@
 <style lang="scss">
+  @import "~src/assets/css/variables.scss";
+
   .home-page {
-    p { margin: 8px 0 10px 0; }
+    .first-script {
+      width: 300px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: row;
+      padding: 20px 0 0 0;
+
+      .column {
+        flex: 1 0 33%;
+        text-align: center;
+
+        .title {
+          font-size: 18px;
+          font-weight: bold;
+          color: $primary;
+          padding: 0 0 8px 0;
+        }
+      }
+    }
   }
 </style>
 
 <template>
   <div class="home-page">
-    <h2><router-link to="/initiation">Initiation</router-link></h2>
-    <p>Initiation will run a script that will create files and folders for your application</p>
+    <div class="first-script">
+    <pre v-highlightjs><code class="bash">
+    npm install -g vue-build
+    </code></pre>
+    </div>
 
-    <h2><router-link to="/development">Development</router-link></h2>
-    <p>Development is the process of running a hot reloading development server</p>
+    <p>
+      A flexible build tool for VueJS projects with
+      <a href="https://webpack.js.org/" target="_blank">Webpack 2</a>,
+      <a href="http://sass-lang.com/" target="_blank">Sass</a>,
+      <a href="http://eslint.org/" target="_blank">Eslint</a>,
+      <a href="https://karma-runner.github.io/" target="_blank">Karma</a> and
+      <a href="http://nightwatchjs.org/" target="_blank">Nightwatch</a>.
+      Functional out-of-the-box, but easy to customize.
+    </p>
 
-    <h2><router-link to="/production">Production</router-link></h2>
-    <p>Production will build minfied files to the ```dist``` folder</p>
+    <h3>Features</h3>
+    <div class="features-list">
 
-    <h2><router-link to="/unit-testing">Unit Testing</router-link></h2>
-    <p>Unit testing will test files in the ```test/unit/specs``` folder</p>
+      <div class="column">
+        <div class="title">Packages</div>
+        <div>Vue 2</div>
+        <div>Vuex</div>
+        <div>Babel</div>
+        <div>Es6</div>
+        <div>Sass</div>
+        <div>Eslint</div>
+      </div>
 
-    <h2><router-link to="/e2e-testing">E2e Testing</router-link></h2>
-    <p>E2e testing will test files in the ```test/e2e/specs``` folder</p>
+      <div class="column">
+        <div class="title">Webpack</div>
+        <div>Hot Reloading</div>
+        <div>Hot Middleware</div>
+        <div>Error Overlay</div>
+        <div>.env Processing</div>
+        <div>Css Extraction</div>
+      </div>
 
-    <h2><router-link to="/linting">Linting</router-link></h2>
-    <p>Linting will lint files in the ```src``` ```test/unit/specs``` ```test/e2e/specs``` folders</p>
+      <div class="column">
+        <div class="title">Testing</div>
+        <div>Karma</div>
+        <div>Mocha</div>
+        <div>Chai</div>
+        <div>Code Coverage</div>
+        <div>Nightwatch</div>
+        <div>Selenium</div>
+        <div>Chrome Driver</div>
+        <div>Gecko(firefox) Driver</div>
+        <div>PhantomJs Driver</div>
+      </div>
 
-    <h2 style="border: none;">
-      <router-link to="/help">Help</router-link>
-    </h2>
-
-    <h2 style="border: none;">
-      <router-link to="/env">Environment Config</router-link>
-    </h2>
-
-    <h2 style="border: none;">
-      <router-link to="/env">Webpack Config</router-link>
-    </h2>
-
-    <h2 style="border: none;">
-      <router-link to="/folder-structure">Folder Structure</router-link>
-    </h2>
+    </div>
   </div>
 </template>
