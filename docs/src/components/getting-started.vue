@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Initiation</h1>
+    <h1>Getting Started</h1>
     <p>Initiation will ask you a variation of questions that will help you setup your application files and folders</p>
     <pre v-highlightjs><code class="bash">
     vue-build init
