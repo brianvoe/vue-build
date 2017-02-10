@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 // Components
 import home from './components/home.vue'
-import initiation from './components/initiation.vue'
+import gettingStarted from './components/getting-started.vue'
 import development from './components/development.vue'
 import production from './components/production.vue'
 import unit from './components/unit-testing.vue'
@@ -22,7 +22,7 @@ export default new VueRouter({
   linkActiveClass: 'active',
   routes: [
     { path: '/', component: home },
-    { path: '/initiation', component: initiation },
+    { path: '/getting-started', component: gettingStarted },
     { path: '/development', component: development },
     { path: '/production', component: production },
     { path: '/unit-testing', component: unit },

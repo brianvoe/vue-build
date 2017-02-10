@@ -43,7 +43,7 @@
     </div>
     <div class="links">
       <router-link to="/" exact>Home</router-link>
-      <router-link to="/initiation">Initiation</router-link>
+      <router-link to="/getting-started">Getting Started</router-link>
       <router-link to="/development">Development</router-link>
       <router-link to="/production">Production</router-link>
       <router-link to="/unit-testing">Unit Testing</router-link>
