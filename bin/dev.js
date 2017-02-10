@@ -34,7 +34,6 @@ exports.handler = function (yargs) {
   var Webpack = require('webpack')
   var chalk = require('chalk')
   var fs = require('fs')
-  var path = require('path')
   var WebpackDevServer = require('webpack-dev-server')
   var webpackHotMiddleware = require('webpack-hot-middleware')
   var ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -78,7 +77,7 @@ exports.handler = function (yargs) {
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, {
     contentBase: projectRoot + '/dist/',
-    publicPath: '/',
+    publicPath: webpackConfig.output.publicPath || '/',
     hot: true,
     historyApiFallback: true,
     clientLogLevel: 'warning',
