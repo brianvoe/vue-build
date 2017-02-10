@@ -3,7 +3,7 @@
     <h1>Folder Structure</h1>
     <p>
       The main goal was to create as simplistic of a folder structure as possible,
-      but still allow additional flexibility for webpack configuration.
+      but still allow additional flexibility for application configuration.
     </p>
 
     <h3>Minimum Structure</h3>
