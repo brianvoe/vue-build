@@ -6,11 +6,11 @@
 
 <template>
   <div class="home-page">
-    <h2><router-link to="/initiation">Initiation</router-link></h2>
-    <p>Initiation will run a script that will create files and folders for your application</p>
+    <h2><router-link to="/initiation">Getting Started</router-link></h2>
+    <p>Create a new vue-build application</p>
 
-    <h2><router-link to="/development">Development</router-link></h2>
-    <p>Development is the process of running a hot reloading development server</p>
+    <h2><router-link to="/development">Running Your App</router-link></h2>
+    <p>Run your application for development with hot reloading</p>
 
     <h2><router-link to="/production">Production</router-link></h2>
     <p>Production will build minfied files to the ```dist``` folder</p>
@@ -18,15 +18,8 @@
     <h2><router-link to="/unit-testing">Unit Testing</router-link></h2>
     <p>Unit testing will test files in the ```test/unit/specs``` folder</p>
 
-    <h2><router-link to="/e2e-testing">E2e Testing</router-link></h2>
+    <h2><router-link to="/e2e-testing">E2# Testing</router-link></h2>
     <p>E2e testing will test files in the ```test/e2e/specs``` folder</p>
-
-    <h2><router-link to="/linting">Linting</router-link></h2>
-    <p>Linting will lint files in the ```src``` ```test/unit/specs``` ```test/e2e/specs``` folders</p>
-
-    <h2 style="border: none;">
-      <router-link to="/help">Help</router-link>
-    </h2>
 
     <h2 style="border: none;">
       <router-link to="/env">Environment Config</router-link>

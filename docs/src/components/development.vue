@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1>Development</h1>
-    <p>Lets get you up and running with a development server with hot reloading
-    and error overlay</p>
+    <h1>Running Your App</h1>
+    <p>To run your app for development, use the <pre v-highlightjs>vue-build dev</pre> command.</p>
 
     <pre v-highlightjs><code class="bash">
     vue-build dev
