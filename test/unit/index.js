@@ -6,4 +6,4 @@ function importAll (r) {
 }
 
 importAll(require.context('./specs', true, /.*\.js$/))
-importAll(require.context('../../src', true, /^((?!app\.js|index\.html).)*$/))
+importAll(require.context('../../src', true, /^((?!app\.js|index\.html|\.ico|\.png|\.jpg).)*$/))
