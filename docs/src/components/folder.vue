@@ -1,23 +1,30 @@
 <template>
   <div>
     <h1>Folder Structure</h1>
-    <p>
-      The main goal was to create as simplistic of a folder structure as possible,
-      but still allow additional flexibility for webpack configuration.
-    </p>
+    <p>vue-build tries to keep as much <strong>out</strong> of your project
+    repo as possible -- if you're not using it (or overriding it), you
+    should be able to delete it.</p>
 
-    <h3>Minimum Structure</h3>
+    <p>In that spirit, here's the absolute minimum project structure that
+    will work with vue-build:</p>
+
     <pre v-highlightjs><code class="bash">
     - .eslintrc
+    - package.json
     - src
       - app.js - main file
     </code></pre>
 
-    <h3>Full Structure</h3>
+    <p><code>app.js</code> is used as your project's entry point.</p>
+
+    <p>A more specialized app (with tests and a custom build configuration)
+    will look more like this:</p>
+
     <pre v-highlightjs><code class="bash">
-    - .env - optional
-    - webpack.config.js - optional see webpack wiki
     - .eslintrc
+    - .env - optional
+    - package.json
+    - webpack.config.js - optional see webpack wiki
     - src
       - app.js - main file
     - test
