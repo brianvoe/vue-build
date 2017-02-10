@@ -50,7 +50,7 @@
       <router-link to="/e2e-testing">E2E Testing</router-link>
       <router-link to="/env">Env Config</router-link>
       <router-link to="/webpack">Webpack</router-link>
-      <router-link to="/folder">Folders</router-link>
+      <router-link to="/structure">Structure</router-link>
     </div>
   </div>
 </template>
