@@ -1,28 +1,36 @@
 <template>
   <div>
     <h1>Environment Configuration</h1>
-    <p>
-      If .env(optional) file is added to the project each variable will be passed and processed in the application build.
-      In order to access variables in .env file just call process.env.[VARIABLE]
-    </p>
+    <p>If you add a standard <code>.env</code> file to the project, its
+    variables will be included in <code>process.env</code>, <strong>both
+    during the build step and in your application code</strong>.</p>
 
-    <pre v-highlightjs><code class="javascript">
-    // config.js
-    var config = {
-       env: process.env.ENVIRONMENT,
-       custom_url: process.env.CUSTOMURL
-    }
-    // Will output to
-    var config = {
-       env: 'development',
-       custom_url: 'http://customurl.com'
-    }
-    </code></pre>
+    <p>For instance, the following <code>.env</code> file...</p>
 
-    <p>Example .env file</p>
     <pre v-highlightjs><code class="bash">
     ENVIRONMENT=development
     CUSTOMURL=http://customurl.com
+    </code></pre>
+
+    <p>...would allow you to do this during your
+        <router-link to="/webpack">webpack configuration</router-link>...</p>
+
+    <pre v-highlightjs><code class="javascript">
+      // in [project root/webpack.config.js:
+
+      if (process.env.ENVIRONMENT === 'development') {
+        module.exports.someSetting = 'use this in development'
+      }
+    </code></pre>
+
+    <p>...and this in your application itself:</p>
+
+    <pre v-highlightjs><code class="javascript">
+      data () {
+        return {
+           currentEnvironment: process.env.ENVIRONMENT // this will equal 'development'
+        }
+      }
     </code></pre>
   </div>
 </template>
