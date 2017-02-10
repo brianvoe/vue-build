@@ -6,7 +6,7 @@
       vue-build itself. The base configuration includes:
     </p>
     <ul>
-      <li><a href="http://vue-loader.vuejs.org/">vue-loader</a></li>
+      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li>SASS support</li>
       <li>Hot module reloading in development</li>
       <li>Minification and CSS extraction for production builds</li>
@@ -20,7 +20,7 @@
     <p>To customize your Webpack settings, <strong>create a <code>webpack.config.js</code>
     file in the root of your project</strong>. Whatever settings hash you export from
     that file will be merged into vue-build's base configuration using the
-    <a href="https://github.com/survivejs/webpack-merge#standard-merging">
+    <a href="https://github.com/survivejs/webpack-merge#standard-merging" target="_blank">
     default merge strategy of webpack-merge</a>.</p>
 
     <p>So if you wanted to add LESS support, for instance, your <code>webpack.config.js</code>

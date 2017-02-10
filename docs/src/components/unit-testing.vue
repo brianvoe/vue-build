@@ -27,27 +27,27 @@
     </code></pre>
 
     <p>Mocha and Chai are included as globals. For more information, refer to
-    the <a href="https://mochajs.org/">Mocha docs</a> and
-    <a href="http://chaijs.com/">Chai docs</a>. For information on unit testing
-    Vue applications specifically, try the <a href="https://vuejs.org/v2/guide/unit-testing.html">official docs</a>.</p>
+    the <a href="https://mochajs.org/" target="_blank">Mocha docs</a> and
+    <a href="http://chaijs.com/" target="_blank">Chai docs</a>. For information on unit testing
+    Vue applications specifically, try the <a href="https://vuejs.org/v2/guide/unit-testing.html" target="_blank">official docs</a>.</p>
 
     <h2>Code coverage</h2>
-
     <p>If you run <code class="bash">vue-build unit</code> with the
     <code>--coverage</code> option, the tests will output a code coverage
     report to <code>[project root]/test/unit/coverage</code>, with both an
     <code>lcov.info</code> file and an HTML coverage report in the
     <code>lcov-report</code> subdirectory.</p>
+    <pre v-highlightjs><code class="javascript">
+    vue-build unit --coverage
+    </code></pre>
 
     <h2>Running in continuous integration</h2>
-
     <p>By default, unit tests run in "watch" mode, running repeatedly on every
     file change until you terminate the process. For continuous integration environments, use the <code>--single-run</code> option to run the tests only one time. The process will exit with a success or failure code so
     that your CI server knows if your tests passed.</p>
 
     <h2>Running only some of your tests</h2>
-
-    <p>Mocha's <a href="https://mochajs.org/#exclusive-tests">.only()</a>
+    <p>Mocha's <a href="https://mochajs.org/#exclusive-tests" target="_blank">.only()</a>
     feature is a good way to run a few tests in isolation (and you don't have
     to restart the test runner to do it!). If you need to exclude a test by
     leaving it out of the build entirely, though, you can do that with
@@ -61,7 +61,7 @@
 
     <p>Arguments to <code>--files</code> are automatically scoped to
     <code>[project root]/unit/specs</code>, so you don't need to include it.
-    For information about the pattern-matching syntax, see the <a href="http://karma-runner.github.io/1.0/config/files.html">Karma
+    For information about the pattern-matching syntax, see the <a href="http://karma-runner.github.io/1.0/config/files.html" target="_blank">Karma
     docs</a>.</p>
 
     <h2>Determining what testing environment you're in</h2>
