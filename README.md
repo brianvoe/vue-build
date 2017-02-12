@@ -8,18 +8,16 @@ Vue-build takes those frustrations and hopefully eliminates them with a set of p
 
 See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
-Note: As we get closer to the release of webpack 2 primary functionality may change.
-
 ## Features
 - Command Line Scripts
 - Webpack 2
+  - Babel
   - Hot Reloading
   - Hot Middleware
   - Error Overlay
   - .env Processing
   - production css extraction
 - Sass
-- Babel
 - Eslint - Standard
 - Unit Testing
   - Karma
@@ -63,4 +61,6 @@ vue-build help
 See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
 
 ## Roadmap
+  - Junit testing xml output for both unit and e2e testing
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
+  - Impliment port checking before build. https://www.npmjs.com/package/tcp-port-used

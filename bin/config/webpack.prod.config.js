@@ -9,7 +9,7 @@ var fs = require('fs')
 var projectRoot = process.cwd()
 
 // Set default environment
-process.env.NODE_ENV = process.env.ENVIRONMENT || 'production'
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
 
 var webpackConfig = merge(baseWebpackConfig, {
