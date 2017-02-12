@@ -1,5 +1,5 @@
-$content-height: 200px;
-$content-width: 60%;
+$content-height: auto;
+$content-width: 300px;
 
 html {
   height: 100%;
@@ -7,7 +7,6 @@ html {
 
 body {
   font-family: helvetica;
-  background: linear-gradient(to bottom, #FFAE00 0%, #FF5A00 100%);
 }
 
 h1 {
@@ -22,6 +21,6 @@ h1 {
     width: $content-width;
     padding: 20px;
     margin: 20px auto 0 auto;
-    box-shadow: 5px 5px 10px #000000;
+    border: solid 1px #cccccc;
   }
 }
