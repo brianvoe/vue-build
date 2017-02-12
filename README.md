@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://vuejs.org"><img width="100"src="https://vuejs.org/images/logo.png" /></a>ue-build</h1>
+<h1 align="center"><a href="http://vue-build.com"><img width="100"src="https://vuejs.org/images/logo.png" /></a>ue-build</h1>
 
 [![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
 
@@ -6,7 +6,9 @@ The build process is one of the ***most frustrating*** things about front end de
 
 Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue, Webpack 2, .env, Sass, Eslint(Standard), Karma, Mocha, Chai, Nightwatch
 
-See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
+See the [wiki](http://vue-build.com) for more detailed information
+
+<a href="https://youtu.be/foKi4xHXlKw" target="_blank"><img src="http://img.youtube.com/vi/foKi4xHXlKw/0.jpg" alt="Vue Build" width="480" height="300" border="0" /></a>
 
 ## Features
 - Command Line Scripts
