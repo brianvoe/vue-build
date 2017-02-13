@@ -9,12 +9,6 @@
       font-weight: bold;
     }
 
-    .video {
-      margin: 0 auto;
-      width: 480px;
-      padding: 8px 0 8px 0;
-    }
-
     .features-list {
       display: flex;
       flex-direction: row;
@@ -52,12 +46,6 @@
       <a href="http://nightwatchjs.org/" target="_blank">Nightwatch</a>.
       Functional out-of-the-box, but easy to customize.
     </p>
-
-    <div class="video">
-      <a href="https://youtu.be/foKi4xHXlKw" target="_blank">
-        <img src="http://img.youtube.com/vi/foKi4xHXlKw/0.jpg" alt="Vue Build" width="480" height="300" border="0" />
-      </a>
-    </div>
 
     <h3>Features</h3>
     <div class="features-list">
