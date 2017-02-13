@@ -43,8 +43,19 @@
 
     <h2>Running in continuous integration</h2>
     <p>By default, unit tests run in "watch" mode, running repeatedly on every
-    file change until you terminate the process. For continuous integration environments, use the <code>--single-run</code> option to run the tests only one time. The process will exit with a success or failure code so
+    file change until you terminate the process. For continuous integration
+    environments, use the <code>--single-run</code> option to run the tests only
+    one time. The process will exit with a success or failure code so
     that your CI server knows if your tests passed.</p>
+
+    <p>If your CI server supports JUnit XML reports, you can use the
+    <code>--junit</code> option to output XML reports to
+    <code>[project root]/test/unit/reports</code>. One file will be generated
+    for each browser/version/OS that's used to run your tests, e.g.</p>
+
+    <pre v-highlightjs><code class="bash">
+        TESTS-Chrome_56.0.2924_(Mac_OS_X_10.10.5).xml
+    </code></pre>
 
     <h2>Running only some of your tests</h2>
     <p>Mocha's <a href="https://mochajs.org/#exclusive-tests" target="_blank">.only()</a>
