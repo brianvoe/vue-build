@@ -58,7 +58,7 @@ vue-build lint
 // Help
 vue-build help
 ```
-See the [wiki](https://github.com/brianvoe/vue-build/wiki) for more detailed information
+See the [docs](http://vue-build.com) for more details
 
 ## Roadmap
   - Junit testing xml output for both unit and e2e testing
