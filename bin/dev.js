@@ -76,7 +76,6 @@ exports.handler = function (yargs) {
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, {
-    contentBase: projectRoot + '/dist/',
     publicPath: webpackConfig.output.publicPath || '/',
     hot: true,
     historyApiFallback: true,
