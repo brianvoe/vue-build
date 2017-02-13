@@ -32,6 +32,7 @@
       - unit
         - specs - test go here
         - coverage
+        - reports
         - .eslintrc
         - .index.js - used to require context
       - e2e
@@ -41,7 +42,7 @@
         - page_objects - see nightwatch page_objects
         - globals
           - globals.js - see nightwatch globals path
-        - report
+        - reports
         - screenshots - error screenshots
     </code></pre>
   </div>

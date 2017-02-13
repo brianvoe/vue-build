@@ -30,6 +30,12 @@ exports.builder = {
     alias: 'files',
     type: 'string',
     describe: 'set the file(s) you want to test'
+  },
+  j: {
+    alias: 'junit',
+    type: 'boolean',
+    default: false,
+    describe: 'output JUnit XML to test/unit/reports'
   }
 }
 
@@ -68,6 +74,7 @@ exports.handler = function (yargs) {
   process.env.KARMA_PORT = 8765
   process.env.COVERAGE = yargs.coverage || false
   process.env.FILES = yargs.files || ''
+  process.env.JUNIT = yargs.junit
 
   // Ouput whats going on
   console.log(chalk.blue('Building src files for tests'))

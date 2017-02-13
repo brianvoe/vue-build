@@ -13,6 +13,7 @@ module.exports = function (config) {
   var singleRun = coverage || (process.env.SINGLE_RUN === 'true')
   var autoWatch = singleRun !== true
   var testFiles = process.env.FILES
+  var useJUnit = JSON.parse(process.env.JUNIT)
   var path = require('path')
 
   // if show-coverage argument is passed in open browser to coverage report
@@ -123,7 +124,8 @@ module.exports = function (config) {
       'karma-chai',
       'karma-chai-as-promised',
       'karma-coverage',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-junit-reporter',
     ]
   }
 
@@ -137,11 +139,18 @@ module.exports = function (config) {
   if (coverage) {
     configInfo.reporters.push('coverage')
     configInfo.coverageReporter = {
-      dir: testPath + '/coverage',
+      dir: path.join(testPath, '/coverage'),
       reporters: [
         { type: 'lcov', subdir: '.' },
         { type: 'text-summary' }
       ]
+    }
+  }
+
+  if (useJUnit) {
+    configInfo.reporters.push('junit')
+    configInfo.junitReporter = {
+      outputDir: path.join(testPath, 'reports')
     }
   }
 
