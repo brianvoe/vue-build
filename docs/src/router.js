@@ -19,7 +19,6 @@ export default new VueRouter({
   base: '/',
   linkActiveClass: 'active',
   routes: [
-    { path: '*', component: home },
     { path: '/', component: home },
     { path: '/getting-started', component: gettingStarted },
     { path: '/development', component: development },
