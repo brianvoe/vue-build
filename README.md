@@ -1,6 +1,7 @@
 <h1 align="center"><a href="http://vue-build.com"><img width="100"src="https://vuejs.org/images/logo.png" /></a>ue-build</h1>
 
 [![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
+[![NPM Downloads](https://img.shields.io/npm/dt/vue-build.svg)](https://www.npmjs.com/package/vue-build)
 
 The build process is one of the ***most frustrating*** things about front end development and cluttering up your app with a bunch of config and packages you rarely ever need to think about doesn't help either.
 
