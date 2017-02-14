@@ -7,6 +7,12 @@
         logo
       }
     },
+    mounted () {
+      // Lets redirect to path
+      if (this.$route.query.p) {
+        this.$router.push({ path: this.$route.query.p })
+      }
+    },
     computed: {
       isHome () {
         return this.$route.path === '/'
