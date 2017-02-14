@@ -1,3 +1,7 @@
+// Set default environment
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
+process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
+
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -7,10 +11,6 @@ var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var chalk = require('chalk')
 var fs = require('fs')
 var projectRoot = process.cwd()
-
-// Set default environment
-process.env.NODE_ENV = process.env.NODE_ENV || 'production'
-process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
 
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
