@@ -5,6 +5,8 @@ import hljs from 'highlightjs'
 
 import './assets/css/app.scss'
 
+import './google-analytics'
+
 Vue.directive('highlightjs', {
   deep: true,
   bind: function (el, binding) {

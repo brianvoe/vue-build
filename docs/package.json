@@ -2,6 +2,7 @@
   "name": "docs",
   "dependencies": {
     "highlightjs": "^9.8.0",
-    "vue-build": "^0.31.1"
+    "vue-build": "^0.31.1",
+    "autotrack": "^2.0.1"
   }
 }
