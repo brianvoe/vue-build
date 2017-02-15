@@ -13,7 +13,7 @@ describe('Simple assertion test', function () {
   })
 
   it('Make server request', function () {
-    return fetch('http://localhost:' + process.env.PORT + '/ok')
+    return fetch('http://localhost:8080/ok')
     .then(function (response) {
       return response.text()
     }).then(function (text) {
