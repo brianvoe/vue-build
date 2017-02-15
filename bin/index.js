@@ -13,6 +13,13 @@ console.log(
     figlet.textSync('Vue-Build')
   )
 )
+
+// Check node version
+var nodeVersion = process.version.replace('v', '').split('.')[0]
+if (nodeVersion < 6) {
+  throw new Error('Vue Build requires node version >= 6')
+}
+
 // process .env file
 var pathToEnv = process.cwd() + '/.env'
 var fs = require('fs')
