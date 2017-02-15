@@ -1,8 +1,6 @@
 module.exports = {
-  // any properties you export from this file will be available in your app as:
-  //
-  // process.env.[name of property]
-  //
+  // any properties you export from this file will be available as globals in
+  // your app
   //
   // for instance:
   //
@@ -11,6 +9,7 @@ module.exports = {
   //   }
   //
   // Then in your app:
+  //   /* global API_HOSTNAME */
   //
   //   fetch(API_HOSTNAME + '/my-endpoint')
   //

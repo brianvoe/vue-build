@@ -23,7 +23,7 @@ try {
   projectClientEnv = require(path.join(projectRoot, 'env.js'))
 
   for (key of Object.keys(projectClientEnv)) {
-    clientEnvironment['process.env.' + key] = JSON.stringify(projectClientEnv[key])
+    clientEnvironment[key] = JSON.stringify(projectClientEnv[key])
   }
 } catch (err) {}
 

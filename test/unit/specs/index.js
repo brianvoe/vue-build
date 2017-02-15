@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import app from 'src/app.vue'
+/* global TEST_API */
 
 describe('Simple assertion test', function () {
   it('Make sure test runs', function () {
@@ -13,7 +14,7 @@ describe('Simple assertion test', function () {
   })
 
   it('Make server request', function () {
-    return fetch(process.env.TEST_API + '/ok')
+    return fetch(TEST_API + '/ok')
     .then(function (response) {
       return response.text()
     }).then(function (text) {
