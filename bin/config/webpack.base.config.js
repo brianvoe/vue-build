@@ -13,6 +13,20 @@ if (process.env.COVERAGE === 'true') {
   babelSettings.plugins.push('istanbul')
 }
 
+var clientEnvironment = {
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
+  'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
+}
+
+try {
+  projectClientEnv = require(path.join(projectRoot, 'env.js'))
+
+  for (key of Object.keys(projectClientEnv)) {
+    clientEnvironment['process.env.' + key] = JSON.stringify(projectClientEnv[key])
+  }
+} catch (err) {}
+
 var config = {
   // Path to main source folder where your files reside
   context: path.join(projectRoot, 'src'),
@@ -106,11 +120,7 @@ var config = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
-      'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
-    }),
+    new webpack.DefinePlugin(clientEnvironment),
   ]
 }
 

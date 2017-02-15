@@ -13,7 +13,7 @@ describe('Simple assertion test', function () {
   })
 
   it('Make server request', function () {
-    return fetch('/ok')
+    return fetch(process.env.TEST_API + '/ok')
     .then(function (response) {
       return response.text()
     }).then(function (text) {

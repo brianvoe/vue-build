@@ -8,7 +8,7 @@ module.exports = function (yargs) {
   inquirer.prompt([
     {type: 'confirm', name: 'packageFile', message: 'Create/Override package.json file?', default: true},
     {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
-    {type: 'confirm', name: 'envFile', message: 'Create/Override .env file?', default: true},
+    {type: 'confirm', name: 'envFile', message: 'Create/Override env.js file?', default: true},
     {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
     {type: 'confirm', name: 'sourceFolder', message: 'Create/Override /src folder?', default: true},
     {type: 'confirm', name: 'testFolder', message: 'Create/Override /test folder?', default: true}
@@ -42,8 +42,8 @@ module.exports = function (yargs) {
 
     // .env file
     if (answers.envFile) {
-      console.log('Creating .env file')
-      fs.copy(vueBuildRoot + '.env', projectRoot + '/.env', function (err) {
+      console.log('Creating env.js file')
+      fs.copy(vueBuildRoot + 'default.env.js', projectRoot + 'env.js', function (err) {
         if (err) { console.error(err); process.exit(1) }
       })
     }
