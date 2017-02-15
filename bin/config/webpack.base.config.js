@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var webpack = require('webpack')
 var merge = require('webpack-merge')
 var projectRoot = process.cwd()
 var projectModules = path.join(projectRoot, '/node_modules')
@@ -102,7 +103,15 @@ var config = {
         }
       }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
+      'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
+    }),
+  ]
 }
 
 // If there is a webpack in the main project merge it

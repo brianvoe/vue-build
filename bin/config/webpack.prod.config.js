@@ -18,10 +18,6 @@ var webpackConfig = merge(baseWebpackConfig, {
     new ProgressBarPlugin({
       format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
     }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env),
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    }),
     new webpack.optimize.UglifyJsPlugin({
       comments: false,
       sourceMap: process.env.SOURCE_MAP
