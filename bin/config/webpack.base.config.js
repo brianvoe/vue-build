@@ -43,19 +43,6 @@ var config = {
   },
   module: {
     rules: [
-      // Preloaders
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      },
-      {
-        enforce: 'pre',
-        test: /\.vue$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      },
       // Loaders
       {
         test: /\.vue$/,
@@ -104,6 +91,24 @@ var config = {
     ]
   }
 }
+
+// If user has a .eslintrc file lets add loaders
+try {
+  var eslintFile = projectRoot + '/.eslintrc'
+  fs.statSync(eslintFile)
+
+  config.unshift({
+    enforce: 'pre',
+    test: /\.js$/,
+    loader: 'eslint-loader',
+    exclude: /node_modules/
+  }, {
+    enforce: 'pre',
+    test: /\.vue$/,
+    loader: 'eslint-loader',
+    exclude: /node_modules/
+  })
+} catch (err) {}
 
 // If there is a webpack in the main project merge it
 try {
