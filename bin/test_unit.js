@@ -44,7 +44,6 @@ exports.handler = function (yargs) {
   var path = require('path')
   var chalk = require('chalk')
   var fs = require('fs')
-  var path = require('path')
 
   // Check to make sure you have a e2e directory
   try {

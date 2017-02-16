@@ -1,6 +1,5 @@
 // Karma configuration
 module.exports = function (config) {
-  var webpack = require('webpack')
   var merge = require('webpack-merge')
   var fs = require('fs')
   var ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -119,7 +118,7 @@ module.exports = function (config) {
       'karma-chai-as-promised',
       'karma-coverage',
       'karma-spec-reporter',
-      'karma-junit-reporter',
+      'karma-junit-reporter'
     ]
   }
 

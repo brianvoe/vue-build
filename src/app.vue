@@ -1,12 +1,14 @@
 <script>
+  /* globals ENVIRONMENT,PORT */
+
   export default {
     data: function () {
       return {
         image: require('src/logo.png'),
         title: 'ue-Build',
         message: 'Nice job! Youve made it!',
-        environment: process.env.ENVIRONMENT,
-        port: process.env.PORT
+        environment: ENVIRONMENT,
+        port: PORT
       }
     },
     methods: {
