@@ -20,9 +20,9 @@ var clientEnvironment = {
 }
 
 try {
-  projectClientEnv = require(path.join(projectRoot, 'env.js'))
+  var projectClientEnv = require(path.join(projectRoot, 'env.js'))
 
-  for (key of Object.keys(projectClientEnv)) {
+  for (var key of Object.keys(projectClientEnv)) {
     clientEnvironment[key] = JSON.stringify(projectClientEnv[key])
   }
 } catch (err) {}
@@ -107,7 +107,7 @@ var config = {
   },
 
   plugins: [
-    new webpack.DefinePlugin(clientEnvironment),
+    new webpack.DefinePlugin(clientEnvironment)
   ]
 }
 
