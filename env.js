@@ -1,3 +1,5 @@
 module.exports = {
-  TEST_API: 'http://localhost:8080' || process.env.TEST_API
+  ENVIRONMENT: process.env.ENVIRONMENT,
+  PORT: process.env.PORT,
+  TEST_API: 'http://localhost:' + process.env.PORT
 }
