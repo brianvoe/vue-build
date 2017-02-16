@@ -19,12 +19,6 @@ exports.builder = {
     alias: 'devtool',
     type: 'string',
     describe: 'webpack performance build'
-  },
-  sr: {
-    alias: 'single-run',
-    default: true,
-    type: 'boolean',
-    describe: 'testing single run'
   }
 }
 

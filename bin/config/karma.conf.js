@@ -9,7 +9,7 @@ module.exports = function (config) {
   var chalk = require('chalk')
   var port = process.env.PORT
   var coverage = (process.env.COVERAGE === 'true')
-  var singleRun = coverage || (process.env.SINGLE_RUN === 'true')
+  var singleRun = coverage || (process.env.WATCH === 'false')
   var autoWatch = singleRun !== true
   var testFiles = process.env.FILES
   var useJUnit = JSON.parse(process.env.JUNIT)

@@ -16,10 +16,10 @@ exports.builder = {
     describe: 'server port to listen on'
   },
   s: {
-    alias: 'single-run',
+    alias: 'watch',
     type: 'boolean',
     default: false,
-    describe: 'run unit test once'
+    describe: 'watch for file changes and rerun tests'
   },
   c: {
     alias: 'coverage',
@@ -68,7 +68,7 @@ exports.handler = function (yargs) {
   process.env.NODE_ENV = 'production'
   process.env.ENVIRONMENT = 'testing'
   process.env.TESTING_TYPE = 'unit'
-  process.env.SINGLE_RUN = yargs['single-run']
+  process.env.WATCH = yargs['watch']
   process.env.PORT = yargs.port || process.env.PORT || 8080
   process.env.KARMA_PORT = 8765
   process.env.COVERAGE = yargs.coverage || false
