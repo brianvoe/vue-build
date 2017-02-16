@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var webpack = require('webpack')
 var merge = require('webpack-merge')
 var projectRoot = process.cwd()
 var projectModules = path.join(projectRoot, '/node_modules')
@@ -11,6 +12,20 @@ var babelSettings = {
 if (process.env.COVERAGE === 'true') {
   babelSettings.plugins.push('istanbul')
 }
+
+var clientEnvironment = {
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
+  'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
+}
+
+try {
+  projectClientEnv = require(path.join(projectRoot, 'env.js'))
+
+  for (key of Object.keys(projectClientEnv)) {
+    clientEnvironment[key] = JSON.stringify(projectClientEnv[key])
+  }
+} catch (err) {}
 
 var config = {
   // Path to main source folder where your files reside
@@ -89,7 +104,11 @@ var config = {
         }
       }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin(clientEnvironment),
+  ]
 }
 
 // If user has a .eslintrc file lets add loaders
