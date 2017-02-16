@@ -20,16 +20,6 @@ if (nodeVersion < 6) {
   throw new Error('Vue Build requires node version >= 6')
 }
 
-// process .env file
-var pathToEnv = process.cwd() + '/.env'
-var fs = require('fs')
-try {
-  fs.statSync(pathToEnv)
-  require('dotenv').config({
-    path: pathToEnv
-  })
-} catch (err) {}
-
 // Initiate yargs scripts
 var version = require('../package').version
 var yargs = require('yargs')
