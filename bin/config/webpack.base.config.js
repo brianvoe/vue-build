@@ -6,6 +6,7 @@ var merge = require('webpack-merge')
 var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var projectRoot = process.cwd()
 var projectModules = path.join(projectRoot, '/node_modules')
+var firstProgressBarRun = true
 
 var babelSettings = {
   presets: [['es2015', {'modules': false}], 'stage-2'],
@@ -114,9 +115,10 @@ var config = {
       format: '[:bar] :percent :msg',
       callback: function (info) {
         // Output message on development
-        if (process.env.ENVIRONMENT === 'development' && info.complete === true) {
+        if (process.env.ENVIRONMENT === 'development' && firstProgressBarRun) {
           console.log(chalk.green('Dev server started'))
           console.log(chalk.blue('http://localhost:' + process.env.PORT + '.....PID:' + process.pid))
+          firstProgressBarRun = false
         }
       }
     })
