@@ -2,7 +2,6 @@
 module.exports = function (config) {
   var merge = require('webpack-merge')
   var fs = require('fs')
-  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
   var projectRoot = process.cwd()
   var testPath = projectRoot + '/test/unit'
   var webpackConfig = require('./webpack.base.config.js')
@@ -15,26 +14,14 @@ module.exports = function (config) {
   var useJUnit = JSON.parse(process.env.JUNIT)
   var path = require('path')
 
-  // if show-coverage argument is passed in open browser to coverage report
-  // if (coverage) {
-  //   var open = require('open')
-  //   open(projectRoot + '/test/unit/coverage/lcov-report/index.html')
-  //   return
-  // }
-
   // Merge main config with test config
   var webpackTestConfig = merge(webpackConfig, {
     // use inline sourcemap for karma-sourcemap-loader
     devtool: 'inline-source-map'
   })
 
-  // no need for app entry during tests
+  // No need for app entry during tests
   delete webpackTestConfig.entry
-
-  // Add progress bar to webpack config
-  webpackTestConfig.plugins.push(new ProgressBarPlugin({
-    format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
-  }))
 
   // Establish which files to run
   var files = []

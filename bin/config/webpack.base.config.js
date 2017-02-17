@@ -1,7 +1,9 @@
 var fs = require('fs')
 var path = require('path')
+var chalk = require('chalk')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
+var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 var projectRoot = process.cwd()
 var projectModules = path.join(projectRoot, '/node_modules')
 
@@ -107,7 +109,17 @@ var config = {
   },
 
   plugins: [
-    new webpack.DefinePlugin(clientEnvironment)
+    new webpack.DefinePlugin(clientEnvironment),
+    new ProgressBarPlugin({
+      format: '[:bar] :percent :msg',
+      callback: function (info) {
+        // Output message on development
+        if (process.env.ENVIRONMENT === 'development' && info.complete === true) {
+          console.log(chalk.green('Dev server started'))
+          console.log(chalk.blue('http://localhost:' + process.env.PORT + '.....PID:' + process.pid))
+        }
+      }
+    })
   ]
 }
 

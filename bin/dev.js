@@ -26,12 +26,9 @@ exports.builder = {
 exports.handler = function (yargs) {
   var projectRoot = process.cwd()
   var Webpack = require('webpack')
-  var chalk = require('chalk')
   var fs = require('fs')
   var WebpackDevServer = require('webpack-dev-server')
   var webpackHotMiddleware = require('webpack-hot-middleware')
-  var ProgressBarPlugin = require('progress-bar-webpack-plugin')
-  var firstRun = true
 
   // Check environment if yargs is passed set environment
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -55,18 +52,6 @@ exports.handler = function (yargs) {
 
   // Load webpack config file
   var webpackConfig = require('./config/webpack.dev.config.js')
-
-  // Add progress bar to webpack config
-  webpackConfig.plugins.push(new ProgressBarPlugin({
-    format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-    callback: function () {
-      if (process.env.ENVIRONMENT !== 'production' && firstRun) {
-        console.log(chalk.blue('Dev server started'))
-        console.log(chalk.blue('http://localhost:' + port + '.....PID:' + process.pid))
-        firstRun = false // only show dev server started once
-      }
-    }
-  }))
 
   var compiler = Webpack(webpackConfig)
   var server = new WebpackDevServer(compiler, {

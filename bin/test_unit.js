@@ -44,6 +44,8 @@ exports.handler = function (yargs) {
   var path = require('path')
   var chalk = require('chalk')
   var fs = require('fs')
+  var open = require('open')
+  var projectRoot = process.cwd()
 
   // Check to make sure you have a e2e directory
   try {
@@ -72,6 +74,7 @@ exports.handler = function (yargs) {
   process.env.PORT = yargs.port || process.env.PORT || 8080
   process.env.KARMA_PORT = 8765
   process.env.COVERAGE = yargs.coverage || false
+  var coverage = yargs.coverage || false
   process.env.FILES = yargs.files || ''
   process.env.JUNIT = yargs.junit
 
@@ -83,5 +86,11 @@ exports.handler = function (yargs) {
   new Server({
     port: process.env.KARMA_PORT,
     configFile: path.join(__dirname, './config/karma.conf.js')
+  }, function (exitCode) {
+    // if show-coverage argument is passed in open browser to coverage report
+    if (coverage) {
+      open(projectRoot + '/test/unit/coverage/lcov-report/index.html')
+    }
+    process.exit(exitCode)
   }).start()
 }
