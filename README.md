@@ -63,6 +63,5 @@ See the [docs](http://vue-build.com) for more details
 
 ## Roadmap
   - Allow overridding of devserver config info in webpack.config.js override
-  - Junit testing xml output for both unit and e2e testing
+  - Add other css preprocessors
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
-  - Impliment port checking before build. https://www.npmjs.com/package/tcp-port-used
