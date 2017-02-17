@@ -7,17 +7,12 @@ var merge = require('webpack-merge')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config.js')
-var ProgressBarPlugin = require('progress-bar-webpack-plugin')
-var chalk = require('chalk')
 var fs = require('fs')
 var projectRoot = process.cwd()
 
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
   plugins: [
-    new ProgressBarPlugin({
-      format: 'Building [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)'
-    }),
     new webpack.optimize.UglifyJsPlugin({
       comments: false,
       sourceMap: process.env.SOURCE_MAP
