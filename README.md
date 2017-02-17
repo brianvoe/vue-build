@@ -64,4 +64,5 @@ See the [docs](http://vue-build.com) for more details
 ## Roadmap
   - Allow overridding of devserver config info in webpack.config.js override
   - Add other css preprocessors
+  - Ability to have src/static folder that pushes to dist
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
