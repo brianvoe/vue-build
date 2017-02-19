@@ -4,7 +4,7 @@
       return {
         image: require('src/logo.png'),
         title: 'ue-Build',
-        message: 'Nice job! Youve made it!'
+        message: 'Nice job! You\'ve made it!'
       }
     },
     methods: {
