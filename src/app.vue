@@ -1,14 +1,10 @@
 <script>
-  /* globals ENVIRONMENT,PORT */
-
   export default {
     data: function () {
       return {
         image: require('src/logo.png'),
         title: 'ue-Build',
-        message: 'Nice job! Youve made it!',
-        environment: ENVIRONMENT,
-        port: PORT
+        message: 'Nice job! You\'ve made it!'
       }
     },
     methods: {
@@ -33,8 +29,6 @@
     <div class="content">
       <h1><img :src="image" />{{title}}</h1>
       <div v-on:click="updateMessage(message)">{{message}}</div>
-      <div>Environment: {{environment}}</div>
-      <div>Port: {{port}}</div>
     </div>
   </div>
 </template>
