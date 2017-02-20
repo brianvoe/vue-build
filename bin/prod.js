@@ -3,6 +3,9 @@
 /* eslint-env node */
 
 module.exports = function (yargs) {
+  var rimraf = require('rimraf')
+  rimraf(process.cwd() + '/dist', require('fs'), function (info) {})
+
   var webpack = require('webpack')
   var config = require('./config/webpack.prod.config.js')
 

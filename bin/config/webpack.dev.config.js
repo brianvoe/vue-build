@@ -30,7 +30,7 @@ try {
     inject: true,
     cache: false,
     showErrors: false,
-    template: 'index.html'
+    template: indexHtml
   }
 
   try {

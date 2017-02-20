@@ -54,8 +54,9 @@ exports.handler = function (yargs) {
   var webpackConfig = require('./config/webpack.dev.config.js')
 
   var compiler = Webpack(webpackConfig)
-  var server = new WebpackDevServer(compiler, {
+  var webpackDevServerConfig = {
     publicPath: webpackConfig.output.publicPath || '/',
+    contentBase: projectRoot + '/src/public', // Add the public folder as a means to search static content
     hot: true,
     historyApiFallback: true,
     clientLogLevel: 'warning',
@@ -82,7 +83,11 @@ exports.handler = function (yargs) {
         require(pathToServer)(app)
       }
     }
-  })
+  }
+  if (webpackConfig.devServer) {
+    webpackDevServerConfig = Object.assign(webpackDevServerConfig, webpackConfig.devServer)
+  }
+  var server = new WebpackDevServer(compiler, webpackDevServerConfig)
 
   var serverListen = server.listen(port, 'localhost', function () {})
 
