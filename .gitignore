@@ -1,5 +1,4 @@
-# Build folder
-build
+# dist folder
 dist
 !docs/dist
 
@@ -14,3 +13,7 @@ selenium-debug.log
 .imdone
 yarn-error.log
 .DS_Store
+
+# Tests
+test
+!samples/*/test

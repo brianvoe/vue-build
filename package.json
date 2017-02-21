@@ -33,16 +33,7 @@
     "vue-build": "bin/index.js"
   },
   "scripts": {
-    "help": "vue-build help",
-    "version": "vue-build --version",
-    "init": "vue-build init",
-    "dev": "vue-build dev",
-    "prod": "vue-build prod",
-    "unit": "vue-build unit",
-    "e2e": "vue-build e2e",
-    "test": "vue-build unit && vue-build e2e",
-    "lint": "vue-build lint",
-    "all": "vue-build lint && vue-build unit && vue-build e2e && vue-build prod"
+    "test": "node test.js"
   },
   "dependencies": {
     "autoprefixer": "^6.5.2",
@@ -76,7 +67,7 @@
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "figlet": "^1.2.0",
     "file-loader": "^0.9.0",
-    "fs-extra": "^1.0.0",
+    "fs-extra": "^2.0.0",
     "geckodriver": "^1.2.0",
     "html-webpack-plugin": "^2.24.1",
     "inquirer": "^1.2.3",
