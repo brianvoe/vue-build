@@ -13,16 +13,13 @@ fs.ensureDir(testFolder, function (err) {
   process.chdir(testFolder)
 
   var ls = spawn('vue-build', ['init'])
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
   ls.stdout.on('data', (data) => {
+    console.log(`${data}`)
     // rl.write(null, {name: 'l'})
-    if (ls.stdout.isPaused()) {
-      console.log('paused')
-    }
   })
+  setTimeout(function () {
+    ls.stdin.write('\n')
+  }, 5000)
 
   ls.stderr.on('data', (data) => {
     console.log(`stderr: ${data}`)
