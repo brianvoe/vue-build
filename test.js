@@ -40,21 +40,70 @@ function production () {
   })
 }
 
-function simple () {
-  process.chdir(processRoot)
-  fs.emptyDir(testFolder, function (err) {
-    if (err) { console.error(err) }
+function test (type) {
+  return new Promise(function (resolve, reject) {
+    console.log('testing app')
+    var prod = spawn('vue-build', [type], { stdio: 'inherit' })
 
-    process.chdir(testFolder)
-
-    installSample('simple')
-    .then(function () {
-      return installPackages()
-    })
-    .then(function () {
-      return production()
+    prod.on('close', (code) => {
+      console.log(`finished testing app`)
+      resolve()
     })
   })
 }
 
+function simple () {
+  return new Promise(function (resolve, reject) {
+    process.chdir(processRoot)
+    fs.emptyDir(testFolder, function (err) {
+      if (err) { console.error(err) }
+
+      process.chdir(testFolder)
+
+      installSample('simple')
+      .then(function () {
+        return installPackages()
+      })
+      .then(function () {
+        return production()
+      })
+      .then(function () {
+        resolve()
+      })
+    })
+  })
+}
+
+function full () {
+  return new Promise(function (resolve, reject) {
+    process.chdir(processRoot)
+    fs.emptyDir(testFolder, function (err) {
+      if (err) { console.error(err) }
+
+      process.chdir(testFolder)
+
+      installSample('full')
+      .then(function () {
+        return installPackages()
+      })
+      .then(function () {
+        return production()
+      })
+      .then(function () {
+        return test('unit')
+      })
+      .then(function () {
+        return test('e2e')
+      })
+      .then(function () {
+        resolve()
+      })
+    })
+  })
+}
+
+// Run samples one at a time
 simple()
+.then(function () {
+  return full()
+})
