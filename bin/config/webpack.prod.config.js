@@ -4,12 +4,14 @@ process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
 
 var webpack = require('webpack')
 var merge = require('webpack-merge')
+var fs = require('fs')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var baseWebpackConfig = require('./webpack.base.config.js')
-var fs = require('fs')
 var projectRoot = process.cwd()
 
+// Merge webpacks
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: process.env.SOURCE_MAP ? '#source-map' : false,
   plugins: [
@@ -40,6 +42,17 @@ for (var rule in webpackConfig.module.rules) {
   }
 }
 
+// Add static directory copying if folder exists
+try {
+  var copyDir = projectRoot + '/src/public'
+  fs.statSync(copyDir)
+
+  webpackConfig.plugins.push(new CopyWebpackPlugin([
+    // Copy directory contents to {output}/
+    { from: copyDir }
+  ]))
+} catch (err) {}
+
 // Check if they have an html file to output if so add plugin
 try {
   var indexHtml = projectRoot + '/src/index.html'
@@ -48,7 +61,7 @@ try {
   var htmlOptions = {
     inject: true,
     showErrors: false,
-    template: 'index.html'
+    template: indexHtml
   }
 
   try {
