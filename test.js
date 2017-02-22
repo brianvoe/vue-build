@@ -1,40 +1,60 @@
 var fs = require('fs-extra')
 var path = require('path')
-var readline = require('readline')
-var exec = require('child_process').exec
 var spawn = require('child_process').spawn
 var processRoot = process.cwd()
 var testFolder = path.join(processRoot, '/test')
 
-process.chdir(processRoot)
-fs.ensureDir(testFolder, function (err) {
-  if (err) { console.error(err) }
+function installSample (type) {
+  return new Promise(function (resolve, reject) {
+    console.log('installing sample')
+    var install = spawn('vue-build', ['init', `-s=${type}`], { stdio: 'inherit' })
 
-  process.chdir(testFolder)
-
-  var ls = spawn('vue-build', ['init'])
-  ls.stdout.on('data', (data) => {
-    console.log(`${data}`)
-    // rl.write(null, {name: 'l'})
+    install.on('close', (code) => {
+      console.log(`finished installing sample`)
+      resolve()
+    })
   })
-  setTimeout(function () {
-    ls.stdin.write('\n')
-  }, 5000)
+}
 
-  ls.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`)
+function installPackages () {
+  return new Promise(function (resolve, reject) {
+    console.log('package installation')
+    var install = spawn('yarn', ['install'], { stdio: 'inherit' })
+
+    install.on('close', (code) => {
+      console.log(`finished installing packages`)
+      resolve()
+    })
   })
+}
 
-  ls.on('close', (code) => {
-    console.log(`child process exited with code ${code}`)
+function production () {
+  return new Promise(function (resolve, reject) {
+    console.log('building dist')
+    var prod = spawn('vue-build', ['prod'], { stdio: 'inherit' })
+
+    prod.on('close', (code) => {
+      console.log(`finished building dist`)
+      resolve()
+    })
   })
+}
 
-  // var cmd = exec('vue-build init', function (error, stdout, stderr) {
-  //   console.log(error)
-  //   console.log(stdout)
-  //   console.log(stderr)
-  // })
-  // cmd.stdout.on('data', (data) => {
-  //   console.log(`${data}`)
-  // })
-})
+function simple () {
+  process.chdir(processRoot)
+  fs.emptyDir(testFolder, function (err) {
+    if (err) { console.error(err) }
+
+    process.chdir(testFolder)
+
+    installSample('simple')
+    .then(function () {
+      return installPackages()
+    })
+    .then(function () {
+      return production()
+    })
+  })
+}
+
+simple()
