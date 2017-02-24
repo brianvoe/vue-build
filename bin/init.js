@@ -1,4 +1,4 @@
-// Sub options for dev command
+// Sub options for init command
 exports.builder = {
   s: {
     alias: 'selection',
@@ -8,7 +8,7 @@ exports.builder = {
   }
 }
 
-// dev command function
+// init command function
 exports.handler = function (yargs) {
   var path = require('path')
   var fs = require('fs-extra')
