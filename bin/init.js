@@ -1,4 +1,4 @@
-// Sub options for dev command
+// Sub options for init command
 exports.builder = {
   s: {
     alias: 'selection',
@@ -8,7 +8,7 @@ exports.builder = {
   }
 }
 
-// dev command function
+// init command function
 exports.handler = function (yargs) {
   var path = require('path')
   var fs = require('fs-extra')
@@ -88,40 +88,50 @@ exports.handler = function (yargs) {
     // webpack file
     if (answers === true || answers.webpackFile) {
       console.log('Creating webpack file')
-      fs.copy(path.join(customPath, 'webpack.config.js'), projectRoot + '/webpack.config.js', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
+      fs.copy(
+        path.join(customPath, 'webpack.config.js'),
+        path.join(projectRoot, '/webpack.config.js'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
     }
 
-    // .env file
+    // env.js file
     if (answers === true || answers.envFile) {
       console.log('Creating env.js file')
-      fs.copy(path.join(customPath, 'env.js'), projectRoot + '/env.js', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
+      fs.copy(
+        path.join(customPath, 'env.js'),
+        path.join(projectRoot, '/env.js'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
     }
 
     // .eslintrc file
     if (answers === true || answers.eslintFile) {
       console.log('Creating .eslintrc file')
-      fs.copy(path.join(customPath, '.eslintrc'), projectRoot + '/.eslintrc', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
+      fs.copy(
+        path.join(customPath, '.eslintrc'),
+        path.join(projectRoot, '/.eslintrc'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
     }
 
     // source file
     if (answers === true || answers.sourceFolder) {
       console.log('Creating source folder')
-      fs.copy(path.join(customPath, 'src'), projectRoot + '/src', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
+      fs.copy(
+        path.join(customPath, 'src'),
+        path.join(projectRoot, '/src'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
     }
     // test folder
     if (answers === true || answers.testFolder) {
       console.log('Creating test folder')
-      fs.copy(path.join(customPath, 'test'), projectRoot + '/test', function (err) {
-        if (err) { console.error(err); process.exit(1) }
-      })
+      fs.copy(
+        path.join(customPath, 'test'),
+        path.join(projectRoot, '/test'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
     }
   }
 
