@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import app from 'src/app.vue'
 
-import 'src/style'
+import 'scss/styles.scss'
 
 /* eslint-disable no-new */
 new Vue({
