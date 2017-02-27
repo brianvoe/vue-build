@@ -1,34 +1,36 @@
 <script>
+  import navComponent from './components/nav.vue'
+  import logo from 'images/logo.png'
+
   export default {
-    data: function () {
+    data () {
       return {
-        image: require('images/logo.png'),
-        title: 'ue-Build',
-        message: 'Nice job! Youve made it!'
+        logo
       }
     },
-    methods: {
-      updateMessage: function (message) {
-        let newMessage = message + ' Now go build something!'
-        this.message = newMessage
-      }
+    components: {
+      navComponent
     }
   }
 </script>
 
-<style lang="sass-loader">
-  h1 {
-    img {
-      height: 50px;
-    }
-  }
-</style>
-
 <template>
   <div id="app">
-    <div class="content">
-      <h1><img :src="image" />{{title}}</h1>
-      <div v-on:click="updateMessage(message)">{{message}}</div>
+    <div class="header">
+      <div class="logo">
+        <img :src="logo" />ue-build
+      </div>
+      <div class="tagline">
+        Youve made it! Now go build something!
+      </div>
+    </div>
+    <div class="main">
+      <navComponent />
+      <div class="content">
+        <transition name="fade" mode="out-in" appear>
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
   </div>
 </template>

@@ -1,10 +1,17 @@
 import Vue from 'vue'
-import app from 'src/app.vue'
+import VueRouter from 'vue-router'
 
-import 'scss/styles.scss'
+import app from 'src/app.vue'
+import routerList from './router'
+
+import 'scss/style.scss'
+
+// Router setup
+Vue.use(VueRouter)
+const router = new VueRouter(routerList)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  router,
   render: (h) => h(app)
-})
+}).$mount('#app')
