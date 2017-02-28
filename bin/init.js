@@ -26,23 +26,28 @@ exports.handler = function (yargs) {
     return
   }
 
-  function simple () {
-    fs.copy(path.join(samplesRoot, 'simple'), projectRoot, function (err) {
-      if (err) { console.error(err); process.exit(1) }
-    })
-
-    // Create package.json
+  // Add package.json file
+  function addPackageFile () {
     fs.writeFileSync(
       path.join(projectRoot, 'package.json'),
       JSON.stringify({
-        name: 'simple',
-        description: 'Simple Vue Build Application',
+        name: 'app',
+        description: 'Vue Build Application',
         version: '0.1.0',
         dependencies: {
           'vue-build': '^' + require('../package').version
         }
       }, null, 2)
     )
+  }
+
+  function simple () {
+    fs.copy(path.join(samplesRoot, 'simple'), projectRoot, function (err) {
+      if (err) { console.error(err); process.exit(1) }
+    })
+
+    // Create package.json
+    addPackageFile()
     console.log(chalk.green('Created simple application!'))
   }
 
@@ -52,17 +57,7 @@ exports.handler = function (yargs) {
     })
 
     // Create package.json
-    fs.writeFileSync(
-      path.join(projectRoot, 'package.json'),
-      JSON.stringify({
-        name: 'app',
-        description: 'Full Vue Build Application',
-        version: '0.1.0',
-        dependencies: {
-          'vue-build': '^' + require('../package').version
-        }
-      }, null, 2)
-    )
+    addPackageFile()
     console.log(chalk.green('Created full application!'))
   }
 
@@ -72,17 +67,7 @@ exports.handler = function (yargs) {
     // package.json file
     if (answers === true || answers.packageFile) {
       console.log('Creating package.json file')
-      fs.writeFileSync(
-        path.join(projectRoot, 'package.json'),
-        JSON.stringify({
-          name: 'app',
-          description: 'Custom Vue Build Application',
-          version: '0.1.0',
-          dependencies: {
-            'vue-build': '^' + require('../package').version
-          }
-        }, null, 2)
-      )
+      addPackageFile()
     }
 
     // webpack file
