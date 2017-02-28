@@ -33,13 +33,13 @@ try {
 var config = {
   // Path to main source folder where your files reside
   context: path.join(projectRoot, 'src'),
-  // Main file entry point - must be in app object as we append dev injections to that path
+  // Main file entry point - must be an object as we append dev injections to that path
   entry: {
-    app: ['./app.js']
+    index: './index.js'
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
-    filename: '[name].js', // filename based upon entry variable - ex: app.js
+    filename: '[name].js', // filename based upon entry variable - ex: index.js
     publicPath: '/' // Important for dev server main path
   },
   resolve: {
@@ -150,5 +150,19 @@ try {
 
   config = merge(config, require(webpackConfig))
 } catch (err) {}
+
+// Check entry index to make sure files exist
+try {
+  if (typeof config.entry.index === 'string') {
+    fs.statSync(path.join(projectRoot, 'src', config.entry.index))
+  } else {
+    for (let file of config.entry.index) {
+      fs.statSync(path.join(projectRoot, 'src', file))
+    }
+  }
+} catch (err) {
+  var error = `Could not find file ${err.path}. Vue build uses index.js as the main entry point. Please make sure that file exists.`
+  throw new Error(error)
+}
 
 module.exports = config

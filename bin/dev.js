@@ -66,8 +66,8 @@ exports.handler = function (yargs) {
       colors: true
     },
     // express server setup extension
-    setup: function (app) {
-      app.use(function (req, res, next) {
+    setup: function (appServer) {
+      appServer.use(function (req, res, next) {
         if (process.env.ENVIRONMENT === 'development') {
           console.log('Using middleware for ' + req.url)
         }
@@ -76,11 +76,11 @@ exports.handler = function (yargs) {
 
       // Add webpack hot middleware to use for error overlay
       // Quiet is set to true because well let WebpackDevServer handle console logging
-      app.use(webpackHotMiddleware(compiler))
+      appServer.use(webpackHotMiddleware(compiler))
 
-      // If there is a server.js file load it and pass app to it
+      // If there is a server.js file load it and pass appServer to it
       if (pathToServer) {
-        require(pathToServer)(app)
+        require(pathToServer)(appServer)
       }
     }
   }
