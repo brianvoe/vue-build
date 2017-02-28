@@ -2,7 +2,6 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'production'
 
-var webpack = require('webpack')
 var merge = require('webpack-merge')
 var fs = require('fs')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -12,13 +11,7 @@ var projectRoot = process.cwd()
 
 // Merge webpacks
 var webpackConfig = merge(baseWebpackConfig, {
-  devtool: process.env.SOURCE_MAP ? '#source-map' : false,
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-      sourceMap: process.env.SOURCE_MAP
-    })
-  ]
+  devtool: process.env.SOURCE_MAP ? '#source-map' : false
 })
 
 // Add static directory copying if folder exists
