@@ -6,11 +6,13 @@ describe('Simple assertion test', function () {
   it('Make sure test runs', function () {
     const vm = new Vue(app).$mount()
 
-    // Method call to update Message
-    vm.updateMessage('foo')
+    // set property `message`
+    vm.message = 'foo'
 
-    // Via return promise make sure message equals what it should
-    return assert.equal(vm.message, 'foo Now go build something!', 'message doesnt equal foo')
+    // assert that computed property `contextMessage` updates as intended
+    return assert.equal(
+      vm.contextMessage,
+      'foo Now go build something!', 'message doesnt equal foo')
   })
 
   it('Make server request', function () {

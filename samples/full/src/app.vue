@@ -3,11 +3,25 @@
   import logo from 'images/logo.png'
 
   export default {
-    data () {
-      return {
-        logo
+    props: {
+      message: {
+        type: String,
+        default: 'You\'ve made it!'
       }
     },
+
+    data () {
+      return {
+        logo,
+      }
+    },
+
+    computed: {
+      contextMessage () {
+        return `${this.message} Now go build something!`
+      }
+    },
+
     components: {
       navComponent
     }
@@ -21,7 +35,7 @@
         <img :src="logo" />ue-build
       </div>
       <div class="tagline">
-        Youve made it! Now go build something!
+        {{contextMessage}}
       </div>
     </div>
     <div class="main">
