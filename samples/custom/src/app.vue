@@ -1,18 +1,26 @@
 <script>
+  import logo from 'images/logo.png'
+
   export default {
-    data: function () {
-      return {
-        image: require('src/logo.png'),
-        title: 'ue-Build',
-        message: 'Nice job! Youve made it!'
+    props: {
+      message: {
+        type: String,
+        default: 'You\'ve made it!'
       }
     },
-    methods: {
-      updateMessage: function (message) {
-        let newMessage = message + ' Now go build something!'
-        this.message = newMessage
+
+    data: function () {
+      return {
+        logo,
+        title: 'ue-build',
       }
-    }
+    },
+
+    computed: {
+      contextMessage () {
+        return `${this.message} Now go build something!`
+      }
+    },
   }
 </script>
 
@@ -27,8 +35,8 @@
 <template>
   <div id="app">
     <div class="content">
-      <h1><img :src="image" />{{title}}</h1>
-      <div v-on:click="updateMessage(message)">{{message}}</div>
+      <h1><img :src="logo" />{{title}}</h1>
+      <div>{{contextMessage}}</div>
     </div>
   </div>
 </template>

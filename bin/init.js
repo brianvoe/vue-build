@@ -3,7 +3,7 @@ exports.builder = {
   s: {
     alias: 'selection',
     type: 'string',
-    choices: ['simple', 'full', 'custom'],
+    choices: ['simple', 'full', 'library', 'custom'],
     describe: 'environment setting'
   }
 }
@@ -22,22 +22,36 @@ exports.handler = function (yargs) {
   if (selection) {
     if (selection === 'simple') { simple() }
     if (selection === 'full') { full() }
+    if (selection === 'library') { library() }
     if (selection === 'custom') { custom(true) }
     return
   }
 
   // Add package.json file
-  function addPackageFile () {
+  function addPackageFile (devDependency=false, extraOptions=null) {
+    var packageJSON = {
+      name: 'app',
+      description: 'Vue Build Application',
+      version: '0.1.0',
+      dependencies: {
+        'vue-build': '^' + require('../package').version
+      }
+    }
+
+    if (devDependency) {
+      packageJSON.devDependencies = {
+        'vue-build': packageJSON.dependencies['vue-build']
+      }
+      delete packageJSON.dependencies['vue-build']
+    }
+
+    if (extraOptions) {
+      packageJSON = Object.assign({}, packageJSON, extraOptions)
+    }
+
     fs.writeFileSync(
       path.join(projectRoot, 'package.json'),
-      JSON.stringify({
-        name: 'app',
-        description: 'Vue Build Application',
-        version: '0.1.0',
-        dependencies: {
-          'vue-build': '^' + require('../package').version
-        }
-      }, null, 2)
+      JSON.stringify(packageJSON, null, 2)
     )
   }
 
@@ -59,6 +73,16 @@ exports.handler = function (yargs) {
     // Create package.json
     addPackageFile()
     console.log(chalk.green('Created full application!'))
+  }
+
+  function library () {
+    fs.copy(path.join(samplesRoot, 'library'), projectRoot, function (err) {
+      if (err) { console.error(err); process.exit(1) }
+    })
+
+    // Create package.json
+    addPackageFile(true, { main: 'dist/index.js' })
+    console.log(chalk.green('Created library project!'))
   }
 
   function custom (answers) {
@@ -124,7 +148,7 @@ exports.handler = function (yargs) {
     type: 'list',
     name: 'select',
     message: 'What kind of project would you like to initiate?',
-    choices: ['Simple', 'Full', 'Custom', 'Cancel']
+    choices: ['Simple', 'Full', 'Library', 'Custom', 'Cancel']
   }).then(function (answers) {
     var type = answers.select
     if (type === 'Cancel') { return }
@@ -135,6 +159,9 @@ exports.handler = function (yargs) {
 
     // Full installation
     if (type === 'Full') { full() }
+
+    // Library installation
+    if (type === 'Library') { library() }
 
     // Custom installation
     if (type === 'Custom') {
