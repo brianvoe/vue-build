@@ -60,9 +60,7 @@ module.exports = function (config) {
     files: files,
 
     // files to exclude
-    exclude: [
-      projectRoot + '/src/app.js' // exclude main app file
-    ],
+    exclude: [],
 
     // Preprocess src/test files
     preprocessors: preprocessors,
@@ -145,12 +143,12 @@ module.exports = function (config) {
       console.log(chalk.blue('Running server on http://localhost:' + port + '.....PID:' + process.pid))
 
       var express = require('express')
-      var app = express()
+      var expressApp = express()
 
-      // require server path and pass express app to it
-      require(pathToServer)(app)
+      // require server path and pass express expressApp to it
+      require(pathToServer)(expressApp)
 
-      app.listen(port)
+      expressApp.listen(port)
     }
 
     // Push inline express server plugin

@@ -4,7 +4,7 @@ module.exports = {
     browser
       .url(browser.launchUrl)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('#app', 'ue-Build')
+      .assert.containsText('#app', 'ue-build')
       .end()
   }
 }

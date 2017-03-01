@@ -5,14 +5,18 @@ var baseWebpackConfig = require('./webpack.base.config.js')
 var projectRoot = process.cwd()
 var fs = require('fs')
 
+var entryIndex = baseWebpackConfig.entry.index
+if (typeof baseWebpackConfig.entry.index === 'string') {
+  entryIndex = [baseWebpackConfig.entry.index]
+}
+// entryIndex.push('webpack-dev-server/client')
+entryIndex.push('webpack/hot/dev-server')
+entryIndex.push('webpack-hot-middleware/client?noInfo=true')
+
 var webpackConfig = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   entry: {
-    app: [
-      // 'webpack-dev-server/client',
-      'webpack/hot/dev-server',
-      'webpack-hot-middleware/client?noInfo=true'
-    ]
+    index: entryIndex
   },
   // Plugins needed for development
   plugins: [

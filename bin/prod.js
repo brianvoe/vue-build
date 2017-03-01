@@ -8,6 +8,12 @@ exports.builder = {
     type: 'boolean',
     default: true,
     describe: 'extract css'
+  },
+  u: {
+    alias: 'uglify',
+    type: 'boolean',
+    default: true,
+    describe: 'uglify js'
   }
 }
 
@@ -20,6 +26,7 @@ exports.handler = function (yargs) {
   var config = require('./config/webpack.prod.config.js')
   var ExtractTextPlugin = require('extract-text-webpack-plugin')
   var cssExtraction = yargs['css-extraction']
+  var uglify = yargs['uglify']
 
   // Add css extraction
   if (cssExtraction) {
@@ -30,19 +37,26 @@ exports.handler = function (yargs) {
     })
     for (var rule in config.module.rules) {
       if (config.module.rules[rule].test.test('.css')) {
-      // Replace default loader with extractCSS
+        // Replace default loader with extractCSS
         config.module.rules[rule].loader = extractCSS.extract([
           'css-loader?sourceMap',
           'resolve-url-loader',
           'sass-loader?sourceMap'
         ])
 
-      // Add extraction plugin
+        // Add extraction plugin
         config.plugins.push(extractCSS)
       }
     }
   }
-  console.log(config.plugins)
+
+  // Uglify code
+  if (uglify) {
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      sourceMap: process.env.SOURCE_MAP
+    }))
+  }
 
   // Run webpack
   webpack(config, function (err, stats) {

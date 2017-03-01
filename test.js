@@ -22,6 +22,10 @@ function installPackages () {
     var install = spawn('yarn', ['install'], { stdio: 'inherit' })
 
     install.on('close', (code) => {
+      if (code !== 0) {
+        reject(code)
+      }
+
       console.log(`finished installing packages`)
       resolve()
     })
@@ -34,6 +38,10 @@ function production () {
     var prod = spawn('vue-build', ['prod'], { stdio: 'inherit' })
 
     prod.on('close', (code) => {
+      if (code !== 0) {
+        reject(code)
+      }
+
       console.log(`finished building dist`)
       resolve()
     })
@@ -46,6 +54,10 @@ function test (type) {
     var prod = spawn('vue-build', [type], { stdio: 'inherit' })
 
     prod.on('close', (code) => {
+      if (code !== 0) {
+        reject(code)
+      }
+
       console.log(`finished testing app`)
       resolve()
     })
@@ -61,15 +73,10 @@ function simple () {
       process.chdir(testFolder)
 
       installSample('simple')
-      .then(function () {
-        return installPackages()
-      })
-      .then(function () {
-        return production()
-      })
-      .then(function () {
-        resolve()
-      })
+      .then(installPackages)
+      .then(production)
+      .then(resolve)
+      .catch((err) => { reject(err) })
     })
   })
 }
@@ -83,27 +90,38 @@ function full () {
       process.chdir(testFolder)
 
       installSample('full')
-      .then(function () {
-        return installPackages()
-      })
-      .then(function () {
-        return production()
-      })
-      .then(function () {
-        return test('unit')
-      })
-      .then(function () {
-        return test('e2e')
-      })
-      .then(function () {
-        resolve()
-      })
+      .then(installPackages)
+      .then(production)
+      .then(() => test('unit'))
+      .then(() => test('e2e'))
+      .then(resolve)
+      .catch((err) => { reject(err) })
+    })
+  })
+}
+
+function library () {
+  return new Promise(function(resolve, reject) {
+    process.chdir(processRoot)
+    fs.emptyDir(testFolder, function (err) {
+      if (err) { console.error(err) }
+
+      process.chdir(testFolder)
+
+      installSample('library')
+      .then(installPackages)
+      .then(production)
+      .then(() => test('unit'))
+      .then(resolve)
+      .catch((err) => { reject(err) })
     })
   })
 }
 
 // Run samples one at a time
 simple()
-.then(function () {
-  return full()
+.then(full)
+.then(library)
+.catch((error) => {
+  console.log('Tests failed: ', error);
 })
