@@ -64,4 +64,5 @@ See the [docs](http://vue-build.com) for more details
 
 ## Roadmap
   - Add other css preprocessors
+  - Integrate babel-preset-env - remove es2015
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
