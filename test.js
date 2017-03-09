@@ -101,7 +101,7 @@ function full () {
 }
 
 function library () {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     process.chdir(processRoot)
     fs.emptyDir(testFolder, function (err) {
       if (err) { console.error(err) }
@@ -123,5 +123,5 @@ simple()
 .then(full)
 .then(library)
 .catch((error) => {
-  console.log('Tests failed: ', error);
+  console.log('Tests failed: ', error)
 })
