@@ -109,5 +109,8 @@
     "webpack-merge": "^2.0.0",
     "whatwg-fetch": "^1.0.0",
     "yargs": "^6.3.0"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^2.3.1"
   }
 }
