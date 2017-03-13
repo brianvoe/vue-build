@@ -28,7 +28,7 @@ exports.handler = function (yargs) {
   var webpack = require('webpack')
   var config = require('./config/webpack.prod.config.js')
   var ExtractTextPlugin = require('extract-text-webpack-plugin')
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
   var bundleAnalyzer = yargs['bundle-analyzer']
@@ -63,10 +63,11 @@ exports.handler = function (yargs) {
     }))
   }
 
+  // Output bundle analyzer html file
   if (bundleAnalyzer) {
     config.plugins.push(new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-      reportFilename:
+      reportFilename: 'bundle-analyzer.html'
     }))
   }
 
