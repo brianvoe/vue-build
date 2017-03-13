@@ -22,6 +22,7 @@ exports.handler = function (yargs) {
   var webpack = require('webpack')
   var config = require('./config/webpack.prod.config.js')
   var ExtractTextPlugin = require('extract-text-webpack-plugin')
+  var OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
 
@@ -53,6 +54,8 @@ exports.handler = function (yargs) {
       comments: false,
       sourceMap: process.env.SOURCE_MAP
     }))
+
+    config.plugins.push(new OptimizeCssAssetsWebpackPlugin())
   }
 
   // Run webpack
