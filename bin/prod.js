@@ -14,6 +14,12 @@ exports.builder = {
     type: 'boolean',
     default: true,
     describe: 'uglify js'
+  },
+  b: {
+    alias: 'bundle-analyzer',
+    type: 'boolean',
+    default: false,
+    describe: 'create a bundle size report'
   }
 }
 
@@ -23,8 +29,10 @@ exports.handler = function (yargs) {
   var config = require('./config/webpack.prod.config.js')
   var ExtractTextPlugin = require('extract-text-webpack-plugin')
   var OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
+  var bundleAnalyzer = yargs['bundle-analyzer']
 
   // Add css extraction
   if (cssExtraction) {
@@ -56,6 +64,14 @@ exports.handler = function (yargs) {
     }))
 
     config.plugins.push(new OptimizeCssAssetsWebpackPlugin())
+  }
+
+  // Output bundle analyzer html file
+  if (bundleAnalyzer) {
+    config.plugins.push(new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'bundle-analyzer.html'
+    }))
   }
 
   // Run webpack
