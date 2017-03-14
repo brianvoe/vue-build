@@ -1,7 +1,7 @@
 {
   "name": "vue-build",
-  "version": "0.42.0",
-  "description": "Vue development/testing/production cli",
+  "version": "0.43.0",
+  "description": "Ultra Simple, Development, Testing and Production Build Cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
   "license": "MIT",
@@ -91,6 +91,7 @@
     "open": "0.0.5",
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "progress-bar-webpack-plugin": "^1.9.0",
+    "resolve": "^1.3.2",
     "resolve-url-loader": "^1.6.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^5.0.1",
