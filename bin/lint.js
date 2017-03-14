@@ -14,7 +14,7 @@ module.exports = function (yargs) {
     '--ext', '.js,.vue', // Extensions
     projectRoot + '/src'
   ]
-  spawn.sync('./node_modules/.bin/eslint', srcOpts, { stdio: 'inherit' })
+  spawn.sync('eslint', srcOpts, { stdio: 'inherit' })
 
   // Lint unit test folder
   console.log(chalk.blue('Linting unit test folder'))
@@ -23,7 +23,7 @@ module.exports = function (yargs) {
     '--ext', '.js,.vue', // Extensions
     projectRoot + '/test/unit/spec'
   ]
-  spawn.sync('./node_modules/.bin/eslint', unitOpts, { stdio: 'inherit' })
+  spawn.sync('eslint', unitOpts, { stdio: 'inherit' })
 
   // Lint e2e test folder
   console.log(chalk.blue('Linting e2e test folder'))
@@ -32,5 +32,5 @@ module.exports = function (yargs) {
     '--ext', '.js,.vue', // Extensions
     projectRoot + '/test/e2e/spec'
   ]
-  spawn.sync('./node_modules/.bin/eslint', e2eOpts, { stdio: 'inherit' })
+  spawn.sync('eslint', e2eOpts, { stdio: 'inherit' })
 }
