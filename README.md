@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
 [![NPM Downloads](https://img.shields.io/npm/dt/vue-build.svg)](https://www.npmjs.com/package/vue-build)
+[![Node version](https://img.shields.io/node/v/vue-build.svg?style=flat)](http://nodejs.org/download/)
+
 
 The build process is one of the ***most frustrating*** things about front end development and cluttering up your app with a bunch of config and packages you rarely ever need to think about doesn't help either.
 
@@ -11,6 +13,7 @@ See the [docs](http://vue-build.com) for more details
 
 ## Features
 - Command Line Scripts
+- Vue 2
 - Webpack 2
   - Babel
   - Hot Reloading
