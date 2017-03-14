@@ -28,7 +28,7 @@ exports.handler = function (yargs) {
   }
 
   // Add package.json file
-  function addPackageFile (devDependency=false, extraOptions=null) {
+  function addPackageFile (devDependency = false, extraOptions = null) {
     var packageJSON = {
       name: 'app',
       description: 'Vue Build Application',
@@ -114,6 +114,16 @@ exports.handler = function (yargs) {
         })
     }
 
+    // .babelrc file
+    if (answers === true || answers.babelrcFile) {
+      console.log('Creating .babelrc file')
+      fs.copy(
+        path.join(customPath, '.babelrc'),
+        path.join(projectRoot, '/.babelrc'), function (err) {
+          if (err) { console.error(err); process.exit(1) }
+        })
+    }
+
     // .eslintrc file
     if (answers === true || answers.eslintFile) {
       console.log('Creating .eslintrc file')
@@ -169,6 +179,7 @@ exports.handler = function (yargs) {
         {type: 'confirm', name: 'packageFile', message: 'Create/Override package.json file?', default: true},
         {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
         {type: 'confirm', name: 'envFile', message: 'Create/Override env.js file?', default: true},
+        {type: 'confirm', name: 'babelrcFile', message: 'Create/Override .babelrc file?', default: true},
         {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
         {type: 'confirm', name: 'sourceFolder', message: 'Create/Override /src folder?', default: true},
         {type: 'confirm', name: 'testFolder', message: 'Create/Override /test folder?', default: true}

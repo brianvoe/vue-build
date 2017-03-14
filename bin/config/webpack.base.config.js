@@ -8,14 +8,6 @@ var projectRoot = process.cwd()
 var projectModules = path.join(projectRoot, '/node_modules')
 var firstProgressBarRun = true
 
-var babelSettings = {
-  presets: [['es2015', {'modules': false}], 'stage-2'],
-  plugins: ['transform-runtime']
-}
-if (process.env.COVERAGE === 'true') {
-  babelSettings.plugins.push('istanbul')
-}
-
 var clientEnvironment = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
@@ -67,7 +59,7 @@ var config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            js: 'babel-loader?' + JSON.stringify(babelSettings),
+            js: 'babel-loader',
             postcss: [
               require('autoprefixer')({
                 browsers: ['last 3 versions']
@@ -79,8 +71,7 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: babelSettings
+        include: [path.join(projectRoot, 'src'), path.join(projectRoot, 'test')]
       },
       {
         test: /\.(scss|css)$/,
@@ -125,6 +116,35 @@ var config = {
   ]
 }
 
+// If a user has a .babelrc file lets just let it use that
+// If user doesnt have a .babelrc file lets create a default for them
+try {
+  var babelrcFile = path.join(projectRoot, '.babelrc')
+  fs.statSync(babelrcFile)
+} catch (err) {
+  var babelSettings = {
+    presets: [['env', {'modules': false}], 'stage-2'],
+    plugins: ['transform-runtime'],
+    comments: false
+  }
+  if (process.env.COVERAGE === 'true') {
+    babelSettings.plugins.push('istanbul')
+  }
+
+  let rules = config.module.rules
+  for (var i = 0; i < rules.length; i++) {
+    // Add babel options to babel-loader
+    if (rules[i].loader === 'babel-loader') {
+      rules[i].options = babelSettings
+    }
+
+    // Add babel options to vue-loader
+    if (rules[i].loader === 'vue-loader') {
+      rules[i].options.loaders.js = 'babel-loader?' + JSON.stringify(babelSettings)
+    }
+  }
+}
+
 // If user has a .eslintrc file lets add loaders
 try {
   var eslintFile = projectRoot + '/.eslintrc'
@@ -132,14 +152,9 @@ try {
 
   config.unshift({
     enforce: 'pre',
-    test: /\.js$/,
+    test: /\.(js|vue)$/,
     loader: 'eslint-loader',
-    exclude: /node_modules/
-  }, {
-    enforce: 'pre',
-    test: /\.vue$/,
-    loader: 'eslint-loader',
-    exclude: /node_modules/
+    include: [path.join(projectRoot, 'src'), path.join(projectRoot, 'test')]
   })
 } catch (err) {}
 
