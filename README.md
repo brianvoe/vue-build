@@ -1,4 +1,4 @@
-<h1 align="center"><a href="http://vue-build.com"><img width="100"src="https://vuejs.org/images/logo.png" /></a>ue-build</h1>
+<h1 align="center"><a href="http://vue-build.com"><img width="100"src="https://raw.githubusercontent.com/brianvoe/vue-build/master/samples/custom/src/logo.png" /></a>ue-build</h1>
 
 [![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
 [![NPM Downloads](https://img.shields.io/npm/dt/vue-build.svg)](https://www.npmjs.com/package/vue-build)
@@ -67,6 +67,4 @@ See the [docs](http://vue-build.com) for more details
 
 ## Roadmap
   - Add other css preprocessors
-  - Integrate babel-preset-env - remove es2015
-  - Added optional .babelrc file override file
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
