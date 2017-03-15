@@ -66,6 +66,5 @@ vue-build help
 See the [docs](http://vue-build.com) for more details
 
 ## Roadmap
-  - Default vue-build execution(not init, lint or help) in local directory
   - Add other css preprocessors
   - Possibly webpack dashboard? https://github.com/FormidableLabs/webpack-dashboard
