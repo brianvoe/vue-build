@@ -46,6 +46,11 @@ var yargs = require('yargs')
   .usage('Usage: vue-build <command> [options]\nUsage: vue-build <command> --help')
   .epilog('Have questions? Email: brian@webiswhatido.com')
   .showHelpOnFail(false, 'Specify --help for available options')
+  .fail(function (msg, err, yargs) {
+    if (err) throw err // preserve stack
+    console.error(msg)
+    process.exit(1)
+  })
 
 // If you dont send any commands show help
 if (yargs.argv._.length === 0) {
