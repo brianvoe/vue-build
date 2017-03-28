@@ -89,7 +89,7 @@ exports.handler = function (yargs) {
   }
   var server = new WebpackDevServer(compiler, webpackDevServerConfig)
 
-  var serverListen = server.listen(port, 'localhost', function () {})
+  var serverListen = server.listen(port)
 
   return {
     compiler: compiler,
