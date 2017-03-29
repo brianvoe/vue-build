@@ -38,7 +38,7 @@ var config = {
     modules: [projectRoot + '/src', projectModules],
     // If you dont put the extension on an import it will
     // try to resolve it by looking for these extensions first
-    extensions: ['.scss', '.js', '.vue'],
+    extensions: ['.scss', '.ts', '.tsx', '.js', '.vue'],
     enforceExtension: false, // Whether or not to force user to add .ext to end of files
     // Aliases - Used for pointing to reusable parts of your app
     alias: {
@@ -67,6 +67,11 @@ var config = {
             ]
           }
         }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] }
       },
       {
         test: /\.js$/,
