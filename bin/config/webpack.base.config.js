@@ -14,6 +14,14 @@ var clientEnvironment = {
   'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
 }
 
+// Check if there is a typescript file as the main entry point
+var entry = './index.js'
+try {
+  var typescriptFile = path.join(projectRoot, 'src', 'index.ts')
+  fs.statSync(typescriptFile)
+  entry = './index.ts'
+} catch (err) {}
+
 try {
   var projectClientEnv = require(path.join(projectRoot, 'env.js'))
 
@@ -27,7 +35,7 @@ var config = {
   context: path.join(projectRoot, 'src'),
   // Main file entry point - must be an object as we append dev injections to that path
   entry: {
-    index: './index.js'
+    index: entry
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
@@ -38,7 +46,7 @@ var config = {
     modules: [projectRoot + '/src', projectModules],
     // If you dont put the extension on an import it will
     // try to resolve it by looking for these extensions first
-    extensions: ['.scss', '.js', '.vue'],
+    extensions: ['.scss', '.ts', '.tsx', '.js', '.vue'],
     enforceExtension: false, // Whether or not to force user to add .ext to end of files
     // Aliases - Used for pointing to reusable parts of your app
     alias: {
@@ -67,6 +75,11 @@ var config = {
             ]
           }
         }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] }
       },
       {
         test: /\.js$/,
