@@ -14,6 +14,14 @@ var clientEnvironment = {
   'process.env.TESTING_TYPE': JSON.stringify(process.env.TESTING_TYPE)
 }
 
+// Check if there is a typescript file as the main entry point
+var entry = './index.js'
+try {
+  var typescriptFile = path.join(projectRoot, 'src', 'index.ts')
+  fs.statSync(typescriptFile)
+  entry = './index.ts'
+} catch (err) {}
+
 try {
   var projectClientEnv = require(path.join(projectRoot, 'env.js'))
 
@@ -27,7 +35,7 @@ var config = {
   context: path.join(projectRoot, 'src'),
   // Main file entry point - must be an object as we append dev injections to that path
   entry: {
-    index: './index.js'
+    index: entry
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
