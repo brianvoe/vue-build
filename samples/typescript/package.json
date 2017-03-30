@@ -1,0 +1,9 @@
+{
+  "name": "app",
+  "description": "Vue Build Application",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "vue-build": "git://github.com/brianvoe/vue-build.git#develop"
+  }
+}
