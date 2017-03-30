@@ -3,7 +3,7 @@ exports.builder = {
   s: {
     alias: 'selection',
     type: 'string',
-    choices: ['simple', 'full', 'library', 'custom'],
+    choices: ['simple', 'full', 'library', 'typescript', 'custom'],
     describe: 'environment setting'
   }
 }
@@ -23,6 +23,7 @@ exports.handler = function (yargs) {
     if (selection === 'simple') { simple() }
     if (selection === 'full') { full() }
     if (selection === 'library') { library() }
+    if (selection === 'typescript') { typescript() }
     if (selection === 'custom') { custom(true) }
     return
   }
@@ -83,6 +84,16 @@ exports.handler = function (yargs) {
     // Create package.json
     addPackageFile(true, { main: 'dist/index.js' })
     console.log(chalk.green('Created library project!'))
+  }
+
+  function typescript () {
+    fs.copy(path.join(samplesRoot, 'typescript'), projectRoot, function (err) {
+      if (err) { console.error(err); process.exit(1) }
+    })
+
+    // Create package.json
+    addPackageFile(true, { main: 'dist/index.js' })
+    console.log(chalk.green('Created typescript project!'))
   }
 
   function custom (answers) {
@@ -158,20 +169,17 @@ exports.handler = function (yargs) {
     type: 'list',
     name: 'select',
     message: 'What kind of project would you like to initiate?',
-    choices: ['Simple', 'Full', 'Library', 'Custom', 'Cancel']
+    choices: ['Simple', 'Full', 'Library', 'Typescript', 'Custom', 'Cancel']
   }).then(function (answers) {
     var type = answers.select
     if (type === 'Cancel') { return }
     console.log() // Console Spacing
 
-    // Simple installation
+    // Type selection
     if (type === 'Simple') { simple() }
-
-    // Full installation
     if (type === 'Full') { full() }
-
-    // Library installation
     if (type === 'Library') { library() }
+    if (type === 'Typescript') { typescript() }
 
     // Custom installation
     if (type === 'Custom') {
