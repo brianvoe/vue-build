@@ -79,7 +79,10 @@ var config = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        options: { appendTsSuffixTo: [/\.vue$/] }
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          logLevel: 'warn'
+        }
       },
       {
         test: /\.js$/,
