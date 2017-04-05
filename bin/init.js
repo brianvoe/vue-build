@@ -3,7 +3,7 @@ exports.builder = {
   s: {
     alias: 'selection',
     type: 'string',
-    choices: ['simple', 'full', 'library', 'typescript', 'custom'],
+    choices: ['simple', 'full', 'library', 'typescript', 'custom', undefined],
     describe: 'environment setting'
   }
 }
