@@ -69,7 +69,7 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai-as-promised', 'chai'],
+    frameworks: ['mocha', 'chai'],
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
@@ -100,7 +100,6 @@ module.exports = function (config) {
       'karma-mocha',
       'karma-mocha-reporter',
       'karma-chai',
-      'karma-chai-as-promised',
       'karma-coverage',
       'karma-spec-reporter',
       'karma-junit-reporter'
