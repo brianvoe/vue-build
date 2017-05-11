@@ -28,7 +28,6 @@ exports.handler = function (yargs) {
   var webpack = require('webpack')
   var config = require('./config/webpack.prod.config.js')
   var ExtractTextPlugin = require('extract-text-webpack-plugin')
-  var OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
@@ -45,7 +44,7 @@ exports.handler = function (yargs) {
       if (config.module.rules[rule].test.test('.css')) {
         // Replace default loader with extractCSS
         config.module.rules[rule].loader = extractCSS.extract([
-          'css-loader?sourceMap',
+          'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''), // Minify
           'resolve-url-loader',
           'sass-loader?sourceMap'
         ])
@@ -62,8 +61,6 @@ exports.handler = function (yargs) {
       comments: false,
       sourceMap: process.env.SOURCE_MAP
     }))
-
-    config.plugins.push(new OptimizeCssAssetsWebpackPlugin())
   }
 
   // Output bundle analyzer html file
