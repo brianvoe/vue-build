@@ -40,6 +40,10 @@ exports.handler = function (yargs) {
       disable: false,
       allChunks: true
     })
+
+    // Add extraction plugin
+    config.plugins.push(extractCSS)
+
     for (var rule in config.module.rules) {
       if (config.module.rules[rule].test.test('.css')) {
         // Replace default loader with extractCSS
@@ -48,9 +52,18 @@ exports.handler = function (yargs) {
           'resolve-url-loader',
           'sass-loader?sourceMap'
         ])
+      }
 
-        // Add extraction plugin
-        config.plugins.push(extractCSS)
+      if (config.module.rules[rule].test.test('.vue')) {
+        config.module.rules[rule].options.loaders.css = extractCSS.extract({
+          use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''),
+          fallback: 'vue-style-loader'
+        })
+
+        config.module.rules[rule].options.loaders.scss = extractCSS.extract({
+          use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : '') + '!sass-loader',
+          fallback: 'vue-style-loader'
+        })
       }
     }
   }
