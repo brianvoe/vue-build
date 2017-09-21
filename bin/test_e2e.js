@@ -33,6 +33,11 @@ exports.builder = {
     alias: 'test-port',
     type: 'number',
     describe: 'test against running port'
+  },
+  pa: {
+    alias: 'parallel',
+    type: 'boolean',
+    describe: 'split tests across multiple browser windows running simultaenously'
   }
 }
 
@@ -109,6 +114,12 @@ function runNightwatch (yargs) {
   // additional nightwatch options
   if (yargs.options) {
     opts = opts.concat(yargs.options.split(' '))
+  }
+
+  // set environment variable so that Nightwatch config will run tests in
+  // parallel
+  if (yargs.parallel) {
+    process.env.PARALLEL = true
   }
 
   // Run nightwatch

@@ -3,6 +3,7 @@ var fs = require('fs')
 var projectRoot = process.cwd()
 // Grab from .env file otherwise default is 9090
 var port = process.env.E2E_PORT
+var parallel = process.env.PARALLEL
 
 // Setting
 var defaultSettings = {
@@ -56,6 +57,14 @@ var nightwatchConfig = {
     'chrome': chromeSettings,
     'firefox': firefoxSettings
   }
+}
+
+if (parallel) {
+  nightwatchConfig.test_workers = true
+
+  // regular test output looks noisy when multiple tests run at once, this gives
+  // a more compact representation while still showing errors on failure
+  nightwatchConfig.detailed_output = false
 }
 
 // If folder exists for custom_commands_path
