@@ -86,7 +86,7 @@
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.0",
     "mocha": "^3.3.0",
-    "nightwatch": "^0.9.13",
+    "nightwatch": "^0.9.16",
     "node-sass": "^4.5.0",
     "open": "0.0.5",
     "progress-bar-webpack-plugin": "^1.9.0",
