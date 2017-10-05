@@ -29,6 +29,7 @@ exports.handler = function (yargs) {
   var fs = require('fs')
   var WebpackDevServer = require('webpack-dev-server')
   var webpackHotMiddleware = require('webpack-hot-middleware')
+  var webpackConfig = require('./config/webpack.dev.config.js')
 
   // Check environment if yargs is passed set environment
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -49,9 +50,6 @@ exports.handler = function (yargs) {
   try {
     fs.statSync(pathToServer)
   } catch (err) { pathToServer = false }
-
-  // Load webpack config file
-  var webpackConfig = require('./config/webpack.dev.config.js')
 
   var compiler = Webpack(webpackConfig)
   var webpackDevServerConfig = {
