@@ -14,7 +14,7 @@ See the [docs](http://vue-build.com) for more details
 ## Features
 - Command Line Scripts
 - Vue 2
-- Webpack 2
+- Webpack 3
   - Babel
   - Hot Reloading
   - Hot Middleware
