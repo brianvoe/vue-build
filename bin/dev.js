@@ -64,7 +64,7 @@ exports.handler = function (yargs) {
       colors: true
     },
     // express server setup extension
-    setup: function (appServer) {
+    before: function (appServer) {
       appServer.use(function (req, res, next) {
         if (process.env.ENVIRONMENT === 'development') {
           console.log('Using middleware for ' + req.url)
