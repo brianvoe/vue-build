@@ -29,7 +29,6 @@ exports.handler = function (yargs) {
   var fs = require('fs')
   var WebpackDevServer = require('webpack-dev-server')
   var webpackHotMiddleware = require('webpack-hot-middleware')
-  var webpackConfig = require('./config/webpack.dev.config.js')
 
   // Check environment if yargs is passed set environment
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -40,6 +39,9 @@ exports.handler = function (yargs) {
 
   // Set port in order of importance - fallback is 8080
   var port = process.env.PORT = process.env.E2E_PORT || yargs.port || process.env.PORT || 8080
+
+  // LEAVE IT HERE - it was moved here because we need to set process.env stuff first
+  var webpackConfig = require('./config/webpack.dev.config.js')
 
   // Overwrite devtool
   var devtool = yargs.devtool || false
