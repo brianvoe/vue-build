@@ -117,7 +117,8 @@ var config = {
   },
 
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(), // Scope Hoisting for better performance
+    // Temporarily removed to fix hot module reloading issues
+    // new webpack.optimize.ModuleConcatenationPlugin(), // Scope Hoisting for better performance
     new webpack.DefinePlugin(clientEnvironment),
     new ProgressBarPlugin({
       format: '[:bar] :percent :msg',
