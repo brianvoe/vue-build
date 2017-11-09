@@ -19,7 +19,7 @@ function installSample (type) {
 function installPackages () {
   return new Promise(function (resolve, reject) {
     console.log('package installation')
-    var install = spawn('yarn', ['install'], { stdio: 'inherit' })
+    var install = spawn('npm', ['install'], { stdio: 'inherit' })
 
     install.on('close', (code) => {
       if (code !== 0) {
@@ -73,10 +73,10 @@ function simple () {
       process.chdir(testFolder)
 
       installSample('simple')
-      .then(installPackages)
-      .then(production)
-      .then(resolve)
-      .catch((err) => { reject(err) })
+        .then(installPackages)
+        .then(production)
+        .then(resolve)
+        .catch((err) => { reject(err) })
     })
   })
 }
@@ -90,12 +90,12 @@ function full () {
       process.chdir(testFolder)
 
       installSample('full')
-      .then(installPackages)
-      .then(production)
-      .then(() => test('unit'))
-      .then(() => test('e2e'))
-      .then(resolve)
-      .catch((err) => { reject(err) })
+        .then(installPackages)
+        .then(production)
+        .then(() => test('unit'))
+        .then(() => test('e2e'))
+        .then(resolve)
+        .catch((err) => { reject(err) })
     })
   })
 }
@@ -109,19 +109,19 @@ function library () {
       process.chdir(testFolder)
 
       installSample('library')
-      .then(installPackages)
-      .then(production)
-      .then(() => test('unit'))
-      .then(resolve)
-      .catch((err) => { reject(err) })
+        .then(installPackages)
+        .then(production)
+        .then(() => test('unit'))
+        .then(resolve)
+        .catch((err) => { reject(err) })
     })
   })
 }
 
 // Run samples one at a time
 simple()
-.then(full)
-.then(library)
-.catch((error) => {
-  console.log('Tests failed: ', error)
-})
+  .then(full)
+  .then(library)
+  .catch((error) => {
+    console.log('Tests failed: ', error)
+  })
