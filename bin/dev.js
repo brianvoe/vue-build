@@ -69,7 +69,13 @@ exports.handler = function (yargs) {
     before: function (appServer) {
       appServer.use(function (req, res, next) {
         if (process.env.ENVIRONMENT === 'development') {
-          console.log('Using middleware for ' + req.url)
+          // Lets not console log for status polling or webpack hot module reloading
+          if (
+            !req.url.includes('/status') &&
+            !req.url.includes('/__webpack_hmr')
+          ) {
+            console.log('Using middleware for ' + req.url)
+          }
         }
         next()
       })
