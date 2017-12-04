@@ -111,6 +111,7 @@
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1",
     "whatwg-fetch": "^2.0.3",
-    "yargs": "^6.6.0"
+    "yargs": "^6.6.0",
+    "yallist":"^3.0.1"
   }
 }
