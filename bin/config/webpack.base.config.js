@@ -80,6 +80,7 @@ var config = {
         test: /\.ts$/,
         loader: 'ts-loader',
         options: {
+          onlyCompileBundledFiles: true,
           appendTsSuffixTo: [/\.vue$/],
           logLevel: 'warn'
         }
@@ -181,7 +182,7 @@ try {
   var webpackConfig = projectRoot + '/webpack.config.js'
   fs.statSync(webpackConfig)
 
-  config = merge(config, require(webpackConfig))
+  config = merge.smart(config, require(webpackConfig))
 } catch (err) {}
 
 // Check entry index to make sure files exist

@@ -42,7 +42,7 @@ var nightwatchConfig = {
   'selenium': {
     'start_process': true,
     // If you get an error saying unable to access jarfile. make sure to update jar path here
-    'server_path': 'node_modules/selenium-server/lib/runner/selenium-server-standalone-3.8.1.jar',
+    'server_path': require('selenium-server').path,
     'host': '127.0.0.1',
     'port': 4444,
     'cli_args': {
