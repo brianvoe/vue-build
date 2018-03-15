@@ -11,6 +11,7 @@ var projectRoot = process.cwd()
 
 // Merge webpacks
 var webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
   devtool: process.env.SOURCE_MAP ? '#source-map' : false
 })
 
