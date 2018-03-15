@@ -1,4 +1,3 @@
-/* eslint-disable no-extend-native */
 Function.prototype.bind = require('function-bind')
 
 function importAll (r) {

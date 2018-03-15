@@ -7,7 +7,7 @@
 
 The build process is one of the ***most frustrating*** things about front end development and cluttering up your app with a bunch of config and packages you rarely ever need to think about doesn't help either.
 
-Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue 2, Webpack 2, env overriding, Sass, Eslint(Standard), Karma, Mocha, Chai, Nightwatch
+Vue-build takes those frustrations and hopefully eliminates them with a set of popular use cases. Vue 2, Webpack 2, env overriding, Sass, Karma, Mocha, Chai, Nightwatch
 
 See the [docs](http://vue-build.com) for more details
 
@@ -23,7 +23,6 @@ See the [docs](http://vue-build.com) for more details
   - css extraction
   - static output
 - Sass
-- Eslint - Standard
 - Unit Testing
   - Karma
   - Mocha
@@ -56,9 +55,6 @@ vue-build unit
 
 // E2e testing
 vue-build e2e
-
-// Linting
-vue-build lint
 
 // Help
 vue-build help

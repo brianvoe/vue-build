@@ -5,7 +5,6 @@ import dev from 'src/dev.vue'
 // (since they're only intended to be part of the test application)
 import 'scss/dev-style.scss'
 
-/* eslint-disable no-new */
 new Vue({
   render: (h) => h(dev)
 }).$mount('#app')

@@ -164,19 +164,6 @@ try {
   }
 }
 
-// If user has a .eslintrc file lets add loaders
-try {
-  var eslintFile = projectRoot + '/.eslintrc'
-  fs.statSync(eslintFile)
-
-  config.unshift({
-    enforce: 'pre',
-    test: /\.(js|vue)$/,
-    loader: 'eslint-loader',
-    include: [path.join(projectRoot, 'src'), path.join(projectRoot, 'test')]
-  })
-} catch (err) {}
-
 // If there is a webpack in the main project merge it
 try {
   var webpackConfig = projectRoot + '/webpack.config.js'
