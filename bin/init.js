@@ -135,16 +135,6 @@ exports.handler = function (yargs) {
         })
     }
 
-    // .eslintrc file
-    if (answers === true || answers.eslintFile) {
-      console.log('Creating .eslintrc file')
-      fs.copy(
-        path.join(customPath, '.eslintrc'),
-        path.join(projectRoot, '/.eslintrc'), function (err) {
-          if (err) { console.error(err); process.exit(1) }
-        })
-    }
-
     // source file
     if (answers === true || answers.sourceFolder) {
       console.log('Creating source folder')
@@ -188,7 +178,6 @@ exports.handler = function (yargs) {
         {type: 'confirm', name: 'webpackFile', message: 'Create/Override webpack file?', default: true},
         {type: 'confirm', name: 'envFile', message: 'Create/Override env.js file?', default: true},
         {type: 'confirm', name: 'babelrcFile', message: 'Create/Override .babelrc file?', default: true},
-        {type: 'confirm', name: 'eslintFile', message: 'Create/Override .eslintrc file?', default: true},
         {type: 'confirm', name: 'sourceFolder', message: 'Create/Override /src folder?', default: true},
         {type: 'confirm', name: 'testFolder', message: 'Create/Override /test folder?', default: true}
       ])

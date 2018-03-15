@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-env node */
 
 // Sub options for prod command
 exports.builder = {
@@ -27,7 +26,7 @@ exports.builder = {
 exports.handler = function (yargs) {
   var webpack = require('webpack')
   var config = require('./config/webpack.prod.config.js')
-  var ExtractTextPlugin = require('extract-text-webpack-plugin')
+  const MiniCssExtractPlugin = require("mini-css-extract-plugin")
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
@@ -35,10 +34,8 @@ exports.handler = function (yargs) {
 
   // Add css extraction
   if (cssExtraction) {
-    var extractCSS = new ExtractTextPlugin({
-      filename: '[name].css',
-      disable: false,
-      allChunks: true
+    let extractCSS = new MiniCssExtractPlugin({
+      filename: '[name].css'
     })
 
     // Add extraction plugin
@@ -47,33 +44,37 @@ exports.handler = function (yargs) {
     for (var rule in config.module.rules) {
       if (config.module.rules[rule].test.test('.css')) {
         // Replace default loader with extractCSS
-        config.module.rules[rule].loader = extractCSS.extract([
-          'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''), // Minify
+        config.module.rules[rule].loader = [
+          MiniCssExtractPlugin.loader,
+          'css-loader?sourceMap=true', // Minify
           'resolve-url-loader',
           'sass-loader?sourceMap'
-        ])
+        ]
       }
 
-      if (config.module.rules[rule].test.test('.vue')) {
-        config.module.rules[rule].options.loaders.css = extractCSS.extract({
-          use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''),
-          fallback: 'vue-style-loader'
-        })
+      // if (config.module.rules[rule].test.test('.vue')) {
+      //   config.module.rules[rule].options.loaders.css = extractCSS.extract({
+      //     use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''),
+      //     fallback: 'vue-style-loader'
+      //   })
 
-        config.module.rules[rule].options.loaders.scss = extractCSS.extract({
-          use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : '') + '!sass-loader',
-          fallback: 'vue-style-loader'
-        })
-      }
+      //   config.module.rules[rule].options.loaders.scss = extractCSS.extract({
+      //     use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : '') + '!sass-loader',
+      //     fallback: 'vue-style-loader'
+      //   })
+      // }
     }
   }
 
   // Uglify code
   if (uglify) {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-      sourceMap: process.env.SOURCE_MAP
-    }))
+    // if (config.optimization) {
+    //   config.optimization.minimize = true
+    // } else {
+    //   config.optimization = {
+    //     minimize: true
+    //   }
+    // }
   }
 
   // Output bundle analyzer html file
@@ -83,6 +84,8 @@ exports.handler = function (yargs) {
       reportFilename: 'bundle-analyzer.html'
     }))
   }
+
+  console.log(config.module.rules)
 
   // Run webpack
   webpack(config, function (err, stats) {

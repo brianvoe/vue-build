@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-/* eslint-env node */
-
 // Sub options for e2e command
 exports.builder = {
   p: {

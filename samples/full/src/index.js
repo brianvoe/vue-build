@@ -10,7 +10,6 @@ import 'scss/style.scss'
 Vue.use(VueRouter)
 const router = new VueRouter(routerList)
 
-/* eslint-disable no-new */
 new Vue({
   router,
   render: (h) => h(app)
