@@ -55,55 +55,59 @@ exports.handler = function (yargs) {
 
   var compiler = Webpack(webpackConfig)
 
-  // var webpackDevServerConfig = {
-    // publicPath: webpackConfig.output.publicPath || '/',
-    // contentBase: projectRoot + '/src/public', // Add the public folder as a means to search static content
-    // hot: true,
-    // historyApiFallback: true,
-    // clientLogLevel: 'warning',
-    // quiet: true,
-    // noInfo: true,
-    // stats: {
-    //   colors: true
-    // },
-    // // express server setup extension
-    // before: function (appServer) {
-    //   appServer.use(function (req, res, next) {
-    //     if (process.env.ENVIRONMENT === 'development') {
-    //       // Lets not console log for status polling or webpack hot module reloading
-    //       if (
-    //         !req.url.includes('/status') &&
-    //         !req.url.includes('/__webpack_hmr')
-    //       ) {
-    //         console.log('Using middleware for ' + req.url)
-    //       }
-    //     }
-    //     next()
-    //   })
+  var webpackDevServerConfig = {
+    publicPath: webpackConfig.output.publicPath || '/',
+    contentBase: projectRoot + '/src/public', // Add the public folder as a means to search static content
+    hot: true,
+    historyApiFallback: true,
+    clientLogLevel: 'warning',
+    quiet: true,
+    noInfo: true,
+    stats: {
+      colors: true
+    },
+    // express server setup extension
+    before: function (appServer) {
+      appServer.use(function (req, res, next) {
+        if (process.env.ENVIRONMENT === 'development') {
+          // Lets not console log for status polling or webpack hot module reloading
+          if (
+            !req.url.includes('/status') &&
+            !req.url.includes('/__webpack_hmr')
+          ) {
+            console.log('Using middleware for ' + req.url)
+          }
+        }
+        next()
+      })
 
-    //   // Add webpack hot middleware to use for error overlay
-    //   // Quiet is set to true because well let WebpackDevServer handle console logging
-    //   appServer.use(webpackHotMiddleware(compiler))
+      // Add webpack hot middleware to use for error overlay
+      // Quiet is set to true because well let WebpackDevServer handle console logging
+      appServer.use(webpackHotMiddleware(compiler))
 
-    //   // If there is a server.js file load it and pass appServer to it
-    //   if (pathToServer) {
-    //     require(pathToServer)(appServer)
-    //   }
-    // }
-  // }
-  // if (webpackConfig.devServer) {
-  //   webpackDevServerConfig = Object.assign(webpackDevServerConfig, webpackConfig.devServer)
-  // }
-  // console.log(webpackDevServerConfig)
-  // var server = new WebpackDevServer(compiler, webpackDevServerConfig)
+      // If there is a server.js file load it and pass appServer to it
+      if (pathToServer) {
+        require(pathToServer)(appServer)
+      }
+    }
+  }
+  if (webpackConfig.devServer) {
+    webpackDevServerConfig = Object.assign(webpackDevServerConfig, webpackConfig.devServer)
+  }
+  var server = new WebpackDevServer(compiler, webpackDevServerConfig)
 
-  // var serverListen = server.listen(port)
+  var serverListen = server.listen(port)
 
-  // console.log(compiler)
-  serve({ config: webpackConfig });
+  // TODO: find out if we need to move to webpack.serve for file serving
+  // serve({ 
+  //   config: webpackConfig, 
+  //   content: '/',
+  //   dev: webpackDevServerConfig,
+  //   'log-level': [ 'warn', 'error' ]
+  // });
 
   return {
     compiler: compiler,
-    server: null
+    server: serverListen
   }
 }
