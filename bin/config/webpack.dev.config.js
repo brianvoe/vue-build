@@ -10,8 +10,8 @@ if (typeof baseWebpackConfig.entry.index === 'string') {
   entryIndex = [baseWebpackConfig.entry.index]
 }
 // entryIndex.push('webpack-dev-server/client')
-// entryIndex.push('webpack/hot/dev-server')
-// entryIndex.push('webpack-hot-middleware/client?noInfo=true')
+entryIndex.push('webpack/hot/dev-server')
+entryIndex.push('webpack-hot-middleware/client?noInfo=true')
 
 var webpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
@@ -22,7 +22,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   // Plugins needed for development
   plugins: [
     new webpack.NamedModulesPlugin(),
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ]
 })
 

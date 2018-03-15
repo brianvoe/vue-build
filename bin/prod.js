@@ -46,35 +46,27 @@ exports.handler = function (yargs) {
         // Replace default loader with extractCSS
         config.module.rules[rule].loader = [
           MiniCssExtractPlugin.loader,
-          'css-loader?sourceMap=true', // Minify
+          'css-loader?sourceMap=true'+(uglify ? '&minimize=true' : ''),
           'resolve-url-loader',
           'sass-loader?sourceMap'
         ]
       }
 
-      // if (config.module.rules[rule].test.test('.vue')) {
-      //   config.module.rules[rule].options.loaders.css = extractCSS.extract({
-      //     use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : ''),
-      //     fallback: 'vue-style-loader'
-      //   })
+      if (config.module.rules[rule].test.test('.vue')) {
+        config.module.rules[rule].options.loaders.css = [
+          MiniCssExtractPlugin.loader,
+          'css-loader?sourceMap=true'+(uglify ? '&minimize=true' : ''),
+          'resolve-url-loader'
+        ]
 
-      //   config.module.rules[rule].options.loaders.scss = extractCSS.extract({
-      //     use: 'css-loader?sourceMap=true' + (uglify ? '&minimize=true' : '') + '!sass-loader',
-      //     fallback: 'vue-style-loader'
-      //   })
-      // }
+        config.module.rules[rule].options.loaders.scss = [
+          MiniCssExtractPlugin.loader,
+          'css-loader?sourceMap=true'+(uglify ? '&minimize=true' : ''),
+          'resolve-url-loader',
+          'sass-loader?sourceMap'
+        ]
+      }
     }
-  }
-
-  // Uglify code
-  if (uglify) {
-    // if (config.optimization) {
-    //   config.optimization.minimize = true
-    // } else {
-    //   config.optimization = {
-    //     minimize: true
-    //   }
-    // }
   }
 
   // Output bundle analyzer html file
@@ -84,8 +76,6 @@ exports.handler = function (yargs) {
       reportFilename: 'bundle-analyzer.html'
     }))
   }
-
-  console.log(config.module.rules)
 
   // Run webpack
   webpack(config, function (err, stats) {
