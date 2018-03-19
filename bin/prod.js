@@ -19,18 +19,25 @@ exports.builder = {
     type: 'boolean',
     default: false,
     describe: 'create a bundle size report'
+  },
+  j: {
+    alias: 'json',
+    type: 'string',
+    describe: 'write webpack build stats as JSON to given path (for profiling)'
   }
 }
 
 // prod command function
 exports.handler = function (yargs) {
   var webpack = require('webpack')
+  var fs = require('fs')
   var config = require('./config/webpack.prod.config.js')
   const MiniCssExtractPlugin = require("mini-css-extract-plugin")
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
   var bundleAnalyzer = yargs['bundle-analyzer']
+  var jsonPath = yargs['json']
 
   // Add css extraction
   if (cssExtraction) {
@@ -69,6 +76,11 @@ exports.handler = function (yargs) {
     }
   }
 
+  if (jsonPath) {
+    // enable profiling:
+    config.profile = true
+  }
+
   // Output bundle analyzer html file
   if (bundleAnalyzer) {
     config.plugins.push(new BundleAnalyzerPlugin({
@@ -87,5 +99,9 @@ exports.handler = function (yargs) {
       chunks: false,
       chunkModules: false
     }) + '\n')
+
+    if (jsonPath) {
+      fs.writeFileSync(jsonPath, JSON.stringify(stats.toJson()))
+    }
   })
 }
