@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "3.0.0-beta.2",
+  "version": "2.4.0",
   "description": "Ultra Simple, Development, Testing and Production Build Cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
