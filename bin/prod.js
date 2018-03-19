@@ -20,10 +20,10 @@ exports.builder = {
     default: false,
     describe: 'create a bundle size report'
   },
-  j: {
-    alias: 'json',
+  p: {
+    alias: 'profile',
     type: 'string',
-    describe: 'write webpack build stats as JSON to given path (for profiling)'
+    describe: 'profile webpack build and output JSON stats at given path'
   }
 }
 
@@ -31,13 +31,14 @@ exports.builder = {
 exports.handler = function (yargs) {
   var webpack = require('webpack')
   var fs = require('fs')
+  var path = require('path')
   var config = require('./config/webpack.prod.config.js')
   const MiniCssExtractPlugin = require("mini-css-extract-plugin")
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   var cssExtraction = yargs['css-extraction']
   var uglify = yargs['uglify']
   var bundleAnalyzer = yargs['bundle-analyzer']
-  var jsonPath = yargs['json']
+  var profilePath = yargs['profile']
 
   // Add css extraction
   if (cssExtraction) {
@@ -76,7 +77,11 @@ exports.handler = function (yargs) {
     }
   }
 
-  if (jsonPath) {
+  if (profilePath) {
+    if (!fs.existsSync(path.dirname(profilePath))) {
+      throw new Error(`Profile output location ${profilePath} does not exist.`)
+    }
+    
     // enable profiling:
     config.profile = true
   }
@@ -100,8 +105,8 @@ exports.handler = function (yargs) {
       chunkModules: false
     }) + '\n')
 
-    if (jsonPath) {
-      fs.writeFileSync(jsonPath, JSON.stringify(stats.toJson()))
+    if (profilePath) {
+      fs.writeFileSync(profilePath, JSON.stringify(stats.toJson()))
     }
   })
 }
