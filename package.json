@@ -1,6 +1,6 @@
 {
   "name": "vue-build",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Ultra Simple, Development, Testing and Production Build Cli",
   "author": "Brian Voelker <brian@webiswhatido.com> (http://webiswhatido.com)",
   "homepage": "https://github.com/brianvoe/vue-build#readme",
@@ -42,6 +42,7 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
