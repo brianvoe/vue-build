@@ -1,3 +1,5 @@
+# No longer in development. Vue cli came out and tackled all the things I was trying to accomplish with this package.
+
 <h1 align="center"><a href="http://vue-build.com"><img width="100"src="https://raw.githubusercontent.com/brianvoe/vue-build/master/samples/custom/src/logo.png" /></a>ue-build</h1>
 
 [![Build Status](https://travis-ci.org/brianvoe/vue-build.svg?branch=master)](https://travis-ci.org/brianvoe/vue-build)
